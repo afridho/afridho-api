@@ -1,8 +1,7 @@
 ---
 sidebar_position: 1
+title : Football Update
 ---
-
-# Football Update
 
 Get the result of football update in recently time.
 

@@ -1,11 +1,10 @@
 ---
 sidebar_position: 1
 slug: /
+title : Home
 ---
 
-# Home
-
-**Project Name : afridho-api**
+# afridho-api
 
 ## Install
 

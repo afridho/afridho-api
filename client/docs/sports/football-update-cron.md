@@ -1,8 +1,7 @@
 ---
 sidebar_position: 2
+title : Football Update (Automation)
 ---
-
-# Football Update (Automation)
 
 Get recently match result of your favorite club automatically with cron and send to your device with Pushover Notification.
 
