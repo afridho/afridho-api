@@ -27,7 +27,7 @@ Pushover will send notification if data has update or new club favorite added.
 ### Environment
 | ENV              | Description |
 | ---------------- | ----------- |
-| **MONGODB_PASS** | mongodb cluster user |
+| **MONGODB_USER** | mongodb cluster user |
 | **MONGODB_PASS** | mongodb cluster pass |
 | **PUSHOVER_KEY** | user key to access device in pushover   |
 | **PUSHOVER_TOKEN_FOOTBALL_UPDATE** | token of Pushover specific app |
