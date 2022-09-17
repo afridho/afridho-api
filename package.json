@@ -1,0 +1,31 @@
+{
+  "name": "afridho-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "client": "npm --prefix client run start",
+    "client:build": "npm --prefix client run build",
+    "server:dev": "nodemon ./bin/www",
+    "dev": "concurrently \"npm run client\" \"npm run server:dev\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vercel/node": "^2.5.13"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "concurrently": "^7.4.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "form-data": "^4.0.0",
+    "mongodb": "^4.9.1"
+  }
+}

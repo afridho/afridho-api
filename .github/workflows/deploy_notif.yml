@@ -1,0 +1,12 @@
+name: Deployment Status notification
+on: [deployment_status]
+
+jobs:
+  add-pushover-notification:
+    name: Add a pushover notification
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add commit comment
+        run: |
+          curl -X GET "https://afridho-api.vercel.app/api/pushover?title=Vercel&message=${{github.event.repository.name}}%20▸%20build%20${{github.event.deployment_status.state}}%21&device=ridhosmac&url_title=View%20deployment&url=https%3A%2F%2Fafridho-api.vercel.app&status=${{github.event.deployment_status.state}}"
