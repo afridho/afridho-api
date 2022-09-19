@@ -14,7 +14,7 @@ Get recently match result of your favorite club automatically with cron and send
 ## How to using
 - Same with this param api [Football Update](./football-update.md#how-to-using)
 - `debug` : `true or false` debug to force send notification
-- [Google Cloud Scheduler](https://console.cloud.google.com/cloudscheduler) set cron to access this http/api [Test 🏃🏻‍♂️](#result)
+- [Google Cloud Scheduler](https://console.cloud.google.com/cloudscheduler) set cron to access this http/api [Run Api 🏃🏻‍♂️](#result)
   - Cron default `50 5,23 * * *`
     - At minute 50 past hour 5 and 23.
  
@@ -48,7 +48,6 @@ Pushover will send notification if data has update or new club favorite added.
 ```
 /api/fav-football-cron/arsenal
 ```
-#### <a href='/api/fav-football-cron/arsenal' target="_blank">Test </a>🏃🏻‍♂️
 
 ```json title="Response : Successful send pushover notification."
 {
