@@ -19,11 +19,21 @@ const path = require('path');
 app.get('/', function (req, res){
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Set 'views' directory for any views 
+// being rendered res.render()
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, './routes/ig-downloader/index'));
+
+// Set view engine as EJS
+app.engine('html', require('ejs').renderFile);
+app.set("view engine", "ejs");
+
 
 app.use("/api/football-update", football_update);
 app.use("/api/fav-football-cron", my_fav_team_cron);
 app.use("/api/pushover", pushover);
-app.set("view engine", "ejs");
 app.use("/api/ig", ig_downloader);
 
 app.listen(port, () => {
