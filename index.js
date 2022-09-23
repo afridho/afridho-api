@@ -24,7 +24,7 @@ app.use("/api/football-update", football_update);
 app.use("/api/fav-football-cron", my_fav_team_cron);
 app.use("/api/pushover", pushover);
 app.set("view engine", "ejs");
-app.use("/ig", ig_downloader);
+app.use("/api/ig", ig_downloader);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
