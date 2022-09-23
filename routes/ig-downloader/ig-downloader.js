@@ -6,7 +6,7 @@ const RAPID_API_IGDOWNLOADER_KEY = process.env.RAPID_API_IGDOWNLOADER_KEY
 
 router.get('/', async (req, res) => {
     // console.log(req.body);
-    res.render(__dirname + '/index');
+    res.render(__dirname + '/input');
     })
 
 router.post('/download', async (req, res) => {
