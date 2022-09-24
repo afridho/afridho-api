@@ -32,20 +32,30 @@
 
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
-html { width: 100%; height:100%; overflow:auto; }
+html { width: 100%; height:100%; overflow-x: hidden; overflow-y: scroll; }
 
 body { 
 	width: 100%;
 	height:100%;
 	font-family: 'Open Sans', sans-serif;
-	background: #092756;
-	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
-	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-	background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
 a{
   color:white;
   text-decoration: none;
@@ -88,6 +98,27 @@ input {
 .text-justify{
   text-align: justify;
 }
+.caption {
+  height: 60%;
+  overflow: auto;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  padding:8px;
+  background:white;
+  color:#000;
+  border-radius: 4px;
+}
+.small-text{
+  font-size: 0.9em;
+}
+
+.mt-5{margin-top:5px}
+.mt-10{margin-top:10px}
+.mt-15{margin-top:15px}
+.mt-20{margin-top:20px}
+.mb-5{margin-bottom:5px}
+.mb-10{margin-bottom:10px}
+.mb-15{margin-bottom:15px}
+.mb-20{margin-bottom:20px}
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
       </style>
       
@@ -95,51 +126,41 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 <body>
 
   <div class="login">
-    <h1><a href='/ig'>Instagram Downloader</a></h1>
+    <h1><a href='/api/ig'>Instagram Downloader</a></h1>
 
     <div class="text-center">
 
     <% if (typeof media === 'object' && Type == 'Carousel'){ %>
       <% for (var i = 0; i < media.length; i++) { %>
-        <span class="color-white">Media <%- [i] %></span><br>
-        <button onclick="save_image('<%- media[i] %>')" class="btn btn-primary btn-block btn-large">» DOWNLOAD «</button><br>
+        <div class="color-white small-text">(Media <%- [i+1] %>)</div>
+        <button onclick="save_image('<%- media[i] %>')" class="btn btn-primary btn-block btn-large">💾 Download</button><br>
 <% } %>
-    <% } else if(typeof media == 'string' && Type.toLowerCase() == 'post-image'){ %>  
-      <button onclick="save_image('<%- media %>')" class="btn btn-primary btn-block btn-large">» DOWNLOAD «</button><br>
-  <% } else if(typeof media == 'string' && Type.toLowerCase() == 'post-video'){ %>  
-    <button onclick="save_video('<%- media %>')" class="btn btn-primary btn-block btn-large">» DOWNLOAD «</button><br>
 <% } %>
   </div>
 
 
-  <p class="color-white text--justify"><%- title %></>   
+  <% if (title){ %>
+      <div class="color-white text-center small-font">📌 Caption</div>
+  <div class="caption small-font"><%- title %></div><br>   
 
+  <% } %>
+  <div class="text-center">
+  <button onclick="back_homepage()" class="btn btn-large mb-20" >&nbsp;&nbsp;🔙&nbsp;&nbsp;</button>
+  </div>
   </div>
 
 
   <script>
-    function toDataURL(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-          var reader = new FileReader();
-          reader.onloadend = function() {
-            callback(reader.result);
-          }
-          reader.readAsDataURL(xhr.response);
-        };
-        xhr.open('GET', url);
-        xhr.responseType = 'blob';
-        xhr.send();
-      }
+
+    function back_homepage(){
+      window.open('/api/ig', '_self');
+    }
 
   async function save_image(image_url) {
-    toDataURL(image_url, function(dataUrl) {
-      var a  = document.createElement('a');
-      a.href = dataUrl;
-      a.download = 'image.png';
-      a.click()
-    })
+    window.open(image_url, '_blank');
   }
+
+  
 
   function save_video(video_url){
     window.open(video_url, '_blank').focus();
