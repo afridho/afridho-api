@@ -32,10 +32,10 @@ router.post('/download', async (req, res) => {
             if (Type == 'Carousel'){
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
             }else{
-                await open( media, function (err) {
-                if ( err ) throw err;});
+                // await open( media, function (err) {
+                // if ( err ) throw err;});
                 // res.redirect('/api/ig')
-                // res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
+                res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
                 }
             }
     }else{
