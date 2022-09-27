@@ -33,6 +33,7 @@ router.post('/download', async (req, res) => {
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
             }else{
                 console.log(image_from_instagram[1])
+                res.write(JSON.stringify({'tes' : 'good'}));
         res.end()
                 // await open( media, function (err) {
                 // if ( err ) throw err;});
