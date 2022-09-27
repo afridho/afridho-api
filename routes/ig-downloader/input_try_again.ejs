@@ -125,6 +125,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	background: #40c057;
 	border:1px solid #2f9e44;
 }
+.color-white{
+	color:#ffffff;
+}
 	</style>
 </head>
 
@@ -144,6 +147,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	
 	<h1><a href='/api/ig'>Instagram Downloader</a></h1>
     <form action="/api/ig/download" method="POST">
+
+		
 		<%if (locals.invalid_link) { %>
 			<div id="info-error" class="error-link box-info"><%- invalid_link %></div>
 		<% } %>
@@ -151,17 +156,34 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 		<%if (locals.valid_link) { %>
 			<div id="info-link" class="info-link box-info"><%- valid_link %></div>
 		<% } %>
-		
+
 	<input type="text" placeholder='Post - Story - Reels - IGTV' class='text' #input_data id='input_data' name='link' required>
         <button type="submit" #submitData id="submitData" class="btn btn-primary btn-block btn-large mt-10">Submit</button>
+	
+		<%if (locals.media) { %>
+			<h1 id="download-media-mobile" class="color-white">👇️</h1>
+			<button id='download-media-mobile' onclick="save_image('<%- media %>')" class="btn btn-primary btn-block btn-large" style="margin-top:25px;"><%if (locals.icon) { %> <%- icon %> <% } %> Download</button>
+			<% } %>
 	</form>
 
 </div>
 
 <script>
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+		document.getElementById("download-media-mobile").style.display = "block";
+	}
+	else{
+	document.getElementById("download-media-mobile").style.display = "none";
+	}
+	</script>
+<script>
+
+async function save_image(image_url) {
+    window.open(image_url, '_blank');
+}
 
 var infoError = setInterval(removeInfoError, 10000);
-var infoLink = setInterval(removeInfoLink, 10000);
+var infoLink = setInterval(removeInfoLink, 1500);
 
 function removeInfoError() {
 	if(document.getElementById("info-error")){
@@ -177,6 +199,8 @@ function removeInfoLink() {
 }
 
 </script>
+
+
 
 </body>
 </html>
