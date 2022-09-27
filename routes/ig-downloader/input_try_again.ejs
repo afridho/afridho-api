@@ -127,20 +127,30 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 }
 	</style>
 </head>
-<body>
+
+<script type="text/javascript">
+    function load()
+    {
+		'<%if (locals.media) { %>'
+			window.open("<%- media %>", "_blank");
+		'<% } %>'
+
+    }
+</script>
+
+<body onload="load()">
 
 <div class="login">
 	
 	<h1><a href='/api/ig'>Instagram Downloader</a></h1>
     <form action="/api/ig/download" method="POST">
 		<%if (locals.invalid_link) { %>
-			<div class="error-link box-info"><%- invalid_link %></div>
+			<div id="info-error" class="error-link box-info"><%- invalid_link %></div>
 		<% } %>
 
 		<%if (locals.valid_link) { %>
 			<div id="info-link" class="info-link box-info"><%- valid_link %></div>
 		<% } %>
-		
 		
 	<input type="text" placeholder='Post - Story - Reels - IGTV' class='text' #input_data id='input_data' name='link' required>
         <button type="submit" #submitData id="submitData" class="btn btn-primary btn-block btn-large mt-10">Submit</button>
@@ -152,6 +162,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 setInterval(removeInfo, 10000);
 
 function removeInfo() {
+	document.getElementById("info-error").style.display = "none";
 	document.getElementById("info-link").style.display = "none";
 	clearInterval()
 }

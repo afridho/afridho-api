@@ -2,7 +2,6 @@ const axios = require('axios');
 const express = require("express");
 const router = express.Router();
 require('dotenv').config()
-const open = require('open');
 var recursion_now = 0;
 var recursion_limit = 20;// backup RapidAPI-KEY recursion process
 
@@ -32,16 +31,11 @@ router.post('/download', async (req, res) => {
             if (Type == 'Carousel'){
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
             }else{
-                // await open( media, function (err) {
-                // if ( err ) throw err;});
-                // res.redirect('/api/ig')
-                res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
+                res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media});
                 }
             }
     }else{
-        console.log(image_from_instagram[1])
-        res.end()
-        // res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
+        res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
     }}
     )
 
