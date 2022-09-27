@@ -61,6 +61,11 @@ body {
 	animation: gradient 15s ease infinite;
 }
 
+a {
+	color:white;
+	text-decoration: none;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -103,28 +108,56 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 .mt-10{
 	margin-top: 10px;
 }
-.error-link{
+
+.box-info{
 	font-size: 0.8em;
-	padding: 4px;
-	background: red;
+	padding: 6px;
 	color: white;
 	margin-bottom: 15px;
 	border-radius: 2px;
-	/* border:1px solid #868e96; */
 }
-      </style>
+.error-link{
+	background: #f03e3e;
+	border: 1px solid #e03131; 
+}
+
+.info-link{
+	background: #40c057;
+	border:1px solid #2f9e44;
+}
+	</style>
 </head>
 <body>
 
-  <div class="login">
+<div class="login">
 	
-    <h1>Instagram Downloader</h1>
+	<h1><a href='/api/ig'>Instagram Downloader</a></h1>
     <form action="/api/ig/download" method="POST">
-		<div class="error-link"><%- invalid_link %></div>
+		<%if (locals.invalid_link) { %>
+			<div class="error-link box-info"><%- invalid_link %></div>
+		<% } %>
 
-      <input type="text" placeholder='Post - Story - Reels - IGTV' class='text' #input_data id='input_data' name='link' required>
-          <button type="submit" #submitData id="submitData" class="btn btn-primary btn-block btn-large mt-10">Submit</button>
-      </form>
-  </div>
+		<%if (locals.valid_link) { %>
+			<div id="info-link" class="info-link box-info"><%- valid_link %></div>
+		<% } %>
+		
+		
+	<input type="text" placeholder='Post - Story - Reels - IGTV' class='text' #input_data id='input_data' name='link' required>
+        <button type="submit" #submitData id="submitData" class="btn btn-primary btn-block btn-large mt-10">Submit</button>
+	</form>
+</div>
+
+<script>
+
+setInterval(removeInfo, 10000);
+
+function removeInfo() {
+	document.getElementById("info-link").style.display = "none";
+	clearInterval()
+}
+
+
+</script>
+
 </body>
 </html>

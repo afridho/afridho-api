@@ -2,11 +2,13 @@ const axios = require('axios');
 const express = require("express");
 const router = express.Router();
 require('dotenv').config()
-const RAPID_API_IGDOWNLOADER_KEY = process.env.RAPID_API_IGDOWNLOADER_KEY
 const open = require('open');
+var recursion_now = 0;
+var recursion_limit = 20;// backup RapidAPI-KEY recursion process
 
 router.get('/', async (req, res) => {
     res.render(__dirname + '/input');
+    res.end()
     })
 
 router.post('/download', async (req, res) => {
@@ -17,52 +19,58 @@ router.post('/download', async (req, res) => {
     //         "https://scontent.cdninstagram.com/v/t51.2885-15/308016585_494223315551442_8810189213287579869_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent.cdninstagram.com&_nc_cat=106&_nc_ohc=6JCd8Db7myQAX9RJ0yM&edm=AJBgZrYBAAAA&ccb=7-5&ig_cache_key=MjkzMzI5ODAwODI3NTgzNjE0OA%3D%3D.2-ccb7-5&oh=00_AT9KH70qvGOzKA5PVUVpFG7yMN3rzrzrETSZMKy5bsKTFQ&oe=63345D75&_nc_sid=78c662"
     //       ]
     //     const Type = 'Carousel'
-
     const image_from_instagram = await get_instagram_image(req.body.link)
- 
-    if(image_from_instagram[0] != 404){
-        if('error' in image_from_instagram[1]){
-            res.render(__dirname + '/input_try_again', {invalid_link : (req.body.link+"<div class='mt-10'>Link is removed or private</div>")});
-        } else{
-        const title = image_from_instagram[1]?.title
-        const media = image_from_instagram[1]?.media
-        const Type = image_from_instagram[1]?.Type 
-
-        if (Type == 'Carousel')
-        {
-            res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
-
-        }else{
-            await open( media, function (err) {
-            if ( err ) throw err;});
-            res.redirect('/api/ig')
+    if(image_from_instagram[0] == 200){
+        if('error' in image_from_instagram){
+            res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
             res.end()
+        } else{
+            const title = image_from_instagram[1]?.title
+            const media = image_from_instagram[1]?.media
+            const Type = image_from_instagram[1]?.Type 
+
+            if (Type == 'Carousel'){
+                res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
+                res.end()
+            }else{
+                // await open( media, function (err) {
+                // if ( err ) throw err;});
+                // res.redirect('/api/ig')
+                res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
+                res.end()
+                }
             }
-        }
     }else{
         res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
-    }
-}
+        res.end()
+    }}
     )
 
-
 async function get_instagram_image(ig_link){
+    recursion_now++;
     const options = {
     method: 'GET',
     url: 'https://instagram-story-downloader-media-downloader.p.rapidapi.com/index',
     params: {url: ig_link},
     headers: {
-        'X-RapidAPI-Key': RAPID_API_IGDOWNLOADER_KEY,
+        'X-RapidAPI-Key' : await RapidAPI_KEY(),
         'X-RapidAPI-Host': 'instagram-story-downloader-media-downloader.p.rapidapi.com'
     }
     };
 
     return await axios.request(options).then(function (response) {
-        return ['200',response.data]
-    }).catch(function (error) {
-        return ['404',"Link isn't supported by instagram or link contains 'direct chat'"]
+        return ('error' in response.data) ? [response.status, response.data] : [response.status, response.data]
+    }).catch(async function (error) {
+        return await (error.response.status == 429 || recursion_now <= recursion_limit) ? get_instagram_image(ig_link) : [error.response.status,Object.values(error.response.data)[0]]
     });
 }
+
+async function RapidAPI_KEY() {
+    filtered_env = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.includes('IGDOWNLOADER_KEY')));
+    var keys = Object.keys(filtered_env);
+    return await filtered_env[keys[ keys.length * Math.random() << 0]];
+};
+
 
 module.exports = router;
 

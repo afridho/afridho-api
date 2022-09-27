@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+var baseUrlIgDownloader = 'http://afridho-api.vercel.app/api/ig'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -62,6 +63,11 @@ const config = {
         disableSwitch: true,
         respectPrefersColorScheme: true,
       },
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       navbar: {
         title: 'afridho-api',
         logo: {
@@ -75,7 +81,7 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
+          // {to: baseUrlIgDownloader, label: 'Instagram Downloader', position: 'left'},
           {
             href: 'https://github.com/afridho/afridho-api',
             label: 'GitHub Repository',

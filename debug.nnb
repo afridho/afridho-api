@@ -1,9 +1,9 @@
 {
     "cells": [
         {
-            "language": "typescript",
+            "language": "javascript",
             "source": [
-                "console.log('good')"
+                "\n\n\n\n"
             ],
             "outputs": [
                 {
@@ -11,7 +11,7 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "good",
+                                "old",
                                 ""
                             ]
                         }
