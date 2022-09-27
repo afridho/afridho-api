@@ -22,6 +22,7 @@ router.post('/download', async (req, res) => {
     const image_from_instagram = await get_instagram_image(req.body.link)
     if(image_from_instagram[0] == 200){
         if('error' in image_from_instagram[1]){
+
             res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
         } else{
             const title = image_from_instagram[1]?.title
@@ -31,14 +32,18 @@ router.post('/download', async (req, res) => {
             if (Type == 'Carousel'){
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
             }else{
-                await open( media, function (err) {
-                if ( err ) throw err;});
-                res.redirect('/api/ig')
-                res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
+                console.log(image_from_instagram[1])
+        res.end()
+                // await open( media, function (err) {
+                // if ( err ) throw err;});
+                // res.redirect('/api/ig')
+                // res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
                 }
             }
     }else{
-        res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
+        console.log(image_from_instagram[1])
+        res.end()
+        // res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
     }}
     )
 
