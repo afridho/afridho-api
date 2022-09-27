@@ -7,7 +7,7 @@ title : Home
 # afridho-api
 
 :::tip Favorites
-1. <a href='/api/ig' target='_blank'>Instagram Downloader</a>
+1. <a href='https://afridho-api.vercel.app/api/ig' target='_self'>Instagram Downloader</a>
 :::
 
 ## Install
