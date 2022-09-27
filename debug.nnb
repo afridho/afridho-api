@@ -3,17 +3,18 @@
         {
             "language": "javascript",
             "source": [
-                "\n\n\n\n"
+                "const toDataURL = url => fetch(url)\n  .then(response => response.blob())\n  .then(blob => new Promise((resolve, reject) => {\n    const reader = new FileReader()\n    reader.onloadend = () => resolve(reader.result)\n    reader.onerror = reject\n    reader.readAsDataURL(blob)\n  }))\n\n\ntoDataURL('https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0')\n  .then(dataUrl => {\n    console.log('RESULT:', dataUrl)\n  })"
             ],
             "outputs": [
                 {
                     "items": [
                         {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "old",
-                                ""
-                            ]
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "fetch is not defined",
+                                "stack": "    at toDataURL (<Cell 1> [3, 8])\n    at <Cell 1> [11, 9]\n    at <Cell 1> [15, 46]\n    at Script.runInContext (node:vm:141:12)\n    at Script.runInNewContext (node:vm:146:17)\n    at Object.runInNewContext (node:vm:306:38)\n    at C (/Users/ridho/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:113345)\n    at t.execCode (/Users/ridho/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:114312)\n    at k.<anonymous> (/Users/ridho/.vscode/extensions/donjayamanne.typescript-notebook-2.0.6/out/extension/server/index.js:2:142156)\n    at k.emit (node:events:513:28)"
+                            }
                         }
                     ]
                 }

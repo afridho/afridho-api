@@ -133,7 +133,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     <% if (typeof media === 'object' && Type == 'Carousel'){ %>
       <% for (var i = 0; i < media.length; i++) { %>
         <div class="color-white small-text">(Media <%- [i+1] %>)</div>
-        <button onclick="save_image('<%- media[i] %>')" class="btn btn-primary btn-block btn-large">💾 Download</button><br>
+        <button onclick="save_media('<%- media[i] %>')" class="btn btn-primary btn-block btn-large">💾 Download</button><br>
 <% } %>
 <% } %>
   </div>
@@ -156,15 +156,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
       window.open('/api/ig', '_self');
     }
 
-  async function save_image(image_url) {
+  async function save_media(image_url) {
     window.open(image_url, '_blank');
   }
 
-  
-
-  function save_video(video_url){
-    window.open(video_url, '_blank').focus();
-  }
 </script>
 
 </body>

@@ -27,11 +27,12 @@ router.post('/download', async (req, res) => {
             const title = image_from_instagram[1]?.title
             const media = image_from_instagram[1]?.media
             const Type = image_from_instagram[1]?.Type 
-
+            
             if (Type == 'Carousel'){
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
             }else{
-                res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media});
+                const icon = Type == 'Post-Image' ? '📷️' : '📹️'
+                res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media, icon: icon});
                 }
             }
     }else{
