@@ -23,7 +23,6 @@ router.post('/download', async (req, res) => {
     if(image_from_instagram[0] == 200){
         if('error' in image_from_instagram){
             res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
-            res.end()
         } else{
             const title = image_from_instagram[1]?.title
             const media = image_from_instagram[1]?.media
@@ -31,18 +30,15 @@ router.post('/download', async (req, res) => {
 
             if (Type == 'Carousel'){
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
-                res.end()
             }else{
                 await open( media, function (err) {
                 if ( err ) throw err;});
                 res.redirect('/api/ig')
                 res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
-                res.end()
                 }
             }
     }else{
         res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
-        res.end()
     }}
     )
 
@@ -60,8 +56,8 @@ async function get_instagram_image(ig_link){
 
     return await axios.request(options).then(function (response) {
         return ('error' in response.data) ? [response.status, response.data] : [response.status, response.data]
-    }).catch(async function (error) {
-        return await (error.response.status == 429 || recursion_now <= recursion_limit) ? get_instagram_image(ig_link) : [error.response.status,Object.values(error.response.data)[0]]
+    }).catch(function (error) {
+        return (error.response.status == 429 || recursion_now <= recursion_limit) ? get_instagram_image(ig_link) : [error.response.status,Object.values(error.response.data)[0]]
     });
 }
 
