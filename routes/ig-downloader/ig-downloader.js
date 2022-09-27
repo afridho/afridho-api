@@ -43,7 +43,6 @@ router.post('/download', async (req, res) => {
     )
 
 async function get_instagram_image(ig_link){
-    recursion_now++;
     const options = {
     method: 'GET',
     url: 'https://instagram-story-downloader-media-downloader.p.rapidapi.com/index',
@@ -57,7 +56,12 @@ async function get_instagram_image(ig_link){
     return await axios.request(options).then(function (response) {
         return ('error' in response.data) ? [response.status, response.data] : [response.status, response.data]
     }).catch(function (error) {
-        return (error.response.status == 429 || recursion_now <= recursion_limit) ? get_instagram_image(ig_link) : [error.response.status,Object.values(error.response.data)[0]]
+        if(error.response.status == 429 || recursion_now <= recursion_limit) {
+            recursion_now++;
+            get_instagram_image(ig_link)
+        }else{
+            return [error.response.status,Object.values(error.response.data)[0]]
+        }
     });
 }
 
