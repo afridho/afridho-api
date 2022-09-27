@@ -33,9 +33,9 @@ router.post('/download', async (req, res) => {
                 res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
                 res.end()
             }else{
-                // await open( media, function (err) {
-                // if ( err ) throw err;});
-                // res.redirect('/api/ig')
+                await open( media, function (err) {
+                if ( err ) throw err;});
+                res.redirect('/api/ig')
                 res.render(__dirname + '/input_try_again', {valid_link : 'Download success'});
                 res.end()
                 }
