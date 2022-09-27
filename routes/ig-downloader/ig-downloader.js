@@ -54,7 +54,7 @@ async function get_instagram_image(ig_link){
     };
 
     return await axios.request(options).then(function (response) {
-        return ('error' in response.data) ? [response.status, response.data] : [response.status, response.data]
+        return [response.status, response.data]
     }).catch(function (error) {
         if(error.response.status == 429) {
             // || recursion_now <= recursion_limit) {
