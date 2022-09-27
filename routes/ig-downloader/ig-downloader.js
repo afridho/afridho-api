@@ -21,7 +21,7 @@ router.post('/download', async (req, res) => {
     //     const Type = 'Carousel'
     const image_from_instagram = await get_instagram_image(req.body.link)
     if(image_from_instagram[0] == 200){
-        if('error' in image_from_instagram){
+        if('error' in image_from_instagram[1]){
             res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
         } else{
             const title = image_from_instagram[1]?.title
@@ -43,6 +43,7 @@ router.post('/download', async (req, res) => {
     )
 
 async function get_instagram_image(ig_link){
+    recursion_now++;
     const options = {
     method: 'GET',
     url: 'https://instagram-story-downloader-media-downloader.p.rapidapi.com/index',
@@ -55,11 +56,13 @@ async function get_instagram_image(ig_link){
 
     return await axios.request(options).then(function (response) {
         return [response.status, response.data]
-    }).catch(function (error) {
-        if(error.response.status == 429) {
-            // || recursion_now <= recursion_limit) {
-            // recursion_now++;
-            get_instagram_image(ig_link)
+    }).catch(async function (error) {
+        if(error.response.status == 429){
+            if(recursion_now <= recursion_limit){   
+            return get_instagram_image(ig_link)
+            }else{
+                return [error.response.status,Object.values(error.response.data)[0]]
+            }
         }else{
             return [error.response.status,Object.values(error.response.data)[0]]
         }
