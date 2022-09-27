@@ -155,18 +155,26 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	<input type="text" placeholder='Post - Story - Reels - IGTV' class='text' #input_data id='input_data' name='link' required>
         <button type="submit" #submitData id="submitData" class="btn btn-primary btn-block btn-large mt-10">Submit</button>
 	</form>
+
 </div>
 
 <script>
 
-setInterval(removeInfo, 10000);
+var infoError = setInterval(removeInfoError, 10000);
+var infoLink = setInterval(removeInfoLink, 10000);
 
-function removeInfo() {
+function removeInfoError() {
+	if(document.getElementById("info-error")){
 	document.getElementById("info-error").style.display = "none";
-	document.getElementById("info-link").style.display = "none";
-	clearInterval()
+	clearInterval(infoError)
+	}
 }
-
+function removeInfoLink() {
+	if(document.getElementById("info-link")){
+		document.getElementById("info-link").style.display = "none";
+		clearInterval(infoLink)
+	}
+}
 
 </script>
 

@@ -71,7 +71,7 @@ const config = {
       navbar: {
         title: 'afridho-api',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'afridho-api',
           src: 'img/logo.png',
         },
         items: [
