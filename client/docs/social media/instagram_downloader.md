@@ -3,6 +3,8 @@ sidebar_position: 1
 title : Instagram Downloader
 ---
 
+Download media images/videos from Instagram. This API using RapidAPI to get data.
+
 ## `GET` Endpoint
 ```
 /api/ig
