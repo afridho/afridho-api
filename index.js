@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.static('client/build'));
+// app.use(express.static('client/build'));
 app.use(express.static('frontend/sqlite_viewer'));
 const path = require('path');
 app.use('/sqlite-viewer', function (req, res){
