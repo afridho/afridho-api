@@ -8,6 +8,10 @@
         {
             "src": "client/build/**",
             "use": "@vercel/static"
+        },
+        {
+            "src": "client_sqlite_viewer/**",
+            "use": "@vercel/static"
         }
     ],
     "routes":[
@@ -22,6 +26,14 @@
         {
             "src": "/",
             "dest": "client/build/index.html"
+        },
+        {
+            "src": "/sqlite-viewer/(.*)",
+            "dest": "client_sqlite_viewer/$1" 
+        },
+        {
+            "src": "/sqlite-viewer/",
+            "dest": "client_sqlite_viewer/index.html"
         }
     ]
 }
