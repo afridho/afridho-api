@@ -15,14 +15,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(express.static('client/build'));
-app.use(express.static('client_sqlite_viewer'));
+app.use(express.static('frontend/sqlite_viewer'));
 const path = require('path');
 app.get('/', function (req, res){
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.get('/sqlite-viewer', function (req, res){
-  res.sendFile(path.resolve(__dirname, 'client_sqlite_viewer', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'frontend', 'sqlite_viewer', 'index.html'));
 });
 
 app.use("/api/football-update", football_update);

@@ -10,7 +10,7 @@
             "use": "@vercel/static"
         },
         {
-            "src": "client_sqlite_viewer/**",
+            "src": "frontend/sqlite_viewer/**",
             "use": "@vercel/static"
         }
     ],
@@ -29,11 +29,11 @@
         },
         {
             "src": "/sqlite-viewer/(.*)",
-            "dest": "client_sqlite_viewer/$1" 
+            "dest": "frontend/sqlite_viewer/$1" 
         },
         {
             "src": "/sqlite-viewer/",
-            "dest": "client_sqlite_viewer/index.html"
+            "dest": "frontend/sqlite_viewer/index.html"
         }
     ]
 }
