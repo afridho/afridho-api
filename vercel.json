@@ -20,16 +20,20 @@
             "dest": "index.js"
         },
         {
+            "src": "/dev/sqlite/viewer",
+            "dest": "frontend/sqlite/index.html"
+        },
+        {
+            "src": "/dev/sqlite/(.*)",
+            "dest": "frontend/sqlite/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "client/build/$1" 
         },
         {
             "src": "/",
             "dest": "client/build/index.html"
-        },
-        {
-            "src": "/sqlite",
-            "dest": "frontend/sqlite/index.html"
         }
     ]
 }
