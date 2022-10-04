@@ -28,11 +28,7 @@
             "dest": "client/build/index.html"
         },
         {
-            "src": "/sqlite-viewer/(.*)",
-            "dest": "frontend/sqlite_viewer/$1" 
-        },
-        {
-            "src": "/sqlite-viewer/",
+            "src": "/sqlite-viewer",
             "dest": "frontend/sqlite_viewer/index.html"
         }
     ]
