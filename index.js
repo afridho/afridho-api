@@ -15,10 +15,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(express.static('client/build'));
-app.use(express.static('frontend/sqlite_viewer'));
+app.use(express.static('frontend/sqlite'));
 const path = require('path');
 app.use('/sqlite-viewer', function (req, res){
-  res.sendFile(path.resolve(__dirname, 'frontend', 'sqlite_viewer', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'frontend', 'sqlite', 'index.html'));
 });
 
 app.get('/', function (req, res){
