@@ -10,7 +10,7 @@
             "use": "@vercel/static"
         },
         {
-            "src": "frontend/sqlite/**",
+            "src": "frontend/**",
             "use": "@vercel/static"
         }
     ],
@@ -20,12 +20,12 @@
             "dest": "index.js"
         },
         {
-            "src": "/dev/sqlite/viewer",
-            "dest": "frontend/sqlite/index.html"
+            "src": "/dev/(.*)",
+            "dest": "frontend/$1"
         },
         {
-            "src": "/dev/sqlite/(.*)",
-            "dest": "frontend/sqlite/$1"
+            "src": "/dev/sqlite",
+            "dest": "frontend/sqlite/index.html"
         },
         {
             "src": "/(.*)",

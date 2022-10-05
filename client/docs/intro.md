@@ -8,6 +8,7 @@ title : Home
 
 :::tip Favorites
 1. <a href='https://afridho-api.vercel.app/api/ig' target='_self'>Instagram Downloader</a>
+2. <a href='https://afridho-api.vercel.app/dev/sqlite' target='_self'>SQLite Viewer</a>
 :::
 
 ## Install
