@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
+title: Pushover
 ---
 
-# Pushover
 Use this if you want to send notification to your device instantly.
 
 ## Environment
