@@ -35,6 +35,8 @@ Send all this as body (raw or json)
 
 ### Result
 
+#### <a href='https://www.bzeg.link/' target="_blank">URL Shorten Web (bzeg.link) </a>🏃🏻‍♂️
+
 ```json title="Response : Success✅"
 {
   "info":"Success",
