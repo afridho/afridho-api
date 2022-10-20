@@ -19,25 +19,33 @@ router.post('/download', async (req, res) => {
     //       ]
     //     const Type = 'Carousel'
     const image_from_instagram = await get_instagram_image(req.body.link)
-    if(image_from_instagram[0] == 200){
-        if('error' in image_from_instagram[1]){
-
-            res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
-        } else{
-            const title = image_from_instagram[1]?.title
-            const media = image_from_instagram[1]?.media
-            const Type = image_from_instagram[1]?.Type 
-            
-            if (Type == 'Carousel'){
-                res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
-            }else{
-                const icon = Type == 'Post-Image' ? '📷️' : '📹️'
-                res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media, icon: icon});
+    try{
+        if(image_from_instagram[0] == 200){
+            if('error' in image_from_instagram[1]){
+                res.status(500)
+                res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
+            } else{
+                const title = image_from_instagram[1]?.title
+                const media = image_from_instagram[1]?.media
+                const Type = image_from_instagram[1]?.Type 
+                
+                if (Type == 'Carousel'){
+                    res.status(200)
+                    res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
+                }else{
+                    const icon = Type == 'Post-Image' ? '📷️' : '📹️'
+                    res.status(200)
+                    res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media, icon: icon});
+                    }
                 }
-            }
-    }else{
-        res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
-    }}
+        }else{
+            res.status(200)
+            res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
+        }}
+        catch{
+            res.status(500)
+            res.render(__dirname + '/input_try_again', {invalid_link : 'Link is removed or private'});
+        }}
     )
 
 async function get_instagram_image(ig_link){
