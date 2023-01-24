@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const football_update = require("./routes/football-update/football-update")
 const pushover = require("./routes/pushover/pushover")
+const dummy = require("./routes/dummy/dummy")
 const my_fav_team_cron = require("./routes/football-update/my-fav-team-cron")
 const ig_downloader = require("./routes/ig-downloader/ig-downloader")
 
@@ -31,6 +32,7 @@ app.get('/', function (req, res){
 app.use("/api/football-update", football_update);
 app.use("/api/fav-football-cron", my_fav_team_cron);
 app.use("/api/pushover", pushover);
+app.use("/api/dummy", dummy);
 app.set('views', __dirname + '/routes/ig-downloader');
 app.set("view engine", "ejs");
 app.use("/api/ig", ig_downloader);
