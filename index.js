@@ -10,6 +10,11 @@ const ig_downloader = require("./routes/ig-downloader/ig-downloader")
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -32,7 +37,7 @@ app.get('/', function (req, res){
 app.use("/api/football-update", football_update);
 app.use("/api/fav-football-cron", my_fav_team_cron);
 app.use("/api/pushover", pushover);
-app.use("/api/dummy", dummy);
+app.use("/api/dummy", cors(), dummy);
 app.set('views', __dirname + '/routes/ig-downloader');
 app.set("view engine", "ejs");
 app.use("/api/ig", ig_downloader);
