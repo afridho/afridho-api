@@ -1,5 +1,4 @@
 var data = {
-      "data": {
         "data": [{
           "id": 1,
           "email": "santihselvy@gmail.com",
@@ -32,7 +31,6 @@ var data = {
         }],
         "message": "Successfully",
         "status": "success"
-    }
 }
 
 module.exports = data;
