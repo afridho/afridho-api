@@ -1,5 +1,4 @@
 var data = {
-    "data": {
       "data": {
         "data": [{
           "id": 1,
@@ -33,7 +32,6 @@ var data = {
         }],
         "message": "Successfully",
         "status": "success"
-    }
     }
 }
 
