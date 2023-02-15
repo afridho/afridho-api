@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const analyzeSpread = require("./json/analyzeSpread")
 const dashboard = require("./json/dashboard")
+const netPositionDialog = require("./json/NetPositionDialog")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -21,6 +22,13 @@ router.get("/analyze-spread", async (req, res) =>{
 router.get("/dashboard", async (req, res) =>{
     res.status(200)
     res.json(dashboard)
+    
+});
+
+// Trailing > Account Position > Net Position
+router.get("/net-position-dialog", async (req, res) =>{
+    res.status(200)
+    res.json(netPositionDialog)
     
 });
 
