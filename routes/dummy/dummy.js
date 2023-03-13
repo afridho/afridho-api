@@ -3,6 +3,7 @@ const router = express.Router();
 const analyzeSpread = require("./json/analyzeSpread")
 const dashboard = require("./json/dashboard")
 const netPositionDialog = require("./json/NetPositionDialog")
+const slippage = require("./json/slippage")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -30,6 +31,11 @@ router.get("/net-position-dialog", async (req, res) =>{
     res.status(200)
     res.json(netPositionDialog)
     
+});
+
+route.get("/slippage", async (req, res) =>{
+    res.status(200)
+    res.json(slippage)
 });
 
 
