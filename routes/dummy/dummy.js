@@ -33,7 +33,7 @@ router.get("/net-position-dialog", async (req, res) =>{
     
 });
 
-route.get("/slippage", async (req, res) =>{
+router.get("/slippage", async (req, res) =>{
     res.status(200)
     res.json(slippage)
 });
