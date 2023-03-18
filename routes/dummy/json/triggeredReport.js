@@ -3,8 +3,8 @@ var data = {
   "data": [
       {
           "name": "dummy",
-          "server": "MT4CYPRUS",
-          "login": 30036123,
+          "server": "MT4IN4",
+          "login": 1117140,
           "total_ticket": 0,
           "equity": 0,
           "currency": "USD",
@@ -44,8 +44,8 @@ var data = {
       },
       {
           "name": "afridho zega",
-          "server": "MT4CYPRUS",
-          "login": 30036191,
+          "server": "MT4IN4",
+          "login": 1117140,
           "total_ticket": 0,
           "equity": 0,
           "currency": "USD",
@@ -85,8 +85,8 @@ var data = {
       },
       {
           "name": "debug account",
-          "server": "MT4CYPRUS",
-          "login": 30034797,
+          "server": "MT4IN4",
+          "login": 1117140,
           "total_ticket": 0,
           "equity": 0,
           "currency": "USD",
