@@ -60,7 +60,7 @@ router.get("/detail-avprofit", async (req, res) =>{
 
 router.get("/detail-related-account", async (req, res) =>{
     res.status(200)
-    res,json(detailRelatedAccount)
+    res.json(detailRelatedAccount)
 })
 
 module.exports = router;
