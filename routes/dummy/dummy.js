@@ -7,6 +7,7 @@ const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
 const detailScalper = require("./json/detailScalper")
 const detailAVProfit = require("./json/detailAVProfit")
+const detailRelatedAccount = require("./json/detailRelatedAccount")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -55,6 +56,11 @@ router.get("/detail-scalper", async (req, res) =>{
 router.get("/detail-avprofit", async (req, res) =>{
     res.status(200)
     res.json(detailAVProfit)
+})
+
+router.get("/detail-related-account", async (req, res) =>{
+    res.status(200)
+    res,json(detailRelatedAccount)
 })
 
 module.exports = router;
