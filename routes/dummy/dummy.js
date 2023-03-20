@@ -7,6 +7,7 @@ const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
 const detailScalper = require("./json/detailScalper")
 const detailAVProfit = require("./json/detailAVProfit")
+const detailOpenPosition = require("./json/detailOpenPosition")
 const detailRelatedAccount = require("./json/detailRelatedAccount")
 require('dotenv').config()
 
@@ -61,6 +62,11 @@ router.get("/detail-avprofit", async (req, res) =>{
 router.get("/detail-related-account", async (req, res) =>{
     res.status(200)
     res.json(detailRelatedAccount)
+})
+
+router.get("/detail-open-position", async (req, res) =>{
+    res.status(200)
+    res.json(detailOpenPosition)
 })
 
 module.exports = router;
