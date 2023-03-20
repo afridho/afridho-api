@@ -5,6 +5,7 @@ const dashboard = require("./json/dashboard")
 const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
+const detailScalper = require("./json/detailScalper")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -44,6 +45,11 @@ router.get("/triggered-report", async (req, res) =>{
     res.status(200)
     res.json(triggeredReport)
 });
+
+router.get("/detail-scalper", async (req, res) =>{
+    res.status(200)
+    res.json(detailScalper)   
+})
 
 
 module.exports = router;
