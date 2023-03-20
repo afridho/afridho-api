@@ -26,7 +26,7 @@ var data = {
                 "open_price": 1834,
                 "volume": 2
             },
-            "close_targe": {
+            "close_target": {
                 "ticket" : 'TICKET OUTT',
                 "cmd": 'Sell',
                 "open_time": '2023-02-15 12:10:31',
@@ -59,7 +59,7 @@ var data = {
                 "open_price": 2112,
                 "volume": 2
             },
-            "close_targe": {
+            "close_target": {
                 "ticket" : 'TICKET OUTT',
                 "cmd": 'Buy',
                 "open_time": '2023-02-15 12:10:31',
