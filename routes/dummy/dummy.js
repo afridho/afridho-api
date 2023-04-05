@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const analyzeSpread = require("./json/analyzeSpread")
 const dashboard = require("./json/dashboard")
+const autoConfig = require("./json/autoconfig")
 const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
@@ -29,6 +30,12 @@ router.get("/dashboard", async (req, res) =>{
     res.status(200)
     res.json(dashboard)
     
+});
+
+// Trailing > Auto Config
+router.get("/auto-config", async (req, res) =>{
+    res.status(200)
+    res.json(autoConfig)
 });
 
 // Trailing > Account Position > Net Position
