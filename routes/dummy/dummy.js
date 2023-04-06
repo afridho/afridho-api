@@ -7,6 +7,7 @@ const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
 const getMenu = require("./json/getMenu")
+const getRole = require("./json/getRole")
 const detailScalper = require("./json/detailScalper")
 const detailAVProfit = require("./json/detailAVProfit")
 const detailOpenPosition = require("./json/detailOpenPosition")
@@ -23,6 +24,11 @@ router.get("/", async (req, res) =>{
 router.get("/menu", async (req, res) =>{
     res.status(200)
     res.json(getMenu)  
+});
+
+router.get("/role", async (req, res) =>{
+    res.status(200)
+    res.json(getRole)  
 });
 
 // Analyze Spread Data Dummy
