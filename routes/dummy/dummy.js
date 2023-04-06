@@ -6,6 +6,7 @@ const autoConfig = require("./json/autoConfig")
 const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
 const triggeredReport = require("./json/triggeredReport")
+const getMenu = require("./json/getMenu")
 const detailScalper = require("./json/detailScalper")
 const detailAVProfit = require("./json/detailAVProfit")
 const detailOpenPosition = require("./json/detailOpenPosition")
@@ -17,6 +18,12 @@ router.get("/", async (req, res) =>{
     res.json({status : 'it works'});  
 }
 );
+
+// User-Management - Role Menu
+router.get("/menu", async (req, res) =>{
+    res.status(200)
+    res.json(getMenu)  
+});
 
 // Analyze Spread Data Dummy
 router.get("/analyze-spread", async (req, res) =>{
