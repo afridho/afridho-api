@@ -24,7 +24,7 @@ var data = {
                     "menu_id": 1,
                     "name": "View",
                     "action": "home.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 1
                 },
@@ -33,7 +33,7 @@ var data = {
                     "menu_id": 1,
                     "name": "Add",
                     "action": "home.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 2
                 },
@@ -42,7 +42,7 @@ var data = {
                     "menu_id": 1,
                     "name": "Edit",
                     "action": "home.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 3
                 },
@@ -51,7 +51,7 @@ var data = {
                     "menu_id": 1,
                     "name": "Delete",
                     "action": "home.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 4
                 }
@@ -75,7 +75,7 @@ var data = {
                     "menu_id": 2,
                     "name": "View",
                     "action": "ceo.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 5
                 },
@@ -84,7 +84,7 @@ var data = {
                     "menu_id": 2,
                     "name": "Add",
                     "action": "ceo.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 6
                 },
@@ -93,7 +93,7 @@ var data = {
                     "menu_id": 2,
                     "name": "Edit",
                     "action": "ceo.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 7
                 },
@@ -102,7 +102,7 @@ var data = {
                     "menu_id": 2,
                     "name": "Delete",
                     "action": "ceo.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 8
                 }
@@ -126,7 +126,7 @@ var data = {
                     "menu_id": 3,
                     "name": "View",
                     "action": "ceo-dashboard.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 9
                 },
@@ -135,7 +135,7 @@ var data = {
                     "menu_id": 3,
                     "name": "Add",
                     "action": "ceo-dashboard.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 10
                 },
@@ -144,7 +144,7 @@ var data = {
                     "menu_id": 3,
                     "name": "Edit",
                     "action": "ceo-dashboard.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 11
                 },
@@ -153,7 +153,7 @@ var data = {
                     "menu_id": 3,
                     "name": "Delete",
                     "action": "ceo-dashboard.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 12
                 }
@@ -177,7 +177,7 @@ var data = {
                     "menu_id": 4,
                     "name": "View",
                     "action": "convertion.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 13
                 },
@@ -186,7 +186,7 @@ var data = {
                     "menu_id": 4,
                     "name": "Add",
                     "action": "convertion.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 14
                 },
@@ -195,7 +195,7 @@ var data = {
                     "menu_id": 4,
                     "name": "Edit",
                     "action": "convertion.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 15
                 },
@@ -204,7 +204,7 @@ var data = {
                     "menu_id": 4,
                     "name": "Delete",
                     "action": "convertion.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 16
                 }
@@ -228,7 +228,7 @@ var data = {
                     "menu_id": 5,
                     "name": "View",
                     "action": "report.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 17
                 },
@@ -237,7 +237,7 @@ var data = {
                     "menu_id": 5,
                     "name": "Add",
                     "action": "report.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 18
                 },
@@ -246,7 +246,7 @@ var data = {
                     "menu_id": 5,
                     "name": "Edit",
                     "action": "report.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 19
                 },
@@ -255,7 +255,7 @@ var data = {
                     "menu_id": 5,
                     "name": "Delete",
                     "action": "report.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 20
                 }
@@ -279,7 +279,7 @@ var data = {
                     "menu_id": 6,
                     "name": "View",
                     "action": "analyze-spread.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 21
                 },
@@ -288,7 +288,7 @@ var data = {
                     "menu_id": 6,
                     "name": "Add",
                     "action": "analyze-spread.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 22
                 },
@@ -297,7 +297,7 @@ var data = {
                     "menu_id": 6,
                     "name": "Edit",
                     "action": "analyze-spread.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 23
                 },
@@ -306,7 +306,7 @@ var data = {
                     "menu_id": 6,
                     "name": "Delete",
                     "action": "analyze-spread.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 24
                 }
@@ -330,7 +330,7 @@ var data = {
                     "menu_id": 7,
                     "name": "View",
                     "action": "ma-Info.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 25
                 },
@@ -339,7 +339,7 @@ var data = {
                     "menu_id": 7,
                     "name": "Add",
                     "action": "ma-Info.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 26
                 },
@@ -348,7 +348,7 @@ var data = {
                     "menu_id": 7,
                     "name": "Edit",
                     "action": "ma-Info.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 27
                 },
@@ -357,7 +357,7 @@ var data = {
                     "menu_id": 7,
                     "name": "Delete",
                     "action": "ma-Info.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 28
                 }
@@ -381,7 +381,7 @@ var data = {
                     "menu_id": 8,
                     "name": "View",
                     "action": "daily-history.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 29
                 },
@@ -390,7 +390,7 @@ var data = {
                     "menu_id": 8,
                     "name": "Add",
                     "action": "daily-history.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 30
                 },
@@ -399,7 +399,7 @@ var data = {
                     "menu_id": 8,
                     "name": "Edit",
                     "action": "daily-history.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 31
                 },
@@ -408,7 +408,7 @@ var data = {
                     "menu_id": 8,
                     "name": "Delete",
                     "action": "daily-history.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 32
                 }
@@ -432,7 +432,7 @@ var data = {
                     "menu_id": 9,
                     "name": "View",
                     "action": "daily-report.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 33
                 },
@@ -441,7 +441,7 @@ var data = {
                     "menu_id": 9,
                     "name": "Add",
                     "action": "daily-report.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 34
                 },
@@ -450,7 +450,7 @@ var data = {
                     "menu_id": 9,
                     "name": "Edit",
                     "action": "daily-report.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 35
                 },
@@ -459,7 +459,7 @@ var data = {
                     "menu_id": 9,
                     "name": "Delete",
                     "action": "daily-report.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 36
                 }
@@ -483,7 +483,7 @@ var data = {
                     "menu_id": 10,
                     "name": "View",
                     "action": "big-lot.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 37
                 },
@@ -492,7 +492,7 @@ var data = {
                     "menu_id": 10,
                     "name": "Add",
                     "action": "big-lot.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 38
                 },
@@ -501,7 +501,7 @@ var data = {
                     "menu_id": 10,
                     "name": "Edit",
                     "action": "big-lot.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 39
                 },
@@ -510,7 +510,7 @@ var data = {
                     "menu_id": 10,
                     "name": "Delete",
                     "action": "big-lot.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 40
                 }
@@ -534,7 +534,7 @@ var data = {
                     "menu_id": 11,
                     "name": "View",
                     "action": "tick-account.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 41
                 },
@@ -543,7 +543,7 @@ var data = {
                     "menu_id": 11,
                     "name": "Add",
                     "action": "tick-account.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 42
                 },
@@ -552,7 +552,7 @@ var data = {
                     "menu_id": 11,
                     "name": "Edit",
                     "action": "tick-account.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 43
                 },
@@ -561,7 +561,7 @@ var data = {
                     "menu_id": 11,
                     "name": "Delete",
                     "action": "tick-account.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 44
                 }
@@ -585,7 +585,7 @@ var data = {
                     "menu_id": 12,
                     "name": "View",
                     "action": "slippage.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 45
                 },
@@ -594,7 +594,7 @@ var data = {
                     "menu_id": 12,
                     "name": "Add",
                     "action": "slippage.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 46
                 },
@@ -603,7 +603,7 @@ var data = {
                     "menu_id": 12,
                     "name": "Edit",
                     "action": "slippage.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 47
                 },
@@ -612,7 +612,7 @@ var data = {
                     "menu_id": 12,
                     "name": "Delete",
                     "action": "slippage.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 48
                 }
@@ -636,7 +636,7 @@ var data = {
                     "menu_id": 13,
                     "name": "View",
                     "action": "free-margin.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 49
                 },
@@ -645,7 +645,7 @@ var data = {
                     "menu_id": 13,
                     "name": "Add",
                     "action": "free-margin.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 50
                 },
@@ -654,7 +654,7 @@ var data = {
                     "menu_id": 13,
                     "name": "Edit",
                     "action": "free-margin.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 51
                 },
@@ -663,7 +663,7 @@ var data = {
                     "menu_id": 13,
                     "name": "Delete",
                     "action": "free-margin.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 52
                 }
@@ -687,7 +687,7 @@ var data = {
                     "menu_id": 14,
                     "name": "View",
                     "action": "stopout.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 53
                 },
@@ -696,7 +696,7 @@ var data = {
                     "menu_id": 14,
                     "name": "Add",
                     "action": "stopout.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 54
                 },
@@ -705,7 +705,7 @@ var data = {
                     "menu_id": 14,
                     "name": "Edit",
                     "action": "stopout.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 55
                 },
@@ -714,7 +714,7 @@ var data = {
                     "menu_id": 14,
                     "name": "Delete",
                     "action": "stopout.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 56
                 }
@@ -738,7 +738,7 @@ var data = {
                     "menu_id": 15,
                     "name": "View",
                     "action": "open-position.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 57
                 },
@@ -747,7 +747,7 @@ var data = {
                     "menu_id": 15,
                     "name": "Add",
                     "action": "open-position.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 58
                 },
@@ -756,7 +756,7 @@ var data = {
                     "menu_id": 15,
                     "name": "Edit",
                     "action": "open-position.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 59
                 },
@@ -765,7 +765,7 @@ var data = {
                     "menu_id": 15,
                     "name": "Delete",
                     "action": "open-position.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 60
                 }
@@ -789,7 +789,7 @@ var data = {
                     "menu_id": 16,
                     "name": "View",
                     "action": "net-volume.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 61
                 },
@@ -798,7 +798,7 @@ var data = {
                     "menu_id": 16,
                     "name": "Add",
                     "action": "net-volume.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 62
                 },
@@ -807,7 +807,7 @@ var data = {
                     "menu_id": 16,
                     "name": "Edit",
                     "action": "net-volume.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 63
                 },
@@ -816,7 +816,7 @@ var data = {
                     "menu_id": 16,
                     "name": "Delete",
                     "action": "net-volume.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 64
                 }
@@ -840,7 +840,7 @@ var data = {
                     "menu_id": 17,
                     "name": "View",
                     "action": "report-profileA.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 65
                 },
@@ -849,7 +849,7 @@ var data = {
                     "menu_id": 17,
                     "name": "Add",
                     "action": "report-profileA.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 66
                 },
@@ -858,7 +858,7 @@ var data = {
                     "menu_id": 17,
                     "name": "Edit",
                     "action": "report-profileA.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 67
                 },
@@ -867,7 +867,7 @@ var data = {
                     "menu_id": 17,
                     "name": "Delete",
                     "action": "report-profileA.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 68
                 }
@@ -891,7 +891,7 @@ var data = {
                     "menu_id": 18,
                     "name": "View",
                     "action": "reopen-trades.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 69
                 },
@@ -900,7 +900,7 @@ var data = {
                     "menu_id": 18,
                     "name": "Add",
                     "action": "reopen-trades.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 70
                 },
@@ -909,7 +909,7 @@ var data = {
                     "menu_id": 18,
                     "name": "Edit",
                     "action": "reopen-trades.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 71
                 },
@@ -918,7 +918,7 @@ var data = {
                     "menu_id": 18,
                     "name": "Delete",
                     "action": "reopen-trades.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 72
                 }
@@ -942,7 +942,7 @@ var data = {
                     "menu_id": 19,
                     "name": "View",
                     "action": "deleted-trades.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 73
                 },
@@ -951,7 +951,7 @@ var data = {
                     "menu_id": 19,
                     "name": "Add",
                     "action": "deleted-trades.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 74
                 },
@@ -960,7 +960,7 @@ var data = {
                     "menu_id": 19,
                     "name": "Edit",
                     "action": "deleted-trades.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 75
                 },
@@ -969,7 +969,7 @@ var data = {
                     "menu_id": 19,
                     "name": "Delete",
                     "action": "deleted-trades.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 76
                 }
@@ -993,7 +993,7 @@ var data = {
                     "menu_id": 20,
                     "name": "View",
                     "action": "mtm-journal.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 77
                 },
@@ -1002,7 +1002,7 @@ var data = {
                     "menu_id": 20,
                     "name": "Add",
                     "action": "mtm-journal.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 78
                 },
@@ -1011,7 +1011,7 @@ var data = {
                     "menu_id": 20,
                     "name": "Edit",
                     "action": "mtm-journal.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 79
                 },
@@ -1020,7 +1020,7 @@ var data = {
                     "menu_id": 20,
                     "name": "Delete",
                     "action": "mtm-journal.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 80
                 }
@@ -1044,7 +1044,7 @@ var data = {
                     "menu_id": 21,
                     "name": "View",
                     "action": "modified-pending-ticket.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 81
                 },
@@ -1053,7 +1053,7 @@ var data = {
                     "menu_id": 21,
                     "name": "Add",
                     "action": "modified-pending-ticket.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 82
                 },
@@ -1062,7 +1062,7 @@ var data = {
                     "menu_id": 21,
                     "name": "Edit",
                     "action": "modified-pending-ticket.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 83
                 },
@@ -1071,7 +1071,7 @@ var data = {
                     "menu_id": 21,
                     "name": "Delete",
                     "action": "modified-pending-ticket.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 84
                 }
@@ -1095,7 +1095,7 @@ var data = {
                     "menu_id": 22,
                     "name": "View",
                     "action": "profileA.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 85
                 },
@@ -1104,7 +1104,7 @@ var data = {
                     "menu_id": 22,
                     "name": "Add",
                     "action": "profileA.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 86
                 },
@@ -1113,7 +1113,7 @@ var data = {
                     "menu_id": 22,
                     "name": "Edit",
                     "action": "profileA.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 87
                 },
@@ -1122,7 +1122,7 @@ var data = {
                     "menu_id": 22,
                     "name": "Delete",
                     "action": "profileA.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 88
                 }
@@ -1146,7 +1146,7 @@ var data = {
                     "menu_id": 23,
                     "name": "View",
                     "action": "profileA-account.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 89
                 },
@@ -1155,7 +1155,7 @@ var data = {
                     "menu_id": 23,
                     "name": "Add",
                     "action": "profileA-account.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 90
                 },
@@ -1164,7 +1164,7 @@ var data = {
                     "menu_id": 23,
                     "name": "Edit",
                     "action": "profileA-account.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 91
                 },
@@ -1173,7 +1173,7 @@ var data = {
                     "menu_id": 23,
                     "name": "Delete",
                     "action": "profileA-account.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 92
                 }
@@ -1197,7 +1197,7 @@ var data = {
                     "menu_id": 24,
                     "name": "View",
                     "action": "profileA-account-disabled.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 93
                 },
@@ -1206,7 +1206,7 @@ var data = {
                     "menu_id": 24,
                     "name": "Add",
                     "action": "profileA-account-disabled.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 94
                 },
@@ -1215,7 +1215,7 @@ var data = {
                     "menu_id": 24,
                     "name": "Edit",
                     "action": "profileA-account-disabled.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 95
                 },
@@ -1224,7 +1224,7 @@ var data = {
                     "menu_id": 24,
                     "name": "Delete",
                     "action": "profileA-account-disabled.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 96
                 }
@@ -1248,7 +1248,7 @@ var data = {
                     "menu_id": 25,
                     "name": "View",
                     "action": "group-trades.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 97
                 },
@@ -1257,7 +1257,7 @@ var data = {
                     "menu_id": 25,
                     "name": "Add",
                     "action": "group-trades.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 98
                 },
@@ -1266,7 +1266,7 @@ var data = {
                     "menu_id": 25,
                     "name": "Edit",
                     "action": "group-trades.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 99
                 },
@@ -1275,7 +1275,7 @@ var data = {
                     "menu_id": 25,
                     "name": "Delete",
                     "action": "group-trades.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 100
                 }
@@ -1299,7 +1299,7 @@ var data = {
                     "menu_id": 26,
                     "name": "View",
                     "action": "equity-highest-lowest.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 101
                 },
@@ -1308,7 +1308,7 @@ var data = {
                     "menu_id": 26,
                     "name": "Add",
                     "action": "equity-highest-lowest.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 102
                 },
@@ -1317,7 +1317,7 @@ var data = {
                     "menu_id": 26,
                     "name": "Edit",
                     "action": "equity-highest-lowest.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 103
                 },
@@ -1326,7 +1326,7 @@ var data = {
                     "menu_id": 26,
                     "name": "Delete",
                     "action": "equity-highest-lowest.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 104
                 }
@@ -1350,7 +1350,7 @@ var data = {
                     "menu_id": 27,
                     "name": "View",
                     "action": "equity-record.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 105
                 },
@@ -1359,7 +1359,7 @@ var data = {
                     "menu_id": 27,
                     "name": "Add",
                     "action": "equity-record.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 106
                 },
@@ -1368,7 +1368,7 @@ var data = {
                     "menu_id": 27,
                     "name": "Edit",
                     "action": "equity-record.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 107
                 },
@@ -1377,7 +1377,7 @@ var data = {
                     "menu_id": 27,
                     "name": "Delete",
                     "action": "equity-record.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 108
                 }
@@ -1401,7 +1401,7 @@ var data = {
                     "menu_id": 28,
                     "name": "View",
                     "action": "equity-trigger-history.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 109
                 },
@@ -1410,7 +1410,7 @@ var data = {
                     "menu_id": 28,
                     "name": "Add",
                     "action": "equity-trigger-history.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 110
                 },
@@ -1419,7 +1419,7 @@ var data = {
                     "menu_id": 28,
                     "name": "Edit",
                     "action": "equity-trigger-history.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 111
                 },
@@ -1428,7 +1428,7 @@ var data = {
                     "menu_id": 28,
                     "name": "Delete",
                     "action": "equity-trigger-history.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 112
                 }
@@ -1452,7 +1452,7 @@ var data = {
                     "menu_id": 29,
                     "name": "View",
                     "action": "file-source.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 113
                 },
@@ -1461,7 +1461,7 @@ var data = {
                     "menu_id": 29,
                     "name": "Add",
                     "action": "file-source.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 114
                 },
@@ -1470,7 +1470,7 @@ var data = {
                     "menu_id": 29,
                     "name": "Edit",
                     "action": "file-source.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 115
                 },
@@ -1479,7 +1479,7 @@ var data = {
                     "menu_id": 29,
                     "name": "Delete",
                     "action": "file-source.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 116
                 }
@@ -1503,7 +1503,7 @@ var data = {
                     "menu_id": 30,
                     "name": "View",
                     "action": "ftp.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 117
                 },
@@ -1512,7 +1512,7 @@ var data = {
                     "menu_id": 30,
                     "name": "Add",
                     "action": "ftp.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 118
                 },
@@ -1521,7 +1521,7 @@ var data = {
                     "menu_id": 30,
                     "name": "Edit",
                     "action": "ftp.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 119
                 },
@@ -1530,7 +1530,7 @@ var data = {
                     "menu_id": 30,
                     "name": "Delete",
                     "action": "ftp.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 120
                 }
@@ -1554,7 +1554,7 @@ var data = {
                     "menu_id": 31,
                     "name": "View",
                     "action": "trade-monitoring.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 121
                 },
@@ -1563,7 +1563,7 @@ var data = {
                     "menu_id": 31,
                     "name": "Add",
                     "action": "trade-monitoring.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 122
                 },
@@ -1572,7 +1572,7 @@ var data = {
                     "menu_id": 31,
                     "name": "Edit",
                     "action": "trade-monitoring.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 123
                 },
@@ -1581,7 +1581,7 @@ var data = {
                     "menu_id": 31,
                     "name": "Delete",
                     "action": "trade-monitoring.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 124
                 }
@@ -1605,7 +1605,7 @@ var data = {
                     "menu_id": 32,
                     "name": "View",
                     "action": "manual-trigger.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 125
                 },
@@ -1614,7 +1614,7 @@ var data = {
                     "menu_id": 32,
                     "name": "Add",
                     "action": "manual-trigger.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 126
                 },
@@ -1623,7 +1623,7 @@ var data = {
                     "menu_id": 32,
                     "name": "Edit",
                     "action": "manual-trigger.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 127
                 },
@@ -1632,7 +1632,7 @@ var data = {
                     "menu_id": 32,
                     "name": "Delete",
                     "action": "manual-trigger.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 128
                 }
@@ -1656,7 +1656,7 @@ var data = {
                     "menu_id": 33,
                     "name": "View",
                     "action": "trailing.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 129
                 },
@@ -1665,7 +1665,7 @@ var data = {
                     "menu_id": 33,
                     "name": "Add",
                     "action": "trailing.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 130
                 },
@@ -1674,7 +1674,7 @@ var data = {
                     "menu_id": 33,
                     "name": "Edit",
                     "action": "trailing.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 131
                 },
@@ -1683,7 +1683,7 @@ var data = {
                     "menu_id": 33,
                     "name": "Delete",
                     "action": "trailing.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 132
                 }
@@ -1707,7 +1707,7 @@ var data = {
                     "menu_id": 34,
                     "name": "View",
                     "action": "auto-config.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 133
                 },
@@ -1716,7 +1716,7 @@ var data = {
                     "menu_id": 34,
                     "name": "Add",
                     "action": "auto-config.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 134
                 },
@@ -1725,7 +1725,7 @@ var data = {
                     "menu_id": 34,
                     "name": "Edit",
                     "action": "auto-config.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 135
                 },
@@ -1734,7 +1734,7 @@ var data = {
                     "menu_id": 34,
                     "name": "Delete",
                     "action": "auto-config.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 136
                 }
@@ -1758,7 +1758,7 @@ var data = {
                     "menu_id": 35,
                     "name": "View",
                     "action": "account-position.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 137
                 },
@@ -1767,7 +1767,7 @@ var data = {
                     "menu_id": 35,
                     "name": "Add",
                     "action": "account-position.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 138
                 },
@@ -1776,7 +1776,7 @@ var data = {
                     "menu_id": 35,
                     "name": "Edit",
                     "action": "account-position.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 139
                 },
@@ -1785,7 +1785,7 @@ var data = {
                     "menu_id": 35,
                     "name": "Delete",
                     "action": "account-position.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 140
                 }
@@ -1809,7 +1809,7 @@ var data = {
                     "menu_id": 36,
                     "name": "View",
                     "action": "manual-sync.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 141
                 },
@@ -1818,7 +1818,7 @@ var data = {
                     "menu_id": 36,
                     "name": "Add",
                     "action": "manual-sync.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 142
                 },
@@ -1827,7 +1827,7 @@ var data = {
                     "menu_id": 36,
                     "name": "Edit",
                     "action": "manual-sync.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 143
                 },
@@ -1836,7 +1836,7 @@ var data = {
                     "menu_id": 36,
                     "name": "Delete",
                     "action": "manual-sync.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 144
                 }
@@ -1860,7 +1860,7 @@ var data = {
                     "menu_id": 37,
                     "name": "View",
                     "action": "scoring.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 145
                 },
@@ -1869,7 +1869,7 @@ var data = {
                     "menu_id": 37,
                     "name": "Add",
                     "action": "scoring.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 146
                 },
@@ -1878,7 +1878,7 @@ var data = {
                     "menu_id": 37,
                     "name": "Edit",
                     "action": "scoring.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 147
                 },
@@ -1887,7 +1887,7 @@ var data = {
                     "menu_id": 37,
                     "name": "Delete",
                     "action": "scoring.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 148
                 }
@@ -1911,7 +1911,7 @@ var data = {
                     "menu_id": 38,
                     "name": "View",
                     "action": "triggered-report.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 149
                 },
@@ -1920,7 +1920,7 @@ var data = {
                     "menu_id": 38,
                     "name": "Add",
                     "action": "triggered-report.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 150
                 },
@@ -1929,7 +1929,7 @@ var data = {
                     "menu_id": 38,
                     "name": "Edit",
                     "action": "triggered-report.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 151
                 },
@@ -1938,7 +1938,7 @@ var data = {
                     "menu_id": 38,
                     "name": "Delete",
                     "action": "triggered-report.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 152
                 }
@@ -1962,7 +1962,7 @@ var data = {
                     "menu_id": 39,
                     "name": "View",
                     "action": "last-triggered.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 153
                 },
@@ -1971,7 +1971,7 @@ var data = {
                     "menu_id": 39,
                     "name": "Add",
                     "action": "last-triggered.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 154
                 },
@@ -1980,7 +1980,7 @@ var data = {
                     "menu_id": 39,
                     "name": "Edit",
                     "action": "last-triggered.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 155
                 },
@@ -1989,7 +1989,7 @@ var data = {
                     "menu_id": 39,
                     "name": "Delete",
                     "action": "last-triggered.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 156
                 }
@@ -2013,7 +2013,7 @@ var data = {
                     "menu_id": 40,
                     "name": "View",
                     "action": "lifetime-lot.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 157
                 },
@@ -2022,7 +2022,7 @@ var data = {
                     "menu_id": 40,
                     "name": "Add",
                     "action": "lifetime-lot.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 158
                 },
@@ -2031,7 +2031,7 @@ var data = {
                     "menu_id": 40,
                     "name": "Edit",
                     "action": "lifetime-lot.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 159
                 },
@@ -2040,7 +2040,7 @@ var data = {
                     "menu_id": 40,
                     "name": "Delete",
                     "action": "lifetime-lot.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 160
                 }
@@ -2064,7 +2064,7 @@ var data = {
                     "menu_id": 41,
                     "name": "View",
                     "action": "users.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 161
                 },
@@ -2073,7 +2073,7 @@ var data = {
                     "menu_id": 41,
                     "name": "Add",
                     "action": "users.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 162
                 },
@@ -2082,7 +2082,7 @@ var data = {
                     "menu_id": 41,
                     "name": "Edit",
                     "action": "users.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 163
                 },
@@ -2091,7 +2091,7 @@ var data = {
                     "menu_id": 41,
                     "name": "Delete",
                     "action": "users.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 164
                 }
@@ -2115,7 +2115,7 @@ var data = {
                     "menu_id": 42,
                     "name": "View",
                     "action": "user.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 165
                 },
@@ -2124,7 +2124,7 @@ var data = {
                     "menu_id": 42,
                     "name": "Add",
                     "action": "user.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 166
                 },
@@ -2133,7 +2133,7 @@ var data = {
                     "menu_id": 42,
                     "name": "Edit",
                     "action": "user.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 167
                 },
@@ -2142,7 +2142,7 @@ var data = {
                     "menu_id": 42,
                     "name": "Delete",
                     "action": "user.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 168
                 }
@@ -2166,7 +2166,7 @@ var data = {
                     "menu_id": 43,
                     "name": "View",
                     "action": "user-group.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 169
                 },
@@ -2175,7 +2175,7 @@ var data = {
                     "menu_id": 43,
                     "name": "Add",
                     "action": "user-group.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 170
                 },
@@ -2184,7 +2184,7 @@ var data = {
                     "menu_id": 43,
                     "name": "Edit",
                     "action": "user-group.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 171
                 },
@@ -2193,7 +2193,7 @@ var data = {
                     "menu_id": 43,
                     "name": "Delete",
                     "action": "user-group.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 172
                 }
@@ -2217,7 +2217,7 @@ var data = {
                     "menu_id": 44,
                     "name": "View",
                     "action": "setting.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 173
                 },
@@ -2226,7 +2226,7 @@ var data = {
                     "menu_id": 44,
                     "name": "Add",
                     "action": "setting.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 174
                 },
@@ -2235,7 +2235,7 @@ var data = {
                     "menu_id": 44,
                     "name": "Edit",
                     "action": "setting.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 175
                 },
@@ -2244,7 +2244,7 @@ var data = {
                     "menu_id": 44,
                     "name": "Delete",
                     "action": "setting.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 176
                 }
@@ -2268,7 +2268,7 @@ var data = {
                     "menu_id": 45,
                     "name": "View",
                     "action": "group-symbol.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 177
                 },
@@ -2277,7 +2277,7 @@ var data = {
                     "menu_id": 45,
                     "name": "Add",
                     "action": "group-symbol.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 178
                 },
@@ -2286,7 +2286,7 @@ var data = {
                     "menu_id": 45,
                     "name": "Edit",
                     "action": "group-symbol.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 179
                 },
@@ -2295,7 +2295,7 @@ var data = {
                     "menu_id": 45,
                     "name": "Delete",
                     "action": "group-symbol.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 180
                 }
@@ -2319,7 +2319,7 @@ var data = {
                     "menu_id": 46,
                     "name": "View",
                     "action": "warehouse.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 181
                 },
@@ -2328,7 +2328,7 @@ var data = {
                     "menu_id": 46,
                     "name": "Add",
                     "action": "warehouse.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 182
                 },
@@ -2337,7 +2337,7 @@ var data = {
                     "menu_id": 46,
                     "name": "Edit",
                     "action": "warehouse.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 183
                 },
@@ -2346,7 +2346,7 @@ var data = {
                     "menu_id": 46,
                     "name": "Delete",
                     "action": "warehouse.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 184
                 }
@@ -2370,7 +2370,7 @@ var data = {
                     "menu_id": 47,
                     "name": "View",
                     "action": "profit-loss-revision.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 185
                 },
@@ -2379,7 +2379,7 @@ var data = {
                     "menu_id": 47,
                     "name": "Add",
                     "action": "profit-loss-revision.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 186
                 },
@@ -2388,7 +2388,7 @@ var data = {
                     "menu_id": 47,
                     "name": "Edit",
                     "action": "profit-loss-revision.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 187
                 },
@@ -2397,7 +2397,7 @@ var data = {
                     "menu_id": 47,
                     "name": "Delete",
                     "action": "profit-loss-revision.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 188
                 }
@@ -2421,7 +2421,7 @@ var data = {
                     "menu_id": 48,
                     "name": "View",
                     "action": "cross-scalper.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 189
                 },
@@ -2430,7 +2430,7 @@ var data = {
                     "menu_id": 48,
                     "name": "Add",
                     "action": "cross-scalper.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 190
                 },
@@ -2439,7 +2439,7 @@ var data = {
                     "menu_id": 48,
                     "name": "Edit",
                     "action": "cross-scalper.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 191
                 },
@@ -2448,7 +2448,7 @@ var data = {
                     "menu_id": 48,
                     "name": "Delete",
                     "action": "cross-scalper.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 192
                 }
@@ -2472,7 +2472,7 @@ var data = {
                     "menu_id": 49,
                     "name": "View",
                     "action": "filter-group.view",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 193
                 },
@@ -2481,7 +2481,7 @@ var data = {
                     "menu_id": 49,
                     "name": "Add",
                     "action": "filter-group.add",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 194
                 },
@@ -2490,7 +2490,7 @@ var data = {
                     "menu_id": 49,
                     "name": "Edit",
                     "action": "filter-group.edit",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 195
                 },
@@ -2499,7 +2499,7 @@ var data = {
                     "menu_id": 49,
                     "name": "Delete",
                     "action": "filter-group.delete",
-                    "value": 1,
+                    "value": true,
                     "user_group_id": 1,
                     "permission_id": 196
                 }
