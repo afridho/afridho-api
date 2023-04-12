@@ -5,6 +5,7 @@ const dashboard = require("./json/dashboard")
 const autoConfig = require("./json/autoConfig")
 const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
+const tickAccount = require("./json/tickAccount")
 const triggeredReport = require("./json/triggeredReport")
 const getMenu = require("./json/getMenu")
 const getRole = require("./json/getRole")
@@ -94,5 +95,12 @@ router.get("/detail-open-position", async (req, res) =>{
     res.status(200)
     res.json(detailOpenPosition)
 })
+
+// Report > Tick Account
+router.get("/tick-account", async (req, res) =>{
+    res.status(200)
+    res.json(tickAccount)
+})
+
 
 module.exports = router;
