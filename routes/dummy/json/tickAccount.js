@@ -1,4 +1,5 @@
 var data = {
+    data: {
     open_data: [
         { x: "20:45:33", y: 2010.83 },
         { x: "20:47:02", y: 2015.83 },
@@ -53,6 +54,7 @@ var data = {
     close_title: "Close: Sell XAUUSDv (14274010)",
     symbol: "XAUUSDv",
     ticket: "14274010",
-};
+    }
+}
 
 module.exports = data;
