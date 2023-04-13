@@ -31,6 +31,11 @@ var data = {
             x: "16:16:20",
             y: 1908.76
           },
+          {
+            x: "16:18:20",
+            y: 2008.76
+          },
+
     ],
     close_two_min: "20:48:01",
     close_title: "Close: Sell XAUUSDv (14274010)",
