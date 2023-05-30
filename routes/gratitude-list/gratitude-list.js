@@ -29,7 +29,7 @@ router.post("/", async (req, res) =>{
         res.end()
     }else{
     if(req.headers['password'] !== GET_PASSWORD) {
-        res.json({message : 'Password wrong. Unauthorized!'})
+        res.json({message : 'Wrong Password. Unauthorized!'})
         res.status(403)
         res.end()
     }else{
