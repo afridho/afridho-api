@@ -21,7 +21,6 @@ const collection = database.collection('gratitude_list');
 
 const total_days = 7 // 1 week retrieved data
 const time_zone = 7 // Asia/Jakarta
-const today = new Date()
 const days_before = (new Date(new Date().setDate(new Date().getDate() - total_days)))
 
 router.post("/", async (req, res) =>{
@@ -35,7 +34,7 @@ router.post("/", async (req, res) =>{
         res.status(403)
         res.end()
     }else{
-        const date = today
+        const date = new Date()
         const message = req.body.message
         _data = {message , date}
         await mongo_insert(_data)
@@ -82,7 +81,7 @@ async function mongo_insert(data){
 }
 
 async function get_week_number(){
-    currentDate = today;
+    currentDate = new Date();
     startDate = new Date(currentDate.getFullYear(), 0, 1);
     const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
     return Math.ceil(days / 7);
@@ -92,7 +91,7 @@ async function get_week_number(){
 async function send_pushover(message){
     const week_number = await get_week_number()
     const range_start = format(days_before, 'd MMM')
-    const range_end = format(today, 'd MMM')
+    const range_end = format(new Date(), 'd MMM')
 
     let fd = new FormData();
     fd.append("token", TOKEN);
