@@ -16,7 +16,7 @@ const { format, addHours } = require('date-fns')
 // Connect to MongoDB
 const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-const database = client.db('productivity');
+const database = client.db('afridho-api');
 const collection = database.collection('gratitude_list');
 
 const total_days = 7 // 1 week retrieved data
