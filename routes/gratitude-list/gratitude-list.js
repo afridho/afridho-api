@@ -10,7 +10,7 @@ const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST
 const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? (' '+ process.env.GRATITUDE_LIST_NICKNAME) : ''
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const { format } = require('date-fns')
+const { format, addHours } = require('date-fns')
 
 
 // Connect to MongoDB
@@ -34,7 +34,9 @@ router.post("/", async (req, res) =>{
         res.status(403)
         res.end()
     }else{
-        _data = {message : req.body.message, date : today }
+        const date = today
+        const message = req.body.message
+        _data = {message , date}
         await mongo_insert(_data)
         res.json({message : req.body.message, status: 'success'})
         res.status(200)
@@ -47,11 +49,12 @@ router.get("/", async (req, res) =>{
     const data = await get_data_one_week()
     var str = ''
     data.map(val => {
-        str = str.concat(`◉ ${val.message} <small>(${format(val.date, 'eeee, HH:mm')})</small>\n\n`);
+        str = str.concat(`◉ ${val.message} <small>(${format(addHours(val.date, 6), 'eeee, HH:mm')})</small>\n\n`);
     })
     const total = data?.length
     const content = await parse_messages_pushover(str, total)
     await send_pushover(content)
+    // console.log(str)
     
     //send status if open from web
     res.status(200)
