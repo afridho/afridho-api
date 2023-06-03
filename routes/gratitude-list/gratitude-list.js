@@ -20,6 +20,8 @@ const database = client.db('productivity');
 const collection = database.collection('gratitude_list');
 
 const total_days = 7 // 1 week retrieved data
+const today = new Date()
+today.setUTCHours(5); // default Asia/Jakarta hour
 const days_before = (new Date(new Date().setDate(new Date().getDate() - total_days)))
 
 router.post("/", async (req, res) =>{
@@ -33,7 +35,7 @@ router.post("/", async (req, res) =>{
         res.status(403)
         res.end()
     }else{
-        _data = {message : req.body.message, date : new Date() }
+        _data = {message : req.body.message, date : today }
         await mongo_insert(_data)
         res.json({message : req.body.message})
         res.status(200)
@@ -61,7 +63,7 @@ router.get("/", async (req, res) =>{
 async function get_data_one_week(){
     return await collection.find({
             date: {
-                $lt: new Date(),
+                $lt: today,
                 $gte: days_before,
             },
         }).toArray()
@@ -77,7 +79,7 @@ async function mongo_insert(data){
 }
 
 async function get_week_number(){
-    currentDate = new Date();
+    currentDate = today;
     startDate = new Date(currentDate.getFullYear(), 0, 1);
     const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
     return Math.ceil(days / 7);
@@ -86,8 +88,8 @@ async function get_week_number(){
 
 async function send_pushover(message){
     const week_number = await get_week_number()
-    const range_start = format(days_before, 'dd MMM')
-    const range_end = format(new Date(), 'dd MMM')
+    const range_start = format(days_before, 'd MMM')
+    const range_end = format(today, 'd MMM')
 
     let fd = new FormData();
     fd.append("token", TOKEN);
