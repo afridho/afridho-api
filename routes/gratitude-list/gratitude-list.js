@@ -20,6 +20,7 @@ const database = client.db('productivity');
 const collection = database.collection('gratitude_list');
 
 const total_days = 7 // 1 week retrieved data
+const time_zone = 7 // Asia/Jakarta
 const today = new Date()
 const days_before = (new Date(new Date().setDate(new Date().getDate() - total_days)))
 
@@ -49,7 +50,7 @@ router.get("/", async (req, res) =>{
     const data = await get_data_one_week()
     var str = ''
     data.map(val => {
-        str = str.concat(`◉ ${val.message} <small>(${format(to_local_time(val.date), 'eeee, HH:mm')})</small>\n\n`);
+        str = str.concat(`◉ ${val.message} <small>(${format(addHours(val.date, time_zone), 'eeee, HH:mm')})</small>\n\n`);
     })
     const total = data?.length
     const content = await parse_messages_pushover(str, total)
@@ -61,12 +62,6 @@ router.get("/", async (req, res) =>{
     res.json({message: 'Sent', code: 200})
     res.end()
 })
-
-async function to_local_time(date){
-    hoursAdd = 7 // Asia/Jakarta local time
-    return addHours(date, hoursAdd)
-}
-
 
 async function get_data_one_week(){
     return await collection.find({
