@@ -49,7 +49,7 @@ router.get("/", async (req, res) =>{
     const data = await get_data_one_week()
     var str = ''
     data.map(val => {
-        str = str.concat(`◉ ${val.message} <small>(${format(addHours(val.date, 6), 'eeee, HH:mm')})</small>\n\n`);
+        str = str.concat(`◉ ${val.message} <small>(${format(to_local_time(val.date), 'eeee, HH:mm')})</small>\n\n`);
     })
     const total = data?.length
     const content = await parse_messages_pushover(str, total)
@@ -61,6 +61,12 @@ router.get("/", async (req, res) =>{
     res.json({message: 'Sent', code: 200})
     res.end()
 })
+
+async function to_local_time(date){
+    hoursAdd = 7 // Asia/Jakarta local time
+    return addHours(date, hoursAdd)
+}
+
 
 async function get_data_one_week(){
     return await collection.find({
