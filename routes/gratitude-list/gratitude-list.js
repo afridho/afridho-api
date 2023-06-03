@@ -21,7 +21,6 @@ const collection = database.collection('gratitude_list');
 
 const total_days = 7 // 1 week retrieved data
 const today = new Date()
-today.setUTCHours(5); // default Asia/Jakarta hour
 const days_before = (new Date(new Date().setDate(new Date().getDate() - total_days)))
 
 router.post("/", async (req, res) =>{
@@ -37,7 +36,7 @@ router.post("/", async (req, res) =>{
     }else{
         _data = {message : req.body.message, date : today }
         await mongo_insert(_data)
-        res.json({message : req.body.message})
+        res.json({message : req.body.message, status: 'success'})
         res.status(200)
         res.end()
     }}
@@ -63,7 +62,7 @@ router.get("/", async (req, res) =>{
 async function get_data_one_week(){
     return await collection.find({
             date: {
-                $lt: today,
+                $lt: new Date(),
                 $gte: days_before,
             },
         }).toArray()
