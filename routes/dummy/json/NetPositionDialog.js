@@ -1,4 +1,4 @@
-var data = {
+var netPositionDialog = {
         "data": [{
           "id": 1,
           "email": "santihselvy@gmail.com",
@@ -49,4 +49,4 @@ var data = {
         "status": "success"
 }
 
-module.exports = data;
+module.exports = { netPositionDialog };

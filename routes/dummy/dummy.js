@@ -2,18 +2,14 @@ const express = require("express");
 const router = express.Router();
 const analyzeSpread = require("./json/analyzeSpread")
 const dashboard = require("./json/dashboard")
-const autoConfig = require("./json/autoConfig")
-const netPositionDialog = require("./json/NetPositionDialog")
 const slippage = require("./json/slippage")
 const tickAccount = require("./json/tickAccount")
-const triggeredReport = require("./json/triggeredReport")
 const getMenu = require("./json/getMenu")
 const getRole = require("./json/getRole")
-const getRole2 = require("./json/getRole2")
-const detailScalper = require("./json/detailScalper")
-const detailAVProfit = require("./json/detailAVProfit")
-const detailOpenPosition = require("./json/detailOpenPosition")
-const detailRelatedAccount = require("./json/detailRelatedAccount")
+const { triggeredReport, detailScalper, detailAVProfit, detailOpenPosition, detailRelatedAccount } = require("./json/triggeredReport")
+const { autoConfig } = require("./json/autoConfig")
+const { netPositionDialog } = require("./json/NetPositionDialog")
+const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -31,11 +27,6 @@ router.get("/menu", async (req, res) =>{
 router.get("/role", async (req, res) =>{
     res.status(200)
     res.json(getRole)  
-});
-
-router.get("/role2", async (req, res) =>{
-    res.status(200)
-    res.json(getRole2)  
 });
 
 // Analyze Spread Data Dummy
@@ -102,5 +93,16 @@ router.get("/tick-account", async (req, res) =>{
     res.json(tickAccount)
 })
 
+// Settings > Time Alignment
+// Daylight Saving
+router.get("/daylight-saving", async (req, res) =>{
+    res.status(200)
+    res.json(getDaylightSaving)
+})
+
+router.post("/daylight-saving", async (req, res) =>{
+    res.status(200)
+    res.json(postDaylightSaving)
+})
 
 module.exports = router;

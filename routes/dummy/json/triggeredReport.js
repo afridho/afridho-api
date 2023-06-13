@@ -1,4 +1,4 @@
-var data = {
+var triggeredReport = {
     current_page: 1,
     data: [
         {
@@ -939,4 +939,319 @@ var data = {
     total: 78979,
 };
 
-module.exports = data;
+var detailAVProfit = {
+    "current_page": 1,
+    "data": [
+        {
+            "server": "MT4IN4",
+            "login": 1117140,
+            "ticket": 11758572,
+            "symbol": "XAUUSD.m",
+            "volume": 5,
+            "lot": 0.05,
+            "open_time": "2023-02-15 12:10:34",
+            "close_time": "1970-01-01 00:00:00",
+            "open_price": 1837.07,
+            "close_price": 1837.14,
+            "score": 0,
+            "score_close": 0,
+            "result": "0.00000",
+            "result_close": "0.00000",
+            "note": [],
+            "note_close": [],
+            "cmd": "Sell",
+            "open_target": {
+                "ticket" : 'TICKET BOS',
+                "cmd": 'Buy',
+                "open_time": '2023-02-15 12:10:31',
+                "open_price": 1834,
+                "volume": 2
+            },
+            "close_target": {
+                "ticket" : 'TICKET OUTT',
+                "cmd": 'Sell',
+                "open_time": '2023-02-15 12:10:31',
+                "open_price": 2121,
+                "volume": 3
+            }
+        },
+        {
+            "server": "MT4IN1",
+            "login": 'XXXX',
+            "ticket": 241241,
+            "symbol": "XAUUSD.m",
+            "volume": 5,
+            "lot": 0.05,
+            "open_time": "2023-02-15 12:10:34",
+            "close_time": "1970-01-01 00:00:00",
+            "open_price": 1837.07,
+            "close_price": 1837.14,
+            "score": 0,
+            "score_close": 0,
+            "result": "0.00000",
+            "result_close": "0.00000",
+            "note": [],
+            "note_close": [],
+            "cmd": "Sell",
+            "open_target": {
+                "ticket" : 'DUMMY OPEN',
+                "cmd": 'Sell',
+                "open_time": '2023-02-15 12:10:31',
+                "open_price": 2112,
+                "volume": 2
+            },
+            "close_target": {
+                "ticket" : 'TICKET OUTT',
+                "cmd": 'Buy',
+                "open_time": '2023-02-15 12:10:31',
+                "open_price": 444,
+                "volume": 5
+            }
+        }
+    ],
+    "first_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/av-profit/1117140/MT4IN4?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/av-profit/1117140/MT4IN4?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/av-profit/1117140/MT4IN4?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/av-profit/1117140/MT4IN4",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+
+
+var detailRelatedAccount = {
+    "current_page": 1,
+    "data": [
+        {
+            "login": 1117140,
+            "group": "MP5",
+            "name": "Supervisor",
+            "currency": "IDR",
+            "status": "Aman",
+            "status_spv": "Pantau",
+        },
+        {
+            "login": 33317140,
+            "group": "MP4",
+            "name": "Supervisor",
+            "currency": "USD",
+            "status": "Pantau",
+            "status_spv": "Pantau",
+        }
+    ],
+    "first_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+
+var detailOpenPosition = {
+    current_page: 1,
+    data: [
+        {
+            ticket: 529862,
+            login: "87727368",
+            symbol: "GOLDUDmic",
+            cmd: "Buy",
+            volume: 20000,
+            open_time: "2023-03-16 13:50:06",
+            open_price: 1920.5,
+            close_time: "1970-01-01 00:00:00",
+            close_price: 1920.5,
+            profit: 11560,
+            commission_agent: 0,
+            commission: -30,
+            swaps: 0,
+            taxes: 0,
+        },
+        {
+            ticket: 526583,
+            login: "87727368",
+            symbol: "GOLDUDmic",
+            cmd: "Buy",
+            volume: 50000,
+            open_time: "2023-03-09 05:06:31",
+            open_price: 1813.29,
+            close_time: "1970-01-01 00:00:00",
+            close_price: 1813.29,
+            profit: 82705,
+            commission_agent: 0,
+            commission: -75,
+            swaps: 0,
+            taxes: 0,
+        },
+    ],
+    first_page_url:
+        "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+    from: 1,
+    last_page: 1,
+    last_page_url:
+        "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+    links: [
+        {
+            url: null,
+            label: "&laquo; Previous",
+            active: false,
+        },
+        {
+            url: "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4?page=1",
+            label: "1",
+            active: true,
+        },
+        {
+            url: null,
+            label: "Next &raquo;",
+            active: false,
+        },
+    ],
+    next_page_url: null,
+    path: "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/status/1117140/MT4IN4",
+    per_page: 15,
+    prev_page_url: null,
+    to: 1,
+    total: 1,
+};
+
+var detailScalper = {
+    "current_page": 1,
+    "data": [
+        {
+            "login": 1117140,
+            "group": "ANTP",
+            "server": "MT4IN4",
+            "ticket": 13155732,
+            "symbol": "XAUUSDv",
+            "cmd": "Sell",
+            "open_time": "2023-02-08 18:57:52",
+            "close_time": "2023-02-09 16:40:08",
+            "score": 1,
+            "created_at": "2023-02-10 10:33:04",
+            "compare": {
+                "login_prev": 84575349,
+                "group_prev": "MIFLVmc",
+                "server_prev": "MT4IN1",
+                "ticket_prev": 13176179,
+                "symbol_prev": "XAUUSDv",
+                "cmd_prev": "Sell",
+                "open_time_prev": "2023-02-09 16:40:07",
+                "close_time_prev": "1970-01-01 00:00:00"
+            }
+        },
+        {
+            "login": 2227140,
+            "group": "PHKIY",
+            "server": "MT4IN5",
+            "ticket": 114155732,
+            "symbol": "AUDJPY",
+            "cmd": "Buy",
+            "open_time": "2023-02-08 18:57:52",
+            "close_time": "2023-02-09 16:40:08",
+            "score": 1,
+            "created_at": "2023-02-10 10:33:04",
+            "compare": {
+                "login_prev": 2878123,
+                "group_prev": "Trades",
+                "server_prev": "MT4IN3",
+                "ticket_prev": 43176179,
+                "symbol_prev": "XAUUSDv",
+                "cmd_prev": "Sell",
+                "open_time_prev": "2023-02-09 16:40:07",
+                "close_time_prev": "1970-01-01 00:00:00"
+            }
+        },
+        {
+            "login": 3327140,
+            "group": "Oil",
+            "server": "MT4IN2",
+            "ticket": 23155732,
+            "symbol": "GBPUSDv",
+            "cmd": "Sell",
+            "open_time": "2023-02-08 18:57:52",
+            "close_time": "2023-02-09 16:40:08",
+            "score": 1,
+            "created_at": "2023-02-10 10:33:04",
+            "compare": {
+                "login_prev": 33275349,
+                "group_prev": "AUKBPH",
+                "server_prev": "MT4IN2",
+                "ticket_prev": 13176179,
+                "symbol_prev": "XAUUSDv",
+                "cmd_prev": "Buy",
+                "open_time_prev": "2023-02-09 16:40:07",
+                "close_time_prev": "1970-01-01 00:00:00"
+            }
+        }
+    ],
+    "first_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/scalper/1117140/MT4IN4?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/scalper/1117140/MT4IN4?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/scalper/1117140/MT4IN4?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "https://rpt-rmv3-dev.surya-am.com/api/v1/triggered-report/scalper/1117140/MT4IN4",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+
+module.exports = { triggeredReport, detailAVProfit, detailRelatedAccount, detailOpenPosition, detailScalper }

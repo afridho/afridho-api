@@ -1,4 +1,4 @@
-var data = {
+var autoConfig = {
     status: "success",
     message: "Successfully",
     data: {
@@ -260,4 +260,4 @@ var data = {
     },
 };
 
-module.exports = data;
+module.exports = { autoConfig };
