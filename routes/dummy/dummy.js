@@ -7,9 +7,11 @@ const tickAccount = require("./json/tickAccount")
 const getMenu = require("./json/getMenu")
 const getRole = require("./json/getRole")
 const { triggeredReport, detailScalper, detailAVProfit, detailOpenPosition, detailRelatedAccount } = require("./json/triggeredReport")
+const { logAccountProfileA } = require("./json/profileA")
 const { autoConfig } = require("./json/autoConfig")
 const { netPositionDialog } = require("./json/NetPositionDialog")
 const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
+const { netVolume } = require("./json/report")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -104,5 +106,19 @@ router.post("/daylight-saving", async (req, res) =>{
     res.status(200)
     res.json(postDaylightSaving)
 })
+
+// ProfileA > Account
+router.get("/log", async (req, res) =>{
+    res.status(200)
+    res.json(logAccountProfileA)
+})
+
+
+// Report > Net Volume
+router.get("/net-volume", async (req, res) =>{
+    res.status(200)
+    res.json(netVolume)
+})
+
 
 module.exports = router;
