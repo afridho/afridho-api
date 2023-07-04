@@ -486,4 +486,309 @@ let netVolume = [
     }
 ]
 
-module.exports = { netVolume }
+let profileA = {
+    "status": "success",
+    "message": "Successfully",
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "login": 88030027,
+                "livetime_pl": -142.09,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "7.91",
+                "updated_at": "2023-06-28 04:30:37",
+                "detail": [
+                    {
+                        "symbol": "XAUUSD.m",
+                        "lot": "0.00",
+                        "abs_lot": 0,
+                        "cmd": "BUY"
+                    }
+                ]
+            },
+            {
+                "login": 92512744,
+                "livetime_pl": -217.18,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.15",
+                "abs_lot": 0.15,
+                "margin": "0.00",
+                "equity": "82.82",
+                "updated_at": "2023-06-28 04:30:37",
+                "detail": [
+                    {
+                        "symbol": "EURUSD.m",
+                        "lot": "-0.15",
+                        "abs_lot": 0.15,
+                        "cmd": "SELL"
+                    }
+                ]
+            },
+            {
+                "login": 92523238,
+                "livetime_pl": -46.01,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.10",
+                "abs_lot": 0.1,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": "2023-06-28 04:30:37",
+                "detail": [
+                    {
+                        "symbol": "XAUUSD.m",
+                        "lot": "0.10",
+                        "abs_lot": 0.1,
+                        "cmd": "BUY"
+                    }
+                ]
+            },
+            {
+                "login": 84588839,
+                "livetime_pl": -160.52,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.01",
+                "abs_lot": 0.01,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": "2023-06-28 04:30:37",
+                "detail": [
+                    {
+                        "symbol": "XAUUSD.m",
+                        "lot": "-0.01",
+                        "abs_lot": 0.01,
+                        "cmd": "SELL"
+                    }
+                ]
+            },
+            {
+                "login": 65061692,
+                "livetime_pl": 1.5,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65512713,
+                "livetime_pl": -483.09,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65514248,
+                "livetime_pl": -631.12,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "1.36",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65517229,
+                "livetime_pl": 104.19,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65518444,
+                "livetime_pl": -120.06,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.08",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65518501,
+                "livetime_pl": -1052.22,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "19.22",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65518663,
+                "livetime_pl": -801.67,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "19.76",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65520285,
+                "livetime_pl": 0,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65520604,
+                "livetime_pl": -13.6,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.11",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65523360,
+                "livetime_pl": -0.03,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "0.00",
+                "updated_at": null,
+                "detail": []
+            },
+            {
+                "login": 65524271,
+                "livetime_pl": 296.99,
+                "pl_change": 0,
+                "server": "surya",
+                "lot": "0.00",
+                "abs_lot": 0,
+                "margin": "0.00",
+                "equity": "7.99",
+                "updated_at": null,
+                "detail": []
+            }
+        ],
+        "first_page_url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=1",
+        "from": 1,
+        "last_page": 1830,
+        "last_page_url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=1830",
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=2",
+                "label": "2",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=3",
+                "label": "3",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=4",
+                "label": "4",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=5",
+                "label": "5",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=6",
+                "label": "6",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=7",
+                "label": "7",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=8",
+                "label": "8",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=9",
+                "label": "9",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=10",
+                "label": "10",
+                "active": false
+            },
+            {
+                "url": null,
+                "label": "...",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=1829",
+                "label": "1829",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=1830",
+                "label": "1830",
+                "active": false
+            },
+            {
+                "url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=2",
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": "http://profilea.riskv3.local/api/report-profilea?server=surya&page=2",
+        "path": "http://profilea.riskv3.local/api/report-profilea",
+        "per_page": 15,
+        "prev_page_url": null,
+        "to": 15,
+        "total": 27436
+    }
+}
+
+module.exports = { netVolume, profileA }

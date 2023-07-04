@@ -11,7 +11,7 @@ const { logAccountProfileA } = require("./json/profileA")
 const { autoConfig } = require("./json/autoConfig")
 const { netPositionDialog } = require("./json/NetPositionDialog")
 const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
-const { netVolume } = require("./json/report")
+const { netVolume, profileA } = require("./json/report")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -120,5 +120,10 @@ router.get("/net-volume", async (req, res) =>{
     res.json(netVolume)
 })
 
+// Report > Profile A
+router.get("/report-profilea", async (req, res) =>{
+    res.status(200)
+    res.json(profileA)
+})
 
 module.exports = router;
