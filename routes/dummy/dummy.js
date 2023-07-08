@@ -7,7 +7,7 @@ const tickAccount = require("./json/tickAccount")
 const getMenu = require("./json/getMenu")
 const getRole = require("./json/getRole")
 const { triggeredReport, detailScalper, detailAVProfit, detailOpenPosition, detailRelatedAccount } = require("./json/triggeredReport")
-const { logAccountProfileA } = require("./json/profileA")
+const { logAccountProfileA, equityHighestLowest } = require("./json/profileA")
 const { autoConfig } = require("./json/autoConfig")
 const { netPositionDialog } = require("./json/NetPositionDialog")
 const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
@@ -125,5 +125,12 @@ router.get("/report-profilea", async (req, res) =>{
     res.status(200)
     res.json(profileA)
 })
+
+// Report > Equity Highest Lowest
+router.get("/equity-highest-lowest", async (req, res) =>{
+    res.status(200)
+    res.json(equityHighestLowest)
+})
+
 
 module.exports = router;
