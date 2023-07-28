@@ -12,6 +12,7 @@ const { autoConfig } = require("./json/autoConfig")
 const { netPositionDialog } = require("./json/NetPositionDialog")
 const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
 const { netVolume, profileA } = require("./json/report")
+const dataMenuV2 = require("./json/v2")
 require('dotenv').config()
 
 router.get("/", async (req, res) =>{
@@ -130,6 +131,12 @@ router.get("/report-profilea", async (req, res) =>{
 router.get("/equity-highest-lowest", async (req, res) =>{
     res.status(200)
     res.json(equityHighestLowest)
+})
+
+// V2 > get Menu
+router.get("/v2-menu", async (req, res) =>{
+    res.status(200)
+    res.json(dataMenuV2)
 })
 
 
