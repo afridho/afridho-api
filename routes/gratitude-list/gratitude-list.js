@@ -10,7 +10,7 @@ const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST
 const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? (' '+ process.env.GRATITUDE_LIST_NICKNAME) : ''
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const { format, addHours } = require('date-fns')
+const { format, addHours, getDay } = require('date-fns')
 
 
 // Connect to MongoDB
@@ -45,6 +45,15 @@ router.post("/", async (req, res) =>{
 })
 
 router.get("/", async (req, res) =>{
+
+    let weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][getDay(addHours(new Date(), time_zone))]
+    console.log("🚀 ~ file: gratitude-list.js:50 ~ router.get ~ weekday:", weekday)
+
+    // const d = getDay(
+    //     new Date(2012, 1, 29),
+    //   );
+    // console.log("🚀 ~ file: gratitude-list.js:55 ~ router.get ~ d:", d)
+
     // send pushover to my device
     const data = await get_data_one_week()
     var str = ''
@@ -53,12 +62,14 @@ router.get("/", async (req, res) =>{
     })
     const total = data?.length
     const content = await parse_messages_pushover(str, total)
-    await send_pushover(content)
+    console.log("🚀 ~ file: gratitude-list.js:56 ~ router.get ~ content:", content)
+    
+    // await send_pushover(content)
     // console.log(str)
     
     //send status if open from web
-    res.status(200)
-    res.json({message: 'Sent', code: 200})
+    // res.status(200)
+    // res.json({message: 'Sent', code: 200})
     res.end()
 })
 
