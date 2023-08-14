@@ -72,8 +72,7 @@ router.get("/", async (req, res) =>{
     
     //NOTE send status if open from web
     res.status(200)
-    // res.json({message: 'Sent', code: 200})
-    res.json({today: format(addHours(new Date(), time_zone), 'eeee, HH:mm')})
+    res.json({message: 'Sent', code: 200})
     res.end()
 })
 
