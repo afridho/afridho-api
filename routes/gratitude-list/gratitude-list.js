@@ -9,8 +9,9 @@ const USER_KEY = process.env.PUSHOVER_KEY
 const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST
 const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? (' '+ process.env.GRATITUDE_LIST_NICKNAME) : ''
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD 
+const GET_DAY_SENT = process.env.GRATITUDE_LIST_DAY ?? 'Saturday'
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const { format, addHours } = require('date-fns')
+const { format, addHours, getDay } = require('date-fns')
 
 
 // Connect to MongoDB
@@ -52,11 +53,24 @@ router.get("/", async (req, res) =>{
         str = str.concat(`◉ ${val.message} <small>(${format(addHours(val.date, time_zone), 'eeee, HH:mm')})</small>\n\n`);
     })
     const total = data?.length
-    const content = await parse_messages_pushover(str, total)
-    // await send_pushover(content)
-    // console.log(str)
+    let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][getDay(addHours(new Date(), time_zone))]
+
+    //REVIEW - send if set day same with cron
+    if (GET_DAY_SENT === weekday){
+        const week_number = await get_week_number()
+        const range_start = format(days_before, 'd MMM')
+        const range_end = format(new Date(), 'd MMM')
+        const title = `${range_start} - ${range_end}〘Week ${week_number}〙`
+
+        const content = await parse_messages_pushover(str, total)
+        await send_pushover(content, title)
+    } else {
+        const title = "Gratitude List"
+        const content = await remindMe_message_pushover(total, weekday)
+        if(content) await send_pushover(content, title)
+    }
     
-    //send status if open from web
+    //NOTE send status if open from web
     res.status(200)
     // res.json({message: 'Sent', code: 200})
     res.json({today: format(addHours(new Date(), time_zone), 'eeee, HH:mm')})
@@ -77,6 +91,11 @@ async function parse_messages_pushover(message, total){
     return `<h3>This is what are you thankful${GET_NICKNAME}😍</h3>`+message+"<h5>Total = "+total+"</h5>"
 }
 
+async function remindMe_message_pushover(total, day){
+    if(total === 0) return `<h4>Hei ${GET_NICKNAME}, i want remind you, what has Jesus done for your life till this ${day}? 😉</h4>`
+    return null
+}
+
 async function mongo_insert(data){
     return await collection.insertOne(data);
 }
@@ -88,16 +107,11 @@ async function get_week_number(){
     return Math.ceil(days / 7);
 }
 
-
-async function send_pushover(message){
-    const week_number = await get_week_number()
-    const range_start = format(days_before, 'd MMM')
-    const range_end = format(new Date(), 'd MMM')
-
+async function send_pushover(message, title){
     let fd = new FormData();
     fd.append("token", TOKEN);
     fd.append("user", USER_KEY);
-    fd.append("title", `${range_start} - ${range_end}〘Week ${week_number}〙`)
+    fd.append("title", title)
     fd.append("message", message)
     fd.append("html", 1)
 
