@@ -53,12 +53,13 @@ router.get("/", async (req, res) =>{
     })
     const total = data?.length
     const content = await parse_messages_pushover(str, total)
-    await send_pushover(content)
+    // await send_pushover(content)
     // console.log(str)
     
     //send status if open from web
     res.status(200)
-    res.json({message: 'Sent', code: 200})
+    // res.json({message: 'Sent', code: 200})
+    res.json({today: new Date()})
     res.end()
 })
 
