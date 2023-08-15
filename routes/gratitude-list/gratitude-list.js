@@ -20,6 +20,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const database = client.db('afridho-api');
 const collection = database.collection('gratitude_list');
 
+// Shortcut Name
+const shortcut_name = 'Gratitude List'
+
+// Time Configuration
 const total_days = 7 // 1 week retrieved data
 const time_zone = 7 // Asia/Jakarta
 const days_before = (new Date(new Date().setDate(new Date().getDate() - total_days)))
@@ -61,13 +65,14 @@ router.get("/", async (req, res) =>{
         const range_start = format(days_before, 'd MMM')
         const range_end = format(new Date(), 'd MMM')
         const title = `${range_start} - ${range_end}〘Week ${week_number}〙`
-
-        const content = await parse_messages_pushover(str, total)
-        await send_pushover(content, title)
+        const message = await parse_messages_pushover(str, total)
+        await send_pushover({message, title})
     } else {
-        const title = "Gratitude List"
-        const content = await remindMe_message_pushover(total, weekday)
-        if(content) await send_pushover(content, title)
+        const title = shortcut_name
+        const message = await remindMe_message_pushover(total, weekday)
+        const url = `shortcuts://run-shortcut?name=${encodeURIComponent(shortcut_name.toLowerCase())}`
+        const url_title = "Add Gratitude"
+        if(message) await send_pushover({message, title, url, url_title})
     }
     
     //NOTE send status if open from web
@@ -106,13 +111,15 @@ async function get_week_number(){
     return Math.ceil(days / 7);
 }
 
-async function send_pushover(message, title){
+async function send_pushover(data){
     let fd = new FormData();
     fd.append("token", TOKEN);
     fd.append("user", USER_KEY);
-    fd.append("title", title)
-    fd.append("message", message)
     fd.append("html", 1)
+    // fd.append("device", "ridhosmac")
+    Object.entries(data).map(([k, v]) => (
+        fd.append(k, v)
+    ))
 
     try{
         return await axios({
