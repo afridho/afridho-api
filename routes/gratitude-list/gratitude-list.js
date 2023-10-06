@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
     useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1,
 });
-const database = client.db('afridho-api');
+const database = client.db('afridho-api-dev');
 const collection = database.collection('gratitude_list');
 
 // Shortcut Name
