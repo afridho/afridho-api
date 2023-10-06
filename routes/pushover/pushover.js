@@ -35,6 +35,7 @@ router.get('/', async (req, res) => {
 async function pushover(message) {
     //NOTE - default data
     message.title = message.title ?? 'afridho-api/api/pushover';
+    message.message = message.message ?? '‎'; //REVIEW - is empty character
 
     let bodyFormData = new FormData();
     bodyFormData.append('token', TOKEN);
