@@ -44,7 +44,8 @@ router.post('/', async (req, res) => {
         } else {
             const date = new Date();
             const message = req.body.message;
-            _data = { message, date };
+            const location = req.body.location ?? '';
+            _data = { message, location, date };
             await mongo_insert(_data);
             res.json({ message: req.body.message, status: 'success' });
             res.status(200);
