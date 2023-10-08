@@ -110,7 +110,7 @@ function parse_location_message(location) {
     const urlLocation = baseGoogleMapsURL + '?q=' + encodedLocation;
 
     if (location && location.length > 0) {
-        return location == 'HOME' ? `<small>🏡</small>` : `<small>(<a href=${urlLocation}>${location}</a>)</small>`;
+        return location == 'HOME' ? `<small>🏡</small>` : `<small><a href=${urlLocation}>📍</a></small>`;
     }
     return '';
 }
