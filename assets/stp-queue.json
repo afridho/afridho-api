@@ -1,0 +1,10 @@
+[
+    {
+        "name": "pause",
+        "value": false
+    },
+    {
+        "name": "pause_request",
+        "value": true
+    }
+]

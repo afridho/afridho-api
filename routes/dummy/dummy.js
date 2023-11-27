@@ -1,143 +1,229 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const analyzeSpread = require("./json/analyzeSpread")
-const dashboard = require("./json/dashboard")
-const slippage = require("./json/slippage")
-const tickAccount = require("./json/tickAccount")
-const getMenu = require("./json/getMenu")
-const getRole = require("./json/getRole")
-const { triggeredReport, detailScalper, detailAVProfit, detailOpenPosition, detailRelatedAccount } = require("./json/triggeredReport")
-const { logAccountProfileA, equityHighestLowest } = require("./json/profileA")
-const { autoConfig } = require("./json/autoConfig")
-const { netPositionDialog } = require("./json/NetPositionDialog")
-const { getDaylightSaving , postDaylightSaving } = require("./json/time-alignment")
-const { netVolume, profileA } = require("./json/report")
-const dataMenuV2 = require("./json/v2")
-require('dotenv').config()
+const analyzeSpread = require('./json/analyzeSpread');
+const dashboard = require('./json/dashboard');
+const slippage = require('./json/slippage');
+const tickAccount = require('./json/tickAccount');
+const getMenu = require('./json/getMenu');
+const getRole = require('./json/getRole');
+const {
+    triggeredReport,
+    detailScalper,
+    detailAVProfit,
+    detailOpenPosition,
+    detailRelatedAccount,
+} = require('./json/triggeredReport');
+const { logAccountProfileA, equityHighestLowest } = require('./json/profileA');
+const { autoConfig } = require('./json/autoConfig');
+const { netPositionDialog } = require('./json/NetPositionDialog');
+const { getDaylightSaving, postDaylightSaving } = require('./json/time-alignment');
+const { netVolume, profileA } = require('./json/report');
+const dataMenuV2 = require('./json/v2');
+const severityAlert = require('./json/severityAlert');
+const severityAlertDetail = require('./json/severityAlertDetail');
+const stpQueue = require('./json/stpqueueStatus');
 
-router.get("/", async (req, res) =>{
-    res.status(200)
-    res.json({status : 'it works'});  
-}
-);
+require('dotenv').config();
+const MONGODB_USER = process.env.MONGODB_PASS;
+const MONGODB_PASS = process.env.MONGODB_PASS;
+const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
 
-// User-Management - Role Menu
-router.get("/menu", async (req, res) =>{
-    res.status(200)
-    res.json(getMenu)  
+router.get('/', async (req, res) => {
+    res.status(200);
+    res.json({ status: 'it works' });
 });
 
-router.get("/role", async (req, res) =>{
-    res.status(200)
-    res.json(getRole)  
+// User-Management - Role Menu
+router.get('/menu', async (req, res) => {
+    res.status(200);
+    res.json(getMenu);
+});
+
+router.get('/role', async (req, res) => {
+    res.status(200);
+    res.json(getRole);
 });
 
 // Analyze Spread Data Dummy
-router.get("/analyze-spread", async (req, res) =>{
-    res.status(200)
-    res.json(analyzeSpread)
-    
+router.get('/analyze-spread', async (req, res) => {
+    res.status(200);
+    res.json(analyzeSpread);
 });
 
 // CEO > Dashboard Dummy
-router.get("/dashboard", async (req, res) =>{
-    res.status(200)
-    res.json(dashboard)
-    
+router.get('/dashboard', async (req, res) => {
+    res.status(200);
+    res.json(dashboard);
 });
 
 // Trailing > Auto Config
-router.get("/auto-config", async (req, res) =>{
-    res.status(200)
-    res.json(autoConfig)
+router.get('/auto-config', async (req, res) => {
+    res.status(200);
+    res.json(autoConfig);
 });
 
 // Trailing > Account Position > Net Position
-router.get("/net-position-dialog", async (req, res) =>{
-    res.status(200)
-    res.json(netPositionDialog)
-    
+router.get('/net-position-dialog', async (req, res) => {
+    res.status(200);
+    res.json(netPositionDialog);
 });
 
-router.get("/slippage", async (req, res) =>{
-    res.status(200)
-    res.json(slippage)
+router.get('/slippage', async (req, res) => {
+    res.status(200);
+    res.json(slippage);
 });
 
 // Scoring > Triggered Report
-router.get("/triggered-report", async (req, res) =>{
-    res.status(200)
-    res.json(triggeredReport)
+router.get('/triggered-report', async (req, res) => {
+    res.status(200);
+    res.json(triggeredReport);
 });
 
-router.get("/detail-scalper", async (req, res) =>{
-    res.status(200)
-    res.json(detailScalper)   
-})
+router.get('/detail-scalper', async (req, res) => {
+    res.status(200);
+    res.json(detailScalper);
+});
 
-router.get("/detail-avprofit", async (req, res) =>{
-    res.status(200)
-    res.json(detailAVProfit)
-})
+router.get('/detail-avprofit', async (req, res) => {
+    res.status(200);
+    res.json(detailAVProfit);
+});
 
-router.get("/detail-related-account", async (req, res) =>{
-    res.status(200)
-    res.json(detailRelatedAccount)
-})
+router.get('/detail-related-account', async (req, res) => {
+    res.status(200);
+    res.json(detailRelatedAccount);
+});
 
-router.get("/detail-open-position", async (req, res) =>{
-    res.status(200)
-    res.json(detailOpenPosition)
-})
+router.get('/detail-open-position', async (req, res) => {
+    res.status(200);
+    res.json(detailOpenPosition);
+});
 
 // Report > Tick Account
-router.get("/tick-account", async (req, res) =>{
-    res.status(200)
-    res.json(tickAccount)
-})
+router.get('/tick-account', async (req, res) => {
+    res.status(200);
+    res.json(tickAccount);
+});
 
 // Settings > Time Alignment
 // Daylight Saving
-router.get("/daylight-saving", async (req, res) =>{
-    res.status(200)
-    res.json(getDaylightSaving)
-})
+router.get('/daylight-saving', async (req, res) => {
+    res.status(200);
+    res.json(getDaylightSaving);
+});
 
-router.post("/daylight-saving", async (req, res) =>{
-    res.status(200)
-    res.json(postDaylightSaving)
-})
+router.post('/daylight-saving', async (req, res) => {
+    res.status(200);
+    res.json(postDaylightSaving);
+});
 
 // ProfileA > Account
-router.get("/log", async (req, res) =>{
-    res.status(200)
-    res.json(logAccountProfileA)
-})
-
+router.get('/log', async (req, res) => {
+    res.status(200);
+    res.json(logAccountProfileA);
+});
 
 // Report > Net Volume
-router.get("/net-volume", async (req, res) =>{
-    res.status(200)
-    res.json(netVolume)
-})
+router.get('/net-volume', async (req, res) => {
+    res.status(200);
+    res.json(netVolume);
+});
 
 // Report > Profile A
-router.get("/report-profilea", async (req, res) =>{
-    res.status(200)
-    res.json(profileA)
-})
+router.get('/report-profilea', async (req, res) => {
+    res.status(200);
+    res.json(profileA);
+});
 
 // Report > Equity Highest Lowest
-router.get("/equity-highest-lowest", async (req, res) =>{
-    res.status(200)
-    res.json(equityHighestLowest)
-})
+router.get('/equity-highest-lowest', async (req, res) => {
+    res.status(200);
+    res.json(equityHighestLowest);
+});
 
 // V2 > get Menu
-router.get("/v2-menu", async (req, res) =>{
-    res.status(200)
-    res.json(dataMenuV2)
-})
+router.get('/v2-menu', async (req, res) => {
+    res.status(200);
+    res.json(dataMenuV2);
+});
 
+// STP Queue > Status
+router.get('/stp-queue', async (req, res) => {
+    const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
+    const client = new MongoClient(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverApi: ServerApiVersion.v1,
+    });
+    const database = client.db('afridho-api-dev');
+    const collection = database.collection('dummy');
+    const response = await collection.find({}).toArray();
+
+    const displayData = {
+        status: 'success',
+        message: 'Successfully',
+        data: response,
+    };
+
+    res.status(200);
+    res.json(displayData);
+});
+
+// Alert Dashboard > Severity Alert
+router.get('/severity-alert', async (req, res) => {
+    const { severity, page, total_page } = req.query;
+    const query = severity;
+    const pageNumber = page || 1;
+    const result = severityAlert.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    let dataSeverity;
+    if (query) {
+        const severityType = query.charAt(0).toUpperCase() + query.slice(1);
+        dataSeverity = result.filter((item) => item.severity === severityType);
+    }
+    const data = {
+        status: 'success',
+        message: 'Successfully',
+        data: {
+            current_page: Number(pageNumber),
+            data: query ? dataSeverity : result,
+            first_page_url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+            from: 1,
+            last_page: Number(total_page),
+            last_page_url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+            links: [
+                {
+                    url: null,
+                    label: '&laquo; Previous',
+                    active: false,
+                },
+                {
+                    url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+                    label: '1',
+                    active: true,
+                },
+                {
+                    url: null,
+                    label: 'Next &raquo;',
+                    active: false,
+                },
+            ],
+            next_page_url: null,
+            path: 'http://localhost:3000/api/dummy/severity-alert',
+            per_page: 15,
+            prev_page_url: null,
+            to: 3,
+            total: 25,
+        },
+    };
+
+    res.status(200);
+    res.json(data);
+});
+
+router.get('/severity-alert-detail', async (req, res) => {
+    res.status(200);
+    res.json(severityAlertDetail);
+});
 
 module.exports = router;
