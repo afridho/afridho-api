@@ -172,25 +172,33 @@ router.get('/stp-queue', async (req, res) => {
 
 // Alert Dashboard > Severity Alert
 router.get('/severity-alert', async (req, res) => {
-    const { severity, page, total_page } = req.query;
+    const { severity, page } = req.query;
     const query = severity;
     const pageNumber = page || 1;
     const result = severityAlert.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     let dataSeverity;
     if (query) {
         const severityType = query.charAt(0).toUpperCase() + query.slice(1);
-        dataSeverity = result.filter((item) => item.severity === severityType);
+        if (query) {
+            const tempData = result.filter((item) => item.severity === severityType);
+            dataSeverity = tempData.map(({ checked_by, checked_at, ...rest }) => rest);
+        }
     }
+    const totalData = query ? dataSeverity.length : result.length;
+
+    const per_page = 5;
+    const totalPages = Math.ceil(totalData / per_page);
+
     const data = {
         status: 'success',
         message: 'Successfully',
         data: {
             current_page: Number(pageNumber),
             data: query ? dataSeverity : result,
-            first_page_url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+            first_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert?page=1',
             from: 1,
-            last_page: Number(total_page),
-            last_page_url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+            last_page: Number(totalPages),
+            last_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert?page=1',
             links: [
                 {
                     url: null,
@@ -198,7 +206,7 @@ router.get('/severity-alert', async (req, res) => {
                     active: false,
                 },
                 {
-                    url: 'http://localhost:3000/api/dummy/severity-alert?page=1',
+                    url: 'https://afridho-api.vercel.app/api/dummy/severity-alert?page=1',
                     label: '1',
                     active: true,
                 },
@@ -209,11 +217,11 @@ router.get('/severity-alert', async (req, res) => {
                 },
             ],
             next_page_url: null,
-            path: 'http://localhost:3000/api/dummy/severity-alert',
-            per_page: 15,
+            path: 'https://afridho-api.vercel.app/api/dummy/severity-alert',
+            per_page,
             prev_page_url: null,
-            to: 3,
-            total: 25,
+            to: 2,
+            total: Number(totalData),
         },
     };
 
