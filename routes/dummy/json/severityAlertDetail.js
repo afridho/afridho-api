@@ -5,6 +5,7 @@ var data = [
         lot: 15,
         open_price: 17082,
         open_time: '2023-11-22 06:05:18',
+        checked: false,
     },
     {
         ticket: 32447863,
@@ -12,6 +13,7 @@ var data = [
         lot: 10,
         open_price: 12055,
         open_time: '2023-11-16 06:05:18',
+        checked: false,
     },
 ];
 
