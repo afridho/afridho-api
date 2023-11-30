@@ -1,7 +1,7 @@
 var data = [
     {
         server: 'MT4IN1',
-        account: 99007743,
+        account: 30045125,
         alert_type: 'Mahi - 30s',
         severity: 'Critical',
         created_at: '2023-11-22 06:05:18',
