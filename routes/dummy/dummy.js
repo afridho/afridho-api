@@ -230,17 +230,8 @@ router.get('/severity-alert', async (req, res) => {
 });
 
 router.get('/severity-alert-detail', async (req, res) => {
-    const { checked } = req.query;
-    let data;
-    if (checked) {
-        console.log(checked);
-        data = severityAlertDetail.map((item) => ({
-            ...item,
-            checked: checked === 'true' || checked === 'True' ? true : false,
-        }));
-    } else {
-        data = severityAlertDetail;
-    }
+    const { id } = req.query;
+    const data = severityAlert.find((obj) => obj.account == id) ?? [];
     res.status(200);
     res.json(data);
 });
