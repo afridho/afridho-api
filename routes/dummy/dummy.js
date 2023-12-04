@@ -21,6 +21,8 @@ const { netVolume, profileA } = require('./json/report');
 const dataMenuV2 = require('./json/v2');
 const severityAlert = require('./json/severityAlert');
 const severityEventDetail = require('./json/severityEventDetail');
+const severityTriggeredReport = require('./json/severityTriggeredReport');
+
 const stpQueue = require('./json/stpqueueStatus');
 
 require('dotenv').config();
@@ -238,6 +240,12 @@ router.get('/severity-alert-detail', async (req, res) => {
 
 router.get('/severity-event-detail', async (req, res) => {
     const data = severityEventDetail;
+    res.status(200);
+    res.json(data);
+});
+
+router.get('/severity-triggered-report', async (req, res) => {
+    const data = severityTriggeredReport;
     res.status(200);
     res.json(data);
 });
