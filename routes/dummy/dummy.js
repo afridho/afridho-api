@@ -20,7 +20,7 @@ const { getDaylightSaving, postDaylightSaving } = require('./json/time-alignment
 const { netVolume, profileA } = require('./json/report');
 const dataMenuV2 = require('./json/v2');
 const severityAlert = require('./json/severityAlert');
-const severityAlertDetail = require('./json/severityAlertDetail');
+const severityEventDetail = require('./json/severityEventDetail');
 const stpQueue = require('./json/stpqueueStatus');
 
 require('dotenv').config();
@@ -232,6 +232,12 @@ router.get('/severity-alert', async (req, res) => {
 router.get('/severity-alert-detail', async (req, res) => {
     const { id } = req.query;
     const data = severityAlert.find((obj) => obj.account == id) ?? [];
+    res.status(200);
+    res.json(data);
+});
+
+router.get('/severity-event-detail', async (req, res) => {
+    const data = severityEventDetail;
     res.status(200);
     res.json(data);
 });
