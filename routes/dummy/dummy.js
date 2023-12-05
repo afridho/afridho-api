@@ -24,6 +24,7 @@ const severityEventDetail = require('./json/severityEventDetail');
 const severityTriggeredReport = require('./json/severityTriggeredReport');
 const severityClosedTransactions = require('./json/severityClosedTransaction');
 const severityOpenTrades = require('./json/severityOpenTrades');
+const severityHistory = require('./json/severityHistory');
 
 const stpQueue = require('./json/stpqueueStatus');
 
@@ -260,6 +261,12 @@ router.get('/severity-closed-transaction', async (req, res) => {
 
 router.get('/severity-open-trades', async (req, res) => {
     const data = severityOpenTrades;
+    res.status(200);
+    res.json(data);
+});
+
+router.get('/severity-history', async (req, res) => {
+    const data = severityHistory;
     res.status(200);
     res.json(data);
 });
