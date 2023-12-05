@@ -31,7 +31,7 @@ var data = {
     ],
     first_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/tra?per_page=15&page=1',
     from: 1,
-    last_page: 679,
+    last_page: 1,
     last_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/tra?per_page=15&page=679',
     links: [
         {
@@ -115,7 +115,7 @@ var data = {
     per_page: 15,
     prev_page_url: null,
     to: 15,
-    total: 10184,
+    total: 3,
 };
 
 module.exports = data;
