@@ -74,7 +74,7 @@ var data = {
     ],
     first_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/biglot?per_page=15&page=1',
     from: 1,
-    last_page: 5397,
+    last_page: 1,
     last_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/biglot?per_page=15&page=5397',
     links: [
         {
@@ -155,10 +155,10 @@ var data = {
     ],
     next_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/biglot?per_page=15&page=2',
     path: 'https://rpt-rm-dev.surya-am.com/api/v1/biglot',
-    per_page: 15,
+    per_page: 10,
     prev_page_url: null,
-    to: 15,
-    total: 80944,
+    to: 10,
+    total: 10,
 };
 
 module.exports = data;
