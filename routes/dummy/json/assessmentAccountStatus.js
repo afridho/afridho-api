@@ -19,7 +19,7 @@ var data = {
             id: 310554,
             company: 'Valutrades',
             account: 81256490,
-            status: 'Bahaya',
+            status: 'Aman',
             status_stp: 'B-Book',
         },
         {
