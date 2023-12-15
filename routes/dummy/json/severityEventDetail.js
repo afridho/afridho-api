@@ -2,12 +2,16 @@ var data = [
     {
         account: 99007743,
         events: ['Mahi - 30s', 'Biglot', 'AV Profit'],
-        status: 'Pantau',
+        server: 'Surya',
+        action_at: '2023-08-01 04:22:10',
+        updated_at: '2023-08-01 07:22:10',
     },
     {
         account: 99120378,
         events: ['Biglot', 'PL Yesterday', 'PL Today'],
-        status: 'Aman',
+        server: 'Surya',
+        action_at: '2023-08-01 05:22:10',
+        updated_at: '2023-08-01 06:22:10',
     },
 ];
 
