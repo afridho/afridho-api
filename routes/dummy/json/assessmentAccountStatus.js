@@ -61,7 +61,7 @@ var data = {
             id: 310560,
             company: 'Surya',
             account: 92067123,
-            status: 'Bahaya',
+            status: 'Aman',
             status_stp: 'B-Book',
         },
         {
