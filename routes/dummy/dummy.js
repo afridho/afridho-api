@@ -26,6 +26,7 @@ const severityClosedTransactions = require('./json/severityClosedTransaction');
 const severityOpenTrades = require('./json/severityOpenTrades');
 const severityHistory = require('./json/severityHistory');
 const assessmentAccountStatus = require('./json/assessmentAccountStatus');
+const severityRelatedAccount = require('./json/severityRelatedAccount');
 
 const stpQueue = require('./json/stpqueueStatus');
 
@@ -275,6 +276,11 @@ router.get('/severity-history', async (req, res) => {
 router.get('/account-status', async (req, res) => {
     res.status(200);
     res.json(assessmentAccountStatus);
+});
+
+router.get('/related-account', async (req, res) => {
+    res.status(200);
+    res.json(severityRelatedAccount);
 });
 
 module.exports = router;
