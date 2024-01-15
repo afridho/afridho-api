@@ -278,7 +278,7 @@ router.get('/account-status', async (req, res) => {
     res.json(assessmentAccountStatus);
 });
 
-router.get('/related-account', async (req, res) => {
+router.get('/severity-related-account', async (req, res) => {
     res.status(200);
     res.json(severityRelatedAccount);
 });
