@@ -5,6 +5,7 @@ var data = [
         server: 'Surya',
         action_at: '2023-08-01 04:22:10',
         updated_at: '2023-08-01 07:22:10',
+        status: 'Pantau',
     },
     {
         account: 99120378,
@@ -12,6 +13,7 @@ var data = [
         server: 'Surya',
         action_at: '2023-08-01 05:22:10',
         updated_at: '2023-08-01 06:22:10',
+        status: 'Aman',
     },
 ];
 
