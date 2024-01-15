@@ -9,6 +9,11 @@ var data = [
         price: 1960.25,
         s_l: 0.0,
         tp: 1292.0,
+        total_commission: -0.9,
+        total_taxes: 0.0,
+        total_swap: -68.9,
+        total_profit: -35.89,
+        floating_pl: -29.01,
     },
 ];
 

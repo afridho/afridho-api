@@ -9,6 +9,11 @@ var data = [
         price: 1960.25,
         s_l: 0.0,
         tp: 1945.0,
+        total_commission: -3.81,
+        total_taxes: 0.0,
+        total_swap: -444.81,
+        total_profit: -2421.89,
+        closed_pl: -2870.71,
     },
     {
         account: 99007743,
@@ -20,6 +25,11 @@ var data = [
         price: 1990.25,
         s_l: 0.0,
         tp: 1922.0,
+        total_commission: -3.81,
+        total_taxes: 0.0,
+        total_swap: -444.81,
+        total_profit: -2421.89,
+        closed_pl: -2870.71,
     },
     {
         account: 99007743,
@@ -31,6 +41,11 @@ var data = [
         price: 1990.25,
         s_l: 0.0,
         tp: 1922.0,
+        total_commission: -3.81,
+        total_taxes: 0.0,
+        total_swap: -444.81,
+        total_profit: -2421.89,
+        closed_pl: -2870.71,
     },
 ];
 
