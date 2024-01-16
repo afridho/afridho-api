@@ -20,6 +20,7 @@ const { getDaylightSaving, postDaylightSaving } = require('./json/time-alignment
 const { netVolume, profileA } = require('./json/report');
 const dataMenuV2 = require('./json/v2');
 const severityAlert = require('./json/severityAlert');
+const severityAlertCeo = require('./json/severityAlert');
 const severityEventDetail = require('./json/severityEventDetail');
 const severityTriggeredReport = require('./json/severityTriggeredReport');
 const severityClosedTransactions = require('./json/severityClosedTransaction');
@@ -281,6 +282,65 @@ router.get('/account-status', async (req, res) => {
 router.get('/severity-related-account', async (req, res) => {
     res.status(200);
     res.json(severityRelatedAccount);
+});
+
+// Alert Dashboard > Severity Alert
+router.get('/severity-alert-ceo', async (req, res) => {
+    const { severity, page } = req.query;
+    const query = severity;
+    const pageNumber = page || 1;
+    const result = severityAlertCeo.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    let dataSeverity;
+    if (query) {
+        const severityType = query.charAt(0).toUpperCase() + query.slice(1);
+        if (query) {
+            const tempData = result.filter((item) => item.severity === severityType);
+            dataSeverity = tempData.map(({ checked_by, checked_at, ...rest }) => rest);
+        }
+    }
+    const totalData = query ? dataSeverity.length : result.length;
+
+    const per_page = 5;
+    const totalPages = Math.ceil(totalData / per_page);
+
+    const data = {
+        status: 'success',
+        message: 'Successfully',
+        data: {
+            current_page: Number(pageNumber),
+            data: query ? dataSeverity : result,
+            first_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+            from: 1,
+            last_page: Number(totalPages),
+            last_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+            links: [
+                {
+                    url: null,
+                    label: '&laquo; Previous',
+                    active: false,
+                },
+                {
+                    url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+                    label: '1',
+                    active: true,
+                },
+                {
+                    url: null,
+                    label: 'Next &raquo;',
+                    active: false,
+                },
+            ],
+            next_page_url: null,
+            path: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo',
+            per_page,
+            prev_page_url: null,
+            to: 2,
+            total: Number(totalData),
+        },
+    };
+
+    res.status(200);
+    res.json(data);
 });
 
 module.exports = router;
