@@ -20,7 +20,7 @@ const { getDaylightSaving, postDaylightSaving } = require('./json/time-alignment
 const { netVolume, profileA } = require('./json/report');
 const dataMenuV2 = require('./json/v2');
 const severityAlert = require('./json/severityAlert');
-const severityAlertCeo = require('./json/severityAlert');
+const severityAlertCeo = require('./json/severityAlertCeo');
 const severityEventDetail = require('./json/severityEventDetail');
 const severityTriggeredReport = require('./json/severityTriggeredReport');
 const severityClosedTransactions = require('./json/severityClosedTransaction');
@@ -290,12 +290,13 @@ router.get('/severity-alert-ceo', async (req, res) => {
     const query = severity;
     const pageNumber = page || 1;
     const result = severityAlertCeo.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    console.log('🚀 ~ router.get ~ result:', result);
     let dataSeverity;
     if (query) {
         const severityType = query.charAt(0).toUpperCase() + query.slice(1);
         if (query) {
             const tempData = result.filter((item) => item.severity === severityType);
-            dataSeverity = tempData.map(({ checked_by, checked_at, ...rest }) => rest);
+            dataSeverity = tempData.map(({ checked_at, ...rest }) => rest);
         }
     }
     const totalData = query ? dataSeverity.length : result.length;
