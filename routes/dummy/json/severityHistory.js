@@ -3,6 +3,7 @@ var data = {
     data: [
         {
             account: 91023784,
+            server: 'Surya',
             events: ['Mahi - 30s', 'Biglot', 'AV Profit'],
             status: 'Bahaya',
             status_stp: 'B-Book',
@@ -14,6 +15,7 @@ var data = {
         },
         {
             account: 93647807,
+            server: 'Surya',
             events: ['AV Profit', 'PL Yesterday', 'Lifetime PL'],
             status: 'Bahaya',
             status_stp: 'B-Book',
@@ -25,6 +27,7 @@ var data = {
         },
         {
             account: 92013284,
+            server: 'Surya',
             events: ['Mahi - 30s', 'PL Today', 'AV Profit'],
             status: 'Bahaya',
             status_stp: 'B-Book',
