@@ -269,7 +269,12 @@ router.get('/severity-open-trades', async (req, res) => {
 });
 
 router.get('/severity-history', async (req, res) => {
-    const data = severityHistory;
+    const dataHistory = severityHistory;
+    const data = {
+        status: 'success',
+        message: 'Successfully',
+        data: dataHistory,
+    };
     res.status(200);
     res.json(data);
 });
