@@ -9,6 +9,8 @@ var data = {
             action_by: 'Puran',
             updated_at: '2023',
             updated_at: '2023-11-25 18:09:54',
+            comment:
+                'Dari hasil data per event dan data-data pendukung lainnya, kami memustuskan untuk memberikan status Pantau dan STP Profile A-Book',
         },
         {
             account: 93647807,
@@ -18,6 +20,8 @@ var data = {
             action_by: 'Kipli',
             updated_at: '2023',
             updated_at: '2023-11-25 17:09:54',
+            comment:
+                'Dari hasil data per event dan data-data pendukung lainnya, kami memustuskan untuk memberikan status Pantau dan STP Profile B-Book',
         },
         {
             account: 92013284,
@@ -27,6 +31,8 @@ var data = {
             action_by: 'Puran',
             updated_at: '2023',
             updated_at: '2023-11-25 16:09:54',
+            comment:
+                'Dari hasil data per event dan data-data pendukung lainnya, kami memustuskan untuk memberikan status Pantau dan STP Profile A-Book',
         },
     ],
     first_page_url: 'https://rpt-rm-dev.surya-am.com/api/v1/tra?per_page=15&page=1',
