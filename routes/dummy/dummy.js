@@ -28,6 +28,7 @@ const severityOpenTrades = require('./json/severityOpenTrades');
 const severityHistory = require('./json/severityHistory');
 const assessmentAccountStatus = require('./json/assessmentAccountStatus');
 const severityRelatedAccount = require('./json/severityRelatedAccount');
+const groupOverview = require('./json/groupOverview');
 
 const stpQueue = require('./json/stpqueueStatus');
 
@@ -345,6 +346,11 @@ router.get('/severity-alert-ceo', async (req, res) => {
         },
     };
 
+    res.status(200);
+    res.json(data);
+});
+
+router.get('/group-overview', async (req, res) => {
     res.status(200);
     res.json(data);
 });
