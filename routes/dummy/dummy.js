@@ -352,7 +352,7 @@ router.get('/severity-alert-ceo', async (req, res) => {
 
 router.get('/group-overview', async (req, res) => {
     res.status(200);
-    res.json(data);
+    res.json(groupOverview);
 });
 
 module.exports = router;
