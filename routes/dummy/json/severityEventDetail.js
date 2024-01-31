@@ -1,6 +1,6 @@
 var data = [
     {
-        account: 99007743,
+        login: 99007743,
         events: ['Mahi - 30s', 'Biglot', 'AV Profit'],
         server: 'Surya',
         action_at: '2023-08-01 04:22:10',
@@ -8,7 +8,7 @@ var data = [
         status: 'Bahaya',
     },
     {
-        account: 99120378,
+        login: 99120378,
         events: ['Biglot', 'PL Yesterday', 'PL Today'],
         server: 'Surya',
         action_at: '2023-08-01 05:22:10',
