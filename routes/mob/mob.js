@@ -86,15 +86,15 @@ router.get('/categories/:id/:menu', async (req, res) => {
         });
     } catch (error) {
         // handle error
-        console.log(error);
         res.status(500).json({ error: lang.error });
     }
 });
 
+//REVIEW - Development purpose
 router.delete('/categories/:collection', async (req, res) => {
     const DB_COLLECTION = req.params.collection;
     try {
-        const result = await mongo_delete(eval(DB_COLLECTION));
+        const result = await eval(DB_COLLECTION).deleteMany({});
         res.status(200).json({ status: `Deleted ${result.deletedCount} documents successfully.` });
     } catch (err) {
         res.status(500).json({ err });
@@ -108,7 +108,6 @@ async function detail_product(id) {
         const [response1, response2] = await Promise.all([axios.get(endpoint_varian), axios.get(endpoint_quantities)]);
         const data1 = response1.data.data.productVariations;
         const data2 = response2.data.data;
-        // console.log('🚀 ~ detail_product ~ data1:', JSON.stringify(data1.length));
         const data3 = response1.data.data.vendorCategories;
         const categories_data = data3.filter((item) => item.id !== 1767); //NOTE - filter New Arrivals label
         let combined = [];
@@ -137,10 +136,6 @@ async function mongo_update(collection, data, label) {
     const alias = { label };
     const updateDoc = { $set: data };
     return await collection.updateOne(alias, updateDoc, {});
-}
-
-async function mongo_delete(collection) {
-    return await collection.deleteMany({});
 }
 
 module.exports = router;
