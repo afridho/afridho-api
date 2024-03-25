@@ -24,9 +24,21 @@
         {
             "language": "javascript",
             "source": [
-                ""
+                "const str = 'accessories-__-socks'\n\nconst transform = (text) => text.replace(\"-__-\", \"-\")\n\nconsole.log(transform(str))"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "accessories-socks",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

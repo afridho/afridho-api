@@ -1,95 +1,92 @@
 // NOTE - https://www.mensoriginalbranded.com/categories/1767/new-arrivals
+// Execute https://afridho-api.vercel.app/api/mob/categories/1755/new-arrivals
 // Get all new in arrivals products and send notification to me if new product coming
-
 const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();
-const MONGODB_USER = process.env.MONGODB_PASS;
-const MONGODB_PASS = process.env.MONGODB_PASS;
-const DB_NAME = process.env.DB_NAME;
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const sendPushoverMessage = require('../../utils/pushover');
-const capitalizeFirstLetter = require('../../utils/capitalize');
+const getClientDB = require('../../utils/connectdb');
+const [capitalizeFirstLetter, transformText] = require('../../utils/text');
 const [toIdr, imageUrlToBase64] = require('../../utils/converter');
+const [compressImageBase64] = require('../../utils/image');
 const lang = require('./locale.json');
 const MOB_TOKEN = process.env.PUSHOVER_TOKEN_MOB;
-
-// Connect to MongoDB
-const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1,
-});
-const database = client.db(DB_NAME);
+const database = getClientDB();
 const mob = database.collection('mob_update_cron');
 const mob_logs = database.collection('mob_update_cron_logs');
 
 router.get('/categories/:id/:menu', async (req, res) => {
-    const id2 = req.params.id;
-    const menu = req.params.menu;
+    const id = req.params.id;
+    const menu = transformText(req.params.menu);
+    const startTime = Date.now();
 
-    // demo 1774 & 1759
-    const id = 1759;
     try {
         const response = await axios.get(
-            `https://api.plugo.world/v1/shop/66/products?categories=${id2}&sort=sold_out,-sort,-id&limit=1&offset=0`
+            `https://api.plugo.world/v1/shop/66/products?categories=${id}&sort=sold_out,-sort,-id&limit=1&offset=0`
         );
         const result = response?.data?.data[0];
         const price = result?.productVariations[0]?.price;
         result.label = menu;
 
-        const isMenuAvailable = await mongo_read(mob, menu);
-
+        const isExist = await mongo_read(mob, menu);
         const title = lang.brand;
         const message_new = `${lang.new_category} ${capitalizeFirstLetter(menu)} ✨`;
+        const hasNewUpdate = result.id !== isExist?.id;
 
-        // const device = 'ridhosmac';
-        const device = 'iphone6s';
-
-        if (isMenuAvailable) {
-            if (result.id !== id) {
-                // REVIEW - if has difference, push pushover in here
+        if (isExist) {
+            if (hasNewUpdate) {
                 await mongo_update(mob, result, menu);
                 const logs_struct = {
-                    releaseDate: result?.releaseDate ? new Date(result?.releaseDate).toLocaleTimeString() : null,
                     label: menu,
-                    created_at: new Date().toLocaleString(),
+                    last_product: result?.name || null,
+                    releaseDate: result?.releaseDate || null,
+                    created_at: new Date().toISOString(),
                 };
                 await mongo_insert(mob_logs, logs_struct);
-
-                const stock_data = await detail_stock(result?.id);
+                const { stock_data, categories_data } = await detail_product(result?.id);
                 let str_stock = '';
-                stock_data.map((val) => {
+                let str_categories = '';
+                stock_data?.map((val) => {
                     str_stock = str_stock.concat(`${val.size} <small>(${val.stock} pcs)</small>&emsp;`);
                 });
-
-                const message_update = `<b><i>${result?.name}<i></b><br><br><b><font color="#434343"> ${toIdr(
+                categories_data?.map((val) => {
+                    str_categories = str_categories.concat(` #${val.name}`);
+                });
+                const message_update = `<b><i>${result?.name}<i></b><br>${str_categories}<br><br><b> ${toIdr(
                     price
-                )}</font></b><br><br>${str_stock}`;
+                )}</b>${stock_data ? '<br><br>' : ''}${str_stock}`;
 
-                const attachment_base64 = await imageUrlToBase64(result?.images[0]?.url);
-
+                const inputBase64 = await imageUrlToBase64(result?.images[0]?.url);
+                const attachment_base64 = await compressImageBase64(inputBase64, 65); //NOTE - compress images after decode
+                const url = `${lang.url}/categories/${id}/${menu}`;
+                const url_title = lang.open_browser;
                 await sendPushoverMessage(
                     {
                         title,
-                        device,
                         message: message_update,
                         attachment_base64,
+                        url,
+                        url_title,
                         html: 1,
                     },
                     MOB_TOKEN
                 );
             }
         } else {
-            await sendPushoverMessage({ title, message: message_new, device });
+            await sendPushoverMessage({ title, message: message_new }, MOB_TOKEN);
             await mongo_insert(mob, result);
         }
-        res.status(200).json({ status: lang.works });
+        const endTime = Date.now();
+        const executionTime = ((endTime - startTime) / 1000).toFixed(1);
+        res.status(200).json({
+            status: lang.works,
+            message: hasNewUpdate ? lang.po_sent : lang.skip,
+            execution_time: executionTime + 's',
+        });
     } catch (error) {
-        console.log(error);
         // handle error
+        console.log(error);
         res.status(500).json({ error: lang.error });
     }
 });
@@ -104,21 +101,25 @@ router.delete('/categories/:collection', async (req, res) => {
     }
 });
 
-async function detail_stock(id) {
+async function detail_product(id) {
     const endpoint_varian = `https://api.plugo.world/v1/shop/66/products/${id}/without-quantities`;
     const endpoint_quantities = `https://faas.plugo.world/product/products/${id}/variation-quantities`;
-
     try {
         const [response1, response2] = await Promise.all([axios.get(endpoint_varian), axios.get(endpoint_quantities)]);
         const data1 = response1.data.data.productVariations;
         const data2 = response2.data.data;
-        const combined = data1.map((item, index) => ({
-            size: item.details[0].value,
-            stock: data2[index].inventories[0].quantity,
-        }));
-
-        const result = combined.slice(0, 4).filter((item) => item.stock !== 0);
-        return result;
+        // console.log('🚀 ~ detail_product ~ data1:', JSON.stringify(data1.length));
+        const data3 = response1.data.data.vendorCategories;
+        const categories_data = data3.filter((item) => item.id !== 1767); //NOTE - filter New Arrivals label
+        let combined = [];
+        if (data1.length > 1) {
+            combined = data1.map((item, index) => ({
+                size: item.details[0].value,
+                stock: data2[index].inventories[0].quantity,
+            }));
+        }
+        const stock_data = combined.slice(0, 4).filter((item) => item.stock !== 0);
+        return { stock_data, categories_data };
     } catch (err) {
         return err;
     }

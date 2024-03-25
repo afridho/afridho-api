@@ -1,7 +1,10 @@
 {
     "brand": "MOB",
     "url": "https://www.mensoriginalbranded.com",
-    "works": "It works.",
+    "works": "It Works!",
     "error": "An error occurred",
-    "new_category": "New Category added"
+    "new_category": "New Category added",
+    "open_browser": "Open in Browser",
+    "skip": "No Update",
+    "po_sent": "Pushover sent"
 }
