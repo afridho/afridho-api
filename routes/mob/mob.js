@@ -9,9 +9,9 @@ const MONGODB_USER = process.env.MONGODB_PASS;
 const MONGODB_PASS = process.env.MONGODB_PASS;
 const DB_NAME = process.env.DB_NAME;
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const sendPushoverMessage = require('@utils/pushover');
-const capitalizeFirstLetter = require('@utils/capitalize');
-const [toIdr, imageUrlToBase64] = require('@utils/converter');
+const sendPushoverMessage = require('../../utils/pushover');
+const capitalizeFirstLetter = require('../../utils/capitalize');
+const [toIdr, imageUrlToBase64] = require('../../utils/converter');
 const lang = require('./locale.json');
 const MOB_TOKEN = process.env.PUSHOVER_TOKEN_MOB;
 

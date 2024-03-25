@@ -1,15 +1,14 @@
-require('module-alias/register'); //NOTE - for aliases use in module
 const express = require('express');
 const app = express();
 const port = 3000;
-const football_update = require('@routes/football-update/football-update');
-const pushover = require('@routes/pushover/pushover');
-const build_notification = require('@routes/pushover/build-notification');
-const dummy = require('@routes/dummy/dummy');
-const my_fav_team_cron = require('@routes/football-update/my-fav-team-cron');
-const ig_downloader = require('@routes/ig-downloader/ig-downloader');
-const gratitude_list = require('@routes/gratitude-list/gratitude-list');
-const mob = require('@routes/mob/mob');
+const football_update = require('./routes/football-update/football-update');
+const pushover = require('./routes/pushover/pushover');
+const build_notification = require('./routes/pushover/build-notification');
+const dummy = require('./routes/dummy/dummy');
+const my_fav_team_cron = require('./routes/football-update/my-fav-team-cron');
+const ig_downloader = require('./routes/ig-downloader/ig-downloader');
+const gratitude_list = require('./routes/gratitude-list/gratitude-list');
+const mob = require('./routes/mob/mob');
 
 const bodyParser = require('body-parser');
 const path = require('path');

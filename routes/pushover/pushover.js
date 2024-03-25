@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sendPushoverMessage = require('@utils/pushover');
+const sendPushoverMessage = require('../../utils/pushover');
 
 //NOTE - POST METHOD
 router.post('/', async (req, res) => {
