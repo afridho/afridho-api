@@ -91,15 +91,15 @@ router.get('/categories/:id/:menu', async (req, res) => {
 });
 
 //REVIEW - Development purpose
-router.delete('/categories/:collection', async (req, res) => {
-    const DB_COLLECTION = req.params.collection;
-    try {
-        const result = await eval(DB_COLLECTION).deleteMany({});
-        res.status(200).json({ status: `Deleted ${result.deletedCount} documents successfully.` });
-    } catch (err) {
-        res.status(500).json({ err });
-    }
-});
+// router.delete('/categories/:collection', async (req, res) => {
+//     const DB_COLLECTION = req.params.collection;
+//     try {
+//         const result = await eval(DB_COLLECTION).deleteMany({});
+//         res.status(200).json({ status: `Deleted ${result.deletedCount} documents successfully.` });
+//     } catch (err) {
+//         res.status(500).json({ err });
+//     }
+// });
 
 async function detail_product(id) {
     const endpoint_varian = `https://api.plugo.world/v1/shop/66/products/${id}/without-quantities`;
