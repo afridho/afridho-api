@@ -20,7 +20,6 @@ router.get('/categories/:id/:menu', async (req, res) => {
     const id = req.params.id;
     const menu = transformText(req.params.menu);
     const startTime = Date.now();
-    const currentTime = new Date().toISOString();
 
     try {
         const response = await axios.get(
@@ -29,7 +28,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
         const result = response?.data?.data[0];
         const price = result?.productVariations[0]?.price;
         result.label = menu;
-        result.updated_at = currentTime;
+        result.updated_at = new Date().toISOString();
 
         const isExist = await mongo_read(mob, menu);
         const message_new = `${lang.new_category} ${capitalizeFirstLetter(menu)} ✨`;
@@ -37,14 +36,14 @@ router.get('/categories/:id/:menu', async (req, res) => {
 
         if (isExist) {
             if (hasNewUpdate) {
-                await mongo_update(mob, result, menu);
                 const logs_struct = {
+                    id: isExist?.id,
+                    name: isExist?.name || null,
                     label: menu,
-                    last_product: result?.name || null,
-                    releaseDate: result?.releaseDate || null,
-                    created_at: currentTime,
+                    updated_at: isExist?.updated_at,
                 };
                 await mongo_insert(mob_logs, logs_struct);
+                await mongo_update(mob, result, menu);
                 const { stock_data, categories_data } = await detail_product(result?.id);
                 let str_stock = '';
                 let str_categories = '';
