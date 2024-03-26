@@ -7,7 +7,7 @@ const router = express.Router();
 require('dotenv').config();
 const sendPushoverMessage = require('../../utils/pushover');
 const getClientDB = require('../../utils/connectdb');
-const [capitalizeFirstLetter, transformText] = require('../../utils/text');
+const [capitalizeFirstLetter, transformText, removeFirstWord] = require('../../utils/text');
 const [toIdr, imageUrlToBase64] = require('../../utils/converter');
 const [compressImageBase64] = require('../../utils/image');
 const lang = require('./locale.json');
@@ -20,6 +20,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
     const id = req.params.id;
     const menu = transformText(req.params.menu);
     const startTime = Date.now();
+    const currentTime = new Date().toISOString();
 
     try {
         const response = await axios.get(
@@ -28,9 +29,9 @@ router.get('/categories/:id/:menu', async (req, res) => {
         const result = response?.data?.data[0];
         const price = result?.productVariations[0]?.price;
         result.label = menu;
+        result.updated_at = currentTime;
 
         const isExist = await mongo_read(mob, menu);
-        const title = lang.brand;
         const message_new = `${lang.new_category} ${capitalizeFirstLetter(menu)} ✨`;
         const hasNewUpdate = result.id !== isExist?.id;
 
@@ -41,7 +42,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     label: menu,
                     last_product: result?.name || null,
                     releaseDate: result?.releaseDate || null,
-                    created_at: new Date().toISOString(),
+                    created_at: currentTime,
                 };
                 await mongo_insert(mob_logs, logs_struct);
                 const { stock_data, categories_data } = await detail_product(result?.id);
@@ -51,16 +52,17 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     str_stock = str_stock.concat(`${val.size} <small>(${val.stock} pcs)</small>&emsp;`);
                 });
                 categories_data?.map((val) => {
-                    str_categories = str_categories.concat(` #${val.name}`);
+                    str_categories = str_categories.concat(`#${val.name} `);
                 });
-                const message_update = `<b><i>${result?.name}<i></b><br>${str_categories}<br><br><b> ${toIdr(
-                    price
-                )}</b>${stock_data ? '<br><br>' : ''}${str_stock}`;
+                const message_update = `<i>${str_categories}</i><br><br><b> ${toIdr(price)}</b>${
+                    stock_data ? '<br><br>' : ''
+                }${str_stock}`;
 
                 const inputBase64 = await imageUrlToBase64(result?.images[0]?.url);
                 const attachment_base64 = await compressImageBase64(inputBase64, 65); //NOTE - compress images after decode
                 const url = `${lang.url}/categories/${id}/${menu}`;
                 const url_title = lang.open_browser;
+                const title = `✨ ${removeFirstWord(result?.name)}`;
                 await sendPushoverMessage(
                     {
                         title,
@@ -74,7 +76,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
                 );
             }
         } else {
-            await sendPushoverMessage({ title, message: message_new }, MOB_TOKEN);
+            await sendPushoverMessage({ title: lang.brand, message: message_new }, MOB_TOKEN);
             await mongo_insert(mob, result);
         }
         const endTime = Date.now();

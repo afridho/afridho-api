@@ -39,6 +39,25 @@
                     ]
                 }
             ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const words = 'Go power ranger';\nconst removeFirstWord = (text) => (text ? text.split(' ').slice(1).join(' ') : 'Invalid!');\n\nconsole.log(removeFirstWord(words))\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "power ranger",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
