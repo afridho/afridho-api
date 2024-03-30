@@ -1,26 +1,16 @@
-const axios = require('axios');
 const express = require('express');
 const router = express.Router();
-const FormData = require('form-data');
 require('dotenv').config();
-const MONGODB_USER = process.env.MONGODB_PASS;
-const MONGODB_PASS = process.env.MONGODB_PASS;
-const USER_KEY = process.env.PUSHOVER_KEY;
+const getClientDB = require('../../utils/connectdb');
+const sendPushoverMessage = require('../../utils/pushover');
+const [encrypt, decrypt] = require('../../utils/encrypt');
 const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST;
 const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? ' ' + process.env.GRATITUDE_LIST_NICKNAME : '';
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD;
 const GET_DAY_SENT = process.env.GRATITUDE_LIST_DAY ?? 'Saturday';
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const { format, addHours, getDay } = require('date-fns');
 
-// Connect to MongoDB
-const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1,
-});
-const database = client.db('afridho-api');
+const database = getClientDB();
 const collection = database.collection('gratitude_list');
 
 // Shortcut Name
@@ -43,11 +33,11 @@ router.post('/', async (req, res) => {
             res.end();
         } else {
             const date = new Date();
-            const message = req.body.message;
+            const message = encrypt(req.body?.message);
             const location = req.body.location ?? '';
-            _data = { message, location, date };
+            let _data = { message, location, date };
             await mongo_insert(_data);
-            res.json({ message: req.body.message, status: 'success' });
+            res.json({ message, status: 'success' });
             res.status(200);
             res.end();
         }
@@ -60,7 +50,7 @@ router.get('/', async (req, res) => {
     var str = '';
     data.map((val) => {
         str = str.concat(
-            `◉ ${val.message} <small>(${format(
+            `◉ ${decrypt(val.message)} <small>(${format(
                 addHours(val.date, time_zone),
                 'eeee, HH:mm'
             )})</small> ${parse_location_message(val.location)}\n\n`
@@ -70,6 +60,7 @@ router.get('/', async (req, res) => {
     let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
         getDay(addHours(new Date(), time_zone))
     ];
+    const html = 1; //for pushover needed
 
     //REVIEW - send if set day same with cron
     if (GET_DAY_SENT === weekday) {
@@ -78,13 +69,13 @@ router.get('/', async (req, res) => {
         const range_end = format(new Date(), 'd MMM');
         const title = `${range_start} - ${range_end}〘Week ${week_number}〙`;
         const message = await parse_messages_pushover(str, total);
-        await send_pushover({ message, title });
+        await sendPushoverMessage({ message, title, html }, TOKEN);
     } else {
         const title = shortcut_name;
         const message = await remindMe_message_pushover(total, weekday);
         const url = `shortcuts://run-shortcut?name=${encodeURIComponent(shortcut_name.toLowerCase())}`;
         const url_title = 'Add Gratitude';
-        if (message) await send_pushover({ message, title, url, url_title });
+        if (message) await sendPushoverMessage({ message, title, url, url_title, html }, TOKEN);
     }
 
     //NOTE send status if open from web
@@ -131,30 +122,10 @@ async function mongo_insert(data) {
 }
 
 async function get_week_number() {
-    currentDate = new Date();
-    startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
     const days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
     return Math.ceil(days / 7);
-}
-
-async function send_pushover(data) {
-    let fd = new FormData();
-    fd.append('token', TOKEN);
-    fd.append('user', USER_KEY);
-    fd.append('html', 1);
-    // fd.append('device', 'ridhosmac');
-    Object.entries(data).map(([k, v]) => fd.append(k, v));
-
-    try {
-        return await axios({
-            method: 'POST',
-            url: 'https://api.pushover.net/1/messages.json',
-            data: fd,
-            headers: { 'Content-Type': 'multipart/form-data' },
-        }).then((content) => {});
-    } catch (error) {
-        return { request: null, status: 0 };
-    }
 }
 
 module.exports = router;

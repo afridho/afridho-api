@@ -28,7 +28,7 @@ const sendPushoverMessage = async (message, token = DEFAULT_TOKEN) => {
                 url: 'https://api.pushover.net/1/messages.json',
                 data: fd,
                 headers: { 'Content-Type': 'multipart/form-data' },
-            }).then((e) => response_success);
+            }).then(() => response_success);
         } catch (error) {
             return response_error;
         }
