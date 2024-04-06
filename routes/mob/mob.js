@@ -20,6 +20,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
     const id = req.params.id;
     const menu = transformText(req.params.menu);
     const startTime = Date.now();
+    const sound = 'magic';
 
     try {
         const response = await axios.get(
@@ -42,6 +43,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     label: menu,
                     updated_at: isExist?.updated_at,
                 };
+                result.previousId = isExist?.id; // for page checked
                 await mongo_insert(mob_logs, logs_struct);
                 await mongo_update(mob, result, menu);
                 const { stock_data, categories_data } = await detail_product(result?.id);
@@ -53,9 +55,9 @@ router.get('/categories/:id/:menu', async (req, res) => {
                 categories_data?.map((val) => {
                     str_categories = str_categories.concat(`#${val.name} `);
                 });
-                const message_update = `<i>${str_categories}</i><br><br><b> ${toIdr(price)}</b>${
-                    stock_data ? '<br><br>' : ''
-                }${str_stock}`;
+                const message_update = `${str_categories ? `<i>${str_categories}</i><br><br>` : '<br>'}<b>${toIdr(
+                    price
+                )}</b>${stock_data ? '<br><br>' : ''}${str_stock}`;
 
                 const inputBase64 = await imageUrlToBase64(result?.images[0]?.url);
                 const attachment_base64 = await compressImageBase64(inputBase64, 65); //NOTE - compress images after decode
@@ -69,13 +71,14 @@ router.get('/categories/:id/:menu', async (req, res) => {
                         attachment_base64,
                         url,
                         url_title,
+                        sound,
                         html: 1,
                     },
                     MOB_TOKEN
                 );
             }
         } else {
-            await sendPushoverMessage({ title: lang.brand, message: message_new }, MOB_TOKEN);
+            await sendPushoverMessage({ title: lang.brand, message: message_new, sound }, MOB_TOKEN);
             await mongo_insert(mob, result);
         }
         const endTime = Date.now();
