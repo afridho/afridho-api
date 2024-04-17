@@ -10,7 +10,7 @@ var data = [
         close_time: '2024-03-17 14:11:12',
         close_price: 2008.22,
         comment: 'so: 18.0%/1.8/10.0',
-        expand: true,
+        expand: true, // if comment have so, if not just empty or no data
         type: 'Market',
         action: ['Reopen', 'Adjust PL'],
     },
