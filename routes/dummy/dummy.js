@@ -30,6 +30,7 @@ const assessmentAccountStatus = require('./json/assessmentAccountStatus');
 const severityRelatedAccount = require('./json/severityRelatedAccount');
 const groupOverview = require('./json/groupOverview');
 const tradeCorrection = require('./json/tradeCorrection');
+const severityAlertAccount = require('./json/severityAlertAccount');
 
 const stpQueue = require('./json/stpqueueStatus');
 
@@ -289,6 +290,11 @@ router.get('/account-status', async (req, res) => {
 router.get('/severity-related-account', async (req, res) => {
     res.status(200);
     res.json(severityRelatedAccount);
+});
+
+router.get('/severity-alert-account', async (req, res) => {
+    res.status(200);
+    res.json(severityAlertAccount);
 });
 
 // Alert Dashboard > Severity Alert
