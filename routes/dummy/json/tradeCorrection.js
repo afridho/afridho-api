@@ -10,7 +10,7 @@ var data = [
         close_time: '2024-03-17 14:11:12',
         close_price: 2008.22,
         type: 'Market',
-        action: 'Adjust Price',
+        action: ['Reopen', 'Adjust PL'],
     },
     {
         server: 'MT4IN3',
@@ -23,7 +23,7 @@ var data = [
         close_time: '2024-03-17 15:10:11',
         close_price: 2008.22,
         type: 'Market',
-        action: 'Adjust Price & PL',
+        action: ['Revert Pending Sell Stop', 'Adjust Open Price', 'Adjust Close Price'],
     },
 ];
 
