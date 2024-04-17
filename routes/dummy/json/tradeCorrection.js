@@ -21,7 +21,7 @@ var data = [
         open_time: '2024-03-17 12:11:34',
         open_price: 100.23,
         close_time: '2024-03-17 15:10:11',
-        close_price: 104.1,
+        close_price: 2008.22,
         type: 'Market Execution',
         action: 'Adjust Price & PL',
     },
