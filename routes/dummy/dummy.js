@@ -364,8 +364,45 @@ router.get('/group-overview', async (req, res) => {
 
 // Trade Correction
 router.get('/trade-correction', async (req, res) => {
+    const per_page = 5;
+    const data = {
+        status: 'success',
+        message: 'Successfully',
+        data: {
+            current_page: Number(1),
+            data: tradeCorrection,
+            first_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+            from: 1,
+            last_page: Number(1),
+            last_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+            links: [
+                {
+                    url: null,
+                    label: '&laquo; Previous',
+                    active: false,
+                },
+                {
+                    url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
+                    label: '1',
+                    active: true,
+                },
+                {
+                    url: null,
+                    label: 'Next &raquo;',
+                    active: false,
+                },
+            ],
+            next_page_url: null,
+            path: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo',
+            per_page,
+            prev_page_url: null,
+            to: 2,
+            total: Number(2),
+        },
+    };
+
     res.status(200);
-    res.json(tradeCorrection);
+    res.json(data);
 });
 
 module.exports = router;
