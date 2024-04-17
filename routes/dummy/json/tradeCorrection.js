@@ -9,7 +9,7 @@ var data = [
         open_price: 2005.75,
         close_time: '2024-03-17 14:11:12',
         close_price: 2008.22,
-        type: 'Market Execution',
+        type: 'Market',
         action: 'Adjust Price',
     },
     {
@@ -22,7 +22,7 @@ var data = [
         open_price: 100.23,
         close_time: '2024-03-17 15:10:11',
         close_price: 2008.22,
-        type: 'Market Execution',
+        type: 'Market',
         action: 'Adjust Price & PL',
     },
 ];
