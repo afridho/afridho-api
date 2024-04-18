@@ -31,6 +31,7 @@ const severityRelatedAccount = require('./json/severityRelatedAccount');
 const groupOverview = require('./json/groupOverview');
 const tradeCorrection = require('./json/tradeCorrection');
 const severityAlertAccount = require('./json/severityAlertAccount');
+const severityDailyStatement = require('./json/severityDailyStatement');
 
 const stpQueue = require('./json/stpqueueStatus');
 
@@ -360,6 +361,11 @@ router.get('/severity-alert-ceo', async (req, res) => {
 router.get('/group-overview', async (req, res) => {
     res.status(200);
     res.json(groupOverview);
+});
+
+router.get('/daily-statement', async (req, res) => {
+    res.status(200);
+    res.json(severityDailyStatement);
 });
 
 // Trade Correction
