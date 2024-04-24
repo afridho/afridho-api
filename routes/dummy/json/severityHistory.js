@@ -4,7 +4,26 @@ var data = {
         {
             account: 91023784,
             server: 'Surya',
-            events: ['Mahi - 30s', 'Biglot', 'AV Profit'],
+            events: [
+                {
+                    server: 'MT4IN1',
+                    login: 92518503,
+                    event: 'arb',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518502,
+                    event: 'big_lot',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518501,
+                    event: 'weekly_10',
+                    type: 'medium',
+                },
+            ],
             status: 'Bahaya',
             status_stp: 'B-Book',
             action_by: 'Puran',
@@ -15,7 +34,26 @@ var data = {
         {
             account: 93647807,
             server: 'Surya',
-            events: ['AV Profit', 'PL Yesterday', 'Lifetime PL'],
+            events: [
+                {
+                    server: 'MT4IN1',
+                    login: 92518503,
+                    event: 'arb',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518502,
+                    event: 'big_lot',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518501,
+                    event: 'weekly_10',
+                    type: 'medium',
+                },
+            ],
             status: 'Bahaya',
             status_stp: 'B-Book',
             action_by: 'Kipli',
@@ -26,7 +64,26 @@ var data = {
         {
             account: 92013284,
             server: 'Surya',
-            events: ['Mahi - 30s', 'PL Today', 'AV Profit'],
+            events: [
+                {
+                    server: 'MT4IN1',
+                    login: 92518503,
+                    event: 'arb',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518502,
+                    event: 'big_lot',
+                    type: 'medium',
+                },
+                {
+                    server: 'MT4IN1',
+                    login: 92518501,
+                    event: 'weekly_10',
+                    type: 'medium',
+                },
+            ],
             status: 'Bahaya',
             status_stp: 'B-Book',
             action_by: 'Puran',
