@@ -38,6 +38,9 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
+// MARK: Public Static Files
+app.use('/public', express.static(__dirname + '/public'));
+
 // api
 app.use('/api/football-update', football_update);
 app.use('/api/fav-football-cron', my_fav_team_cron);

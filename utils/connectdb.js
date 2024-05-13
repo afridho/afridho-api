@@ -1,5 +1,5 @@
 require('dotenv').config();
-const MONGODB_USER = process.env.MONGODB_PASS;
+const MONGODB_USER = process.env.MONGODB_USER;
 const MONGODB_PASS = process.env.MONGODB_PASS;
 const DB_NAME = process.env.DB_NAME;
 const { MongoClient, ServerApiVersion } = require('mongodb');
