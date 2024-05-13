@@ -10,24 +10,6 @@ const database = getClientDB();
 const db = database.collection('football_update_cron');
 const TOKEN = process.env.PUSHOVER_TOKEN_FOOTBALL_UPDATE;
 
-router.get('/:club_name', async (req, res) => {
-    const param_club = req.params.club_name;
-    const alias = req.query.alias ? req.query.alias : null;
-
-    if ('debug' in req.query && req.query.debug == 'true') {
-        const p_o = await cek_debug(param_club, alias);
-        p_o.code = 200;
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify(p_o));
-        res.end();
-    } else {
-        const p_o = await cek(param_club, alias);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify({ code: 200, status: p_o ? p_o.status : 'no info' }));
-        res.end();
-    }
-});
-
 router.get('/', async (req, res) => {
     res.status(422);
     res.json({ code: 422, error: 'Param not found', info: 'ex. ~/fav-football-cron/club_name' });
@@ -47,50 +29,47 @@ async function mongo_update(data, query_alias) {
     return await db.updateOne(alias, updateDoc, {});
 }
 
-async function cek(club_name, _alias) {
-    const alias = _alias == null ? club_name : _alias.replace('-', ' ');
-    const data = await crawl(club_name, alias);
+router.get('/:club_name', async (req, res) => {
+    const club_name = req.params.club_name;
+    const data = await crawl(club_name);
+    const code = 200; //NOTE : successfull response code
 
-    const mongo_data = await mongo_read(alias);
-    const mongo_name = mongo_data ? mongo_data.club_name : null;
-    const mongo_status = mongo_data ? mongo_data.status : null;
+    if (!data) return res.status(404).json({ code: 404, error: 'Invalid Club Name' });
 
-    if (mongo_data && mongo_name == alias) {
+    const mongo_data = await mongo_read(club_name);
+    if (mongo_data && mongo_data.club_name == club_name) {
         if (data?.match_id != mongo_data.match_id) {
-            if (mongo_status === 'sent') {
-                return { status: 'no update data.' };
+            if (mongo_data.status === 'sent') {
+                response(res, { code, status: 'no update data.' });
             } else {
                 const _data = { status: 'sent', match_id: data.match_id };
-                await mongo_update(_data, alias);
+                await mongo_update(_data, club_name);
                 const coverImage = await generateImage(data);
                 await send_pushover(data, coverImage);
-                return { status: 'Pushover sent.' };
+                response(res, { code, status: 'Pushover sent.' });
             }
         } else {
             const _data = { status: null };
-            await mongo_update(_data, alias);
-            return { status: 'no update data.' };
+            await mongo_update(_data, club_name);
+            response(res, { code, status: 'no update data.' });
         }
     } else {
         // NOTE: 'New Club in database'
-        const _data = { club_name: alias, status: 'sent', match_id: data.match_id };
+        const _data = { club_name, status: 'sent', match_id: data.match_id };
         await mongo_insert(_data);
-        return { status: `New Club Added ${alias}` };
+        res.status(code).json({ code: 200, status: `New Club Added ${club_name}` });
     }
-}
+});
 
-async function cek_debug(club_name, _alias) {
-    const alias = _alias == null ? club_name : _alias.replace('-', ' ');
-    const data = await crawl(club_name, alias);
-    await send_pushover(data);
-    return { debug: true, status: 'Pushover sent.' };
+function response(res, data) {
+    res.status(data.code).json(data);
 }
 
 async function send_pushover(crawl_data, image) {
     const match_result = await crawl_data;
     const match_status = await match_result.match_status;
     const match_competition = await match_result.competition;
-    const title = `${match_result.team_home}  ${match_result.score_home} - ${match_result.score_away}  ${match_result.team_away}`;
+    const title = `${match_result.team_short_home}  ${match_result.score_home} - ${match_result.score_away}  ${match_result.team_short_away}`;
     const attachment_base64 = image;
     const message = `<b>Result:</b> ${match_status}${match_status.toLowerCase() == 'win' ? '✅' : '😩'}
 <i>#${match_competition}</i>`;
@@ -128,7 +107,7 @@ function parse_club_name(name) {
     return club[name] || name;
 }
 
-async function crawl(club_name, alias) {
+async function crawl(club_name) {
     const endpoint = `https://www.skysports.com/${club_name}-results`;
     const endpoint_alt = `https://www.theguardian.com/football/${parse_club_name(club_name)}/results`;
     try {
@@ -171,7 +150,7 @@ async function crawl(club_name, alias) {
             match_id,
             match_url,
             match_status: _getstatus(
-                alias.toLowerCase(),
+                club_name.toLowerCase(),
                 $('.sdc-site-match-header__team-name--home .sdc-site-match-header__team-name-block-target').text(),
                 $('.sdc-site-match-header__team-score-block[data-update="score-home"]').text(),
                 $('.sdc-site-match-header__team-score-block[data-update="score-away"]').text()
@@ -187,8 +166,7 @@ async function crawl(club_name, alias) {
 
         return data;
     } catch (error) {
-        console.error('Error accessing the URL: ', error);
-        return '';
+        return null;
     }
 }
 
