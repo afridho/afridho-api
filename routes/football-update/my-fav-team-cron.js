@@ -102,9 +102,9 @@ async function get_redirect_url(originalUrl) {
 
 function parse_club_name(name) {
     const club = {
-        'manchester-city': 'manchestercity',
+        'manchester-united': 'manchester-united',
     };
-    return club[name] || name;
+    return club[name] || name.split('-').join('');
 }
 
 async function crawl(club_name) {
