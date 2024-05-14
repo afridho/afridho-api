@@ -171,12 +171,13 @@ async function crawl(club_name) {
 }
 
 function _getstatus(home, home_team, home_score, away_score) {
+    const convert = (text) => text.toLowerCase().replace(/\s+/g, '-');
     if (home_score == away_score) {
         return 'Draw';
     } else if (home_score > away_score) {
-        return home_team == home ? 'Win' : 'Lose';
+        return convert(home_team) == home ? 'Win' : 'Lose';
     } else if (home_score < away_score) {
-        return home_team != home ? 'Win' : 'Lose';
+        return convert(home_team) != home ? 'Win' : 'Lose';
     }
 }
 

@@ -4,12 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/:club_name', async (req, res) => {
-    const param_club = req.params.club_name;
-    const alias = req.query.alias == null ? param_club : req.query.alias.replace('-', ' ');
-    const p_o = await crawl(param_club, alias);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify(p_o));
-    res.end();
+    const club_name = req.params.club_name;
+    const data = await crawl(club_name);
+    res.status(200).json(data);
 });
 
 router.get('/', async (req, res) => {
@@ -35,7 +32,7 @@ function parse_club_name(name) {
     return club[name] || name.split('-').join('');
 }
 
-async function crawl(club_name, alias) {
+async function crawl(club_name) {
     const endpoint = `https://www.skysports.com/${club_name}-results`;
     const endpoint_alt = `https://www.theguardian.com/football/${parse_club_name(club_name)}/results`;
     try {
@@ -78,7 +75,7 @@ async function crawl(club_name, alias) {
             match_id,
             match_url,
             match_status: _getstatus(
-                alias.toLowerCase(),
+                club_name.toLowerCase(),
                 $('.sdc-site-match-header__team-name--home .sdc-site-match-header__team-name-block-target').text(),
                 $('.sdc-site-match-header__team-score-block[data-update="score-home"]').text(),
                 $('.sdc-site-match-header__team-score-block[data-update="score-away"]').text()
@@ -94,18 +91,18 @@ async function crawl(club_name, alias) {
 
         return data;
     } catch (error) {
-        console.error('Error accessing the URL: ', error);
-        return '';
+        return {};
     }
 }
 
 function _getstatus(home, home_team, home_score, away_score) {
+    const convert = (text) => text.toLowerCase().replace(/\s+/g, '-');
     if (home_score == away_score) {
         return 'Draw';
     } else if (home_score > away_score) {
-        return home_team == home ? 'Win' : 'Lose';
+        return convert(home_team) == home ? 'Win' : 'Lose';
     } else if (home_score < away_score) {
-        return home_team != home ? 'Win' : 'Lose';
+        return convert(home_team) != home ? 'Win' : 'Lose';
     }
 }
 
