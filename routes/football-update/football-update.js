@@ -2,16 +2,22 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const express = require('express');
 const router = express.Router();
+const generateImage = require('../football-update/generate-image');
 
 router.get('/:club_name', async (req, res) => {
     const club_name = req.params.club_name;
     const data = await crawl(club_name);
+    if (req.query.type == 'image') {
+        const coverImage = await generateImage(data);
+        res.send(`<img src="data:image/jpeg;base64,${coverImage}" alt="Image" />`);
+        return;
+    }
     res.status(200).json(data);
 });
 
 router.get('/', async (req, res) => {
     res.status(422);
-    res.json({ code: 422, error: 'Param not found', info: 'ex. ~/football-update/club_name' });
+    res.json({ code: 422, error: 'Club not found', info: 'ex. ~/football-update/club_name' });
 });
 
 async function get_redirect_url(originalUrl) {
@@ -26,10 +32,9 @@ async function get_redirect_url(originalUrl) {
 
 function parse_club_name(name) {
     // NOTE: for handle theguardian.com url
-    const club = {
-        'manchester-united': 'manchester-united',
-    };
-    return club[name] || name.split('-').join('');
+    const listName = ['manchester-united'];
+
+    return listName.includes(name) ? name : name.split('-').join('');
 }
 
 async function crawl(club_name) {

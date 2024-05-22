@@ -12,7 +12,7 @@ const TOKEN = process.env.PUSHOVER_TOKEN_FOOTBALL_UPDATE;
 
 router.get('/', async (req, res) => {
     res.status(422);
-    res.json({ code: 422, error: 'Param not found', info: 'ex. ~/fav-football-cron/club_name' });
+    res.json({ code: 422, error: 'Club not found', info: 'ex. ~/fav-football-cron/club_name' });
     res.end();
 });
 
@@ -101,10 +101,10 @@ async function get_redirect_url(originalUrl) {
 }
 
 function parse_club_name(name) {
-    const club = {
-        'manchester-united': 'manchester-united',
-    };
-    return club[name] || name.split('-').join('');
+    // NOTE: for handle theguardian.com url
+    const listName = ['manchester-united'];
+
+    return listName.includes(name) ? name : name.split('-').join('');
 }
 
 async function crawl(club_name) {

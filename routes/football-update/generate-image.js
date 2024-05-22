@@ -7,7 +7,7 @@ const generateImage = async (data) => {
     registerFont('public/fonts/Impact.ttf', { family: 'Impact' });
 
     const { team_short_home, team_short_away, logo_home, logo_away, score_home, score_away, competition } = data;
-    const cover = data?.cover || 'public/blur.png';
+    const cover = data?.cover || 'public/default.png';
     const canvasWidth = 500;
     const canvasHeight = 500;
     const canvas = createCanvas(canvasWidth, canvasHeight);
