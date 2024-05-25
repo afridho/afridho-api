@@ -10,9 +10,9 @@
         "start": "node index.js",
         "lint:fix": "eslint --fix ./**/*.js --ignore-pattern './frontend/*'",
         "client": "npm --prefix client run start",
-        "client:dev": "npm --prefix client run start",
-        "client:build": "npm --prefix client run build",
-        "server:dev": "nodemon ./bin/www",
+        "dev:client": "npm --prefix client run start",
+        "dev:server": "nodemon ./bin/www",
+        "build:client": "npm --prefix client run build",
         "dev": "concurrently \"npm run client\" \"npm run server:dev\" "
     },
     "keywords": [],
