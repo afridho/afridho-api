@@ -13,7 +13,7 @@
         "dev:client": "npm --prefix client run start",
         "dev:server": "nodemon ./bin/www",
         "build:client": "npm --prefix client run build",
-        "dev": "concurrently \"npm run client\" \"npm run server:dev\" "
+        "dev": "concurrently \"npm run client\" \"npm run dev:server\" "
     },
     "keywords": [],
     "author": "",
