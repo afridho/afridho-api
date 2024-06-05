@@ -1,8 +1,9 @@
 {
-  "label": "Tools",
-  "position": 5,
-  "link": {
-    "type": "generated-index",
-    "description": "5 minutes to learn the most important Docusaurus concepts."
-  }
+    "label": "Tools",
+    "position": 5,
+    "collapsed": false,
+    "link": {
+        "type": "generated-index",
+        "description": "5 minutes to learn the most important Docusaurus concepts."
+    }
 }

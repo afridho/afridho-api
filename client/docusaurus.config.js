@@ -65,9 +65,10 @@ const config = {
             },
             docs: {
                 sidebar: {
-                    hideable: true,
+                    hideable: false,
                 },
             },
+
             navbar: {
                 title: 'afridho-api',
                 logo: {
