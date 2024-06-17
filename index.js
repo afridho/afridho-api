@@ -26,17 +26,15 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.get('/', function (req, res) {
+    res.status(200).json({ code: 200, status: `It works.` });
+});
+
 // sqlite-viewer
 app.get('/dev/sqlite', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'frontend', 'sqlite', 'index.html'));
 });
 app.use('*/dev/sqlite/', express.static(path.resolve(__dirname, 'frontend', 'sqlite')));
-
-// homepage - docusaurus
-app.use(express.static('client/build'));
-app.get('/', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
 
 // MARK: Public Static Files
 app.use('/public', express.static(__dirname + '/public'));
