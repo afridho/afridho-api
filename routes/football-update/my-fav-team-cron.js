@@ -107,8 +107,17 @@ function parse_club_name(name) {
     return listName.includes(name) ? name : name.split('-').join('');
 }
 
+async function get_endpoint(name) {
+    const listCountry = ['france'];
+    const defaultEndpoint = `https://www.skysports.com/${name}-results`;
+    const countryEndpoint = `https://www.skysports.com/football/teams/${name}/results`;
+
+    if (listCountry.includes(name)) return countryEndpoint;
+    return defaultEndpoint;
+}
+
 async function crawl(club_name) {
-    const endpoint = `https://www.skysports.com/${club_name}-results`;
+    const endpoint = await get_endpoint(club_name);
     const endpoint_alt = `https://www.theguardian.com/football/${parse_club_name(club_name)}/results`;
     try {
         const [res_alt, res] = await Promise.all([axios.get(endpoint_alt), axios.get(endpoint)]);

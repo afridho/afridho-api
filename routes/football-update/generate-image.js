@@ -18,7 +18,7 @@ const generateImage = async (data) => {
     const bar = await loadImage('public/bar.png');
 
     const vsText = '-';
-    const competitionText = competition.toUpperCase();
+    const competitionText = competition?.toUpperCase();
 
     const scale = canvasHeight / backgroundImage.height;
     const width = backgroundImage.width * scale;
