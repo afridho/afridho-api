@@ -34,7 +34,7 @@ router.get('/:club_name', async (req, res) => {
     const data = await crawl(club_name);
     const code = 200; //NOTE : successfull response code
 
-    if (!data) return res.status(404).json({ code: 404, error: 'Invalid Club Name' });
+    if (!data) return res.status(200).json({ code: 200, error: 'Invalid Club Name' });
 
     const mongo_data = await mongo_read(club_name);
     if (mongo_data && mongo_data.club_name == club_name) {
