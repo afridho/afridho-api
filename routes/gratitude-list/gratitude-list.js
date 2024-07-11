@@ -70,19 +70,44 @@ router.get('/', async (req, res) => {
         const title = `${range_start} - ${range_end}〘Week ${week_number}〙`;
         const message = await parse_messages_pushover(str, total);
         await sendPushoverMessage({ message, title, html }, TOKEN);
+        //NOTE send status if open from web
+        res.status(200);
+        res.json({ message: 'Sent', code: 200 });
+        res.end();
     } else {
         const title = shortcut_name;
-        const message = await remindMe_message_pushover(total, weekday);
+        const filtered = await get_filtered_data_one_week(data);
+        const message = await remindMe_message_pushover(filtered, weekday);
         const url = `shortcuts://run-shortcut?name=${encodeURIComponent(shortcut_name.toLowerCase())}`;
         const url_title = 'Add Gratitude';
         if (message) await sendPushoverMessage({ message, title, url, url_title, html }, TOKEN);
+        //NOTE send status if open from web
+        const removeHtmlTags = (text) => text.replace(/<[^>]*>/g, '');
+        res.status(200);
+        res.json({
+            message: filtered ? `You have ${filtered} gratitude 😊.` : await removeHtmlTags(message),
+            code: 200,
+        });
+        res.end();
+    }
+});
+
+async function get_filtered_data_one_week(data) {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+
+    const daysToCheck = [];
+    for (let i = 0; i < 5; i++) {
+        const prevDay = (dayOfWeek - i + 7) % 7;
+        daysToCheck.push(prevDay);
     }
 
-    //NOTE send status if open from web
-    res.status(200);
-    res.json({ message: 'Sent', code: 200 });
-    res.end();
-});
+    const filteredData = data.filter((item) => {
+        const itemDayOfWeek = item.date.getDay();
+        return daysToCheck.includes((dayOfWeek - itemDayOfWeek + 7) % 7);
+    });
+    return filteredData?.length;
+}
 
 async function get_data_one_week() {
     return await collection
