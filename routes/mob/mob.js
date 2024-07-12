@@ -16,6 +16,42 @@ const database = getClientDB();
 const mob = database.collection('mob_update_cron');
 const mob_logs = database.collection('mob_update_cron_logs');
 
+router.get('/categories/:id/web', async (req, res) => {
+    const id = req.params.id;
+    const offset = req.query?.item || 0;
+    const previous_button = offset > 0 || false;
+    const limit = 6;
+
+    const response = await axios.get(
+        `https://api.plugo.world/v1/shop/66/products?categories=${id}&sort=sold_out,-sort,-id&limit=${limit}&offset=${offset}`
+    );
+    const allData = response.data.data;
+
+    let data = [];
+    if (allData.length > 1) {
+        data = await Promise.all(
+            allData.map(async (item) => {
+                const { stock_data: stock } = await detail_product(item.id);
+                const getPrice = item?.productVariations[0]?.price;
+                const idrKurs = parseInt(getPrice);
+                const price = formatToIDR(idrKurs);
+                const name = removeFirstWord(item.name);
+                const productUrl = getProductUrl(item.id, item.name);
+                return {
+                    ...item,
+                    name,
+                    price,
+                    productUrl,
+                    stock,
+                };
+            })
+        );
+    }
+    res.status(200);
+    res.render(__dirname + '/mob', { data, previous_button });
+    res.end();
+});
+
 router.get('/categories/:id/:menu', async (req, res) => {
     const id = req.params.id;
     const menu = transformText(req.params.menu);
@@ -61,7 +97,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
 
                 const inputBase64 = await imageUrlToBase64(result?.images[0]?.url);
                 const attachment_base64 = await compressImageBase64(inputBase64, 65); //NOTE - compress images after decode
-                const url = `${lang.url}/categories/${id}/${menu}`;
+                const url = `${lang.endpoint}/categories/${id}/web`;
                 const url_title = lang.open_browser;
                 const title = `✨ ${removeFirstWord(result?.name)}`;
                 await sendPushoverMessage(
@@ -93,6 +129,19 @@ router.get('/categories/:id/:menu', async (req, res) => {
         res.status(500).json({ error: lang.error });
     }
 });
+
+function getProductUrl(id, name) {
+    const nameUrl = name?.toLowerCase().replace(/\s+/g, '-');
+    return `${lang.url}/products/${id}/${nameUrl}`;
+}
+
+function formatToIDR(number) {
+    const formattedNumber = `Rp ${number.toLocaleString('id-ID', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    })}`;
+    return formattedNumber;
+}
 
 //REVIEW - Development purpose
 // router.delete('/categories/:collection', async (req, res) => {

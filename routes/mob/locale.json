@@ -1,5 +1,6 @@
 {
     "brand": "MOB",
+    "endpoint": "https://afridho-api.vercel.app/api/mob",
     "url": "https://www.mensoriginalbranded.com",
     "works": "It Works!",
     "error": "An error occurred",
