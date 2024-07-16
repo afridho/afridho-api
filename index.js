@@ -46,6 +46,7 @@ app.use('/api/pushover', pushover);
 app.use('/api/build-notification', build_notification);
 app.use('/api/dummy', cors(), dummy);
 app.set('views', __dirname + '/routes/ig-downloader');
+app.set('views', __dirname + '/routes/mob');
 app.set('view engine', 'ejs');
 app.use('/api/ig', ig_downloader);
 app.use('/api/gratitude-list', gratitude_list);
