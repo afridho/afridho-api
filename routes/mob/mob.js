@@ -31,12 +31,20 @@ router.get('/categories/:id/web', async (req, res) => {
     if (allData.length > 1) {
         data = await Promise.all(
             allData.map(async (item) => {
-                const { stock_data: stock } = await detail_product(item.id);
+                const { stock_data } = await detail_product(item.id);
                 const getPrice = item?.productVariations[0]?.price;
                 const idrKurs = parseInt(getPrice);
                 const price = formatToIDR(idrKurs);
                 const name = removeFirstWord(item.name);
                 const productUrl = getProductUrl(item.id, item.name);
+                const stock = stock_data?.filter((item) => {
+                    if (id == 1759) {
+                        //MARK - show L size when underwear categories
+                        return item.size === 'M' || item.size === 'L' || item.size === 'XL';
+                    } else {
+                        return item.size !== 'XL' && item.size !== 'XXL' && item.size !== 'L';
+                    }
+                });
                 return {
                     ...item,
                     name,

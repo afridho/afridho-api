@@ -16,14 +16,9 @@
                 <% data.forEach(function(item, index) { %>
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
-                        <h6 class="card-header fw-bold"><%= item.name %></h6>
+                        <h6 class="card-header fw-bold text-truncate"><%= item.name %></h6>
                         <div class="card-body">
-                            <div
-                                id="carouselAction<%= item.id %>"
-                                class="carousel slide"
-                                data-bs-ride="carousel"
-                                data-touch="true"
-                            >
+                            <div id="carouselAction<%= item.id %>" class="carousel slide" data-touch="true">
                                 <div class="carousel-inner">
                                     <% item.images.forEach(function(file, i) { %>
                                     <div class="carousel-item<%= i === 0 ? ' active' : '' %>">
@@ -67,17 +62,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% item.stock.forEach(function(doc, i) { %>
                                     <tr>
-                                        <th scope="row">S</th>
-                                        <td>2</td>
+                                        <th scope="row"><%= doc.size %></th>
+                                        <td><%= doc.stock %></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">M</th>
-                                        <td>20</td>
-                                    </tr>
+                                    <% }); %>
                                 </tbody>
                             </table>
-                            <!-- <div class="alert alert-info text-center" role="alert"><%= item.price %></div> -->
                         </div>
 
                         <div class="card-footer d-flex justify-content-between align-items-center">
