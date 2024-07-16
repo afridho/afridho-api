@@ -28,18 +28,13 @@
                                     <% item.images.forEach(function(file, i) { %>
                                     <div class="carousel-item<%= i === 0 ? ' active' : '' %>">
                                         <% if (i === 0) { %>
-                                        <img
-                                            src="<%= file.url %>"
-                                            class="img-thumbnail"
-                                            alt="responsive"
-                                            loading="lazy"
-                                        />
+                                        <img src="<%= file.url %>" class="img-thumbnail" alt="responsive" />
                                         <% } else { %>
                                         <img
+                                            src="/public/placeholder/mob.png"
                                             data-src="<%= file.url %>"
                                             class="img-thumbnail lazyload"
                                             alt="responsive"
-                                            loading="lazy"
                                         />
                                         <% } %>
                                     </div>
