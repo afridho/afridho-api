@@ -18,9 +18,10 @@ const mob_logs = database.collection('mob_update_cron_logs');
 
 router.get('/categories/:id/web', async (req, res) => {
     const id = req.params.id;
-    const offset = req.query?.item || 0;
-    const previous_button = offset > 0 || false;
+    const page = req.query?.page || 1;
     const limit = 6;
+    const offset = limit * page - limit;
+    const previous_button = page > 1 || false;
 
     const response = await axios.get(
         `https://api.plugo.world/v1/shop/66/products?categories=${id}&sort=sold_out,-sort,-id&limit=${limit}&offset=${offset}`
@@ -39,10 +40,10 @@ router.get('/categories/:id/web', async (req, res) => {
                 const productUrl = getProductUrl(item.id, item.name);
                 const stock = stock_data?.filter((item) => {
                     if (id == 1759) {
-                        //MARK - show L size when underwear categories
-                        return item.size === 'M' || item.size === 'L' || item.size === 'XL';
+                        // MARK - show L size when underwear categories
+                        return ['M', 'L', 'XL'].includes(item.size);
                     } else {
-                        return item.size !== 'XL' && item.size !== 'XXL' && item.size !== 'L';
+                        return !['XL', 'XXL', 'L', 'XL/110', 'L/105'].includes(item.size);
                     }
                 });
                 return {

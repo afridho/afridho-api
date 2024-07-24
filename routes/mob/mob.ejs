@@ -15,8 +15,12 @@
             <div class="row g-4">
                 <% data.forEach(function(item, index) { %>
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <h6 class="card-header fw-bold text-truncate"><%= item.name %></h6>
+                    <div class="card h-100">
+                        <h6
+                            class="card-header fw-bold text-truncate <%= item.stock.length == 0 ? 'bg-danger-subtle' : '' %>"
+                        >
+                            <%= item.name %>
+                        </h6>
                         <div class="card-body">
                             <div id="carouselAction<%= item.id %>" class="carousel slide" data-touch="true">
                                 <div class="carousel-inner">
@@ -54,7 +58,9 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
-                            <table class="table table-striped mt-2">
+                            <% if (item.stock.length > 0) { %>
+
+                            <table class="table table-striped table-hover mt-2">
                                 <thead>
                                     <tr>
                                         <th scope="col">Size</th>
@@ -70,8 +76,11 @@
                                     <% }); %>
                                 </tbody>
                             </table>
+
+                            <% } %>
                         </div>
 
+                        <% if (item.stock.length > 0) { %>
                         <div class="card-footer d-flex justify-content-between align-items-center">
                             <div><%= item.price %></div>
 
@@ -91,6 +100,14 @@
                                 Buy
                             </a>
                         </div>
+
+                        <% } else { %>
+                        <div
+                            class="card-footer d-flex align-items-center justify-content-center bg-danger-subtle text-center"
+                        >
+                            <h6 class="font-monospace mt-1 p-1">Out of Stock!</h6>
+                        </div>
+                        <% } %>
                     </div>
                 </div>
                 <% }); %>
@@ -123,18 +140,18 @@
                 if (previousButton) {
                     previousButton.addEventListener('click', function (event) {
                         event.preventDefault();
-                        let currentParam = new URLSearchParams(window.location.search).get('item');
-                        let newItemValue = currentParam ? parseInt(currentParam) - 6 : 0;
-                        let url = window.location.href.split('?')[0] + `?item=${newItemValue}`;
+                        let currentParam = new URLSearchParams(window.location.search).get('page') || 1;
+                        let newItemValue = currentParam ? parseInt(currentParam) - 1 : 0;
+                        let url = window.location.href.split('?')[0] + `?page=${newItemValue}`;
                         window.location.href = url;
                     });
                 }
 
                 nextButton.addEventListener('click', function (event) {
                     event.preventDefault();
-                    let currentParam = new URLSearchParams(window.location.search).get('item');
-                    let newItemValue = currentParam ? parseInt(currentParam) + 6 : 6;
-                    let url = window.location.href.split('?')[0] + `?item=${newItemValue}`;
+                    let currentParam = new URLSearchParams(window.location.search).get('page') || 1;
+                    let newItemValue = currentParam ? parseInt(currentParam) + 1 : 1;
+                    let url = window.location.href.split('?')[0] + `?page=${newItemValue}`;
                     window.location.href = url;
                 });
             });
