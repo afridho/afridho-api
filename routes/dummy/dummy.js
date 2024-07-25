@@ -30,6 +30,7 @@ const assessmentAccountStatus = require('./json/assessmentAccountStatus');
 const severityRelatedAccount = require('./json/severityRelatedAccount');
 const groupOverview = require('./json/groupOverview');
 const tradeCorrection = require('./json/tradeCorrection');
+const tradeCorrectionQueueDetail = require('./json/tradeCorrectionQueueDetail');
 const severityAlertAccount = require('./json/severityAlertAccount');
 const severityDailyStatement = require('./json/severityDailyStatement');
 
@@ -409,6 +410,11 @@ router.get('/trade-correction', async (req, res) => {
 
     res.status(200);
     res.json(data);
+});
+
+router.get('/trade-queue-detail', async (req, res) => {
+    res.status(200);
+    res.json(tradeCorrectionQueueDetail);
 });
 
 module.exports = router;
