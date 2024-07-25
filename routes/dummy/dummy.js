@@ -412,6 +412,84 @@ router.get('/trade-correction', async (req, res) => {
     res.json(data);
 });
 
+// Trade Correction Queue
+router.get('/trade-correction-queue', async (req, res) => {
+    const data = {
+        current_page: 1,
+        data: [
+            {
+                login: 2007967929,
+                ticket: {
+                    total: 4,
+                },
+                symbol: {
+                    total: 4,
+                },
+                total_lot: {
+                    total: 0.4,
+                },
+                actions: {
+                    total: 6,
+                    details: [
+                        'Reopen',
+                        'Re-pending',
+                        'Adjust Open Price',
+                        'Adjust Close Price',
+                        'Adjust PL',
+                        'Add Credit',
+                    ],
+                },
+            },
+            {
+                login: 2007967930,
+                ticket: {
+                    total: 3,
+                },
+                symbol: {
+                    total: 3,
+                },
+                total_lot: {
+                    total: 0.30000000000000004,
+                },
+                actions: {
+                    total: 2,
+                    details: ['Adjust Close Price', 'Adjust PL'],
+                },
+            },
+        ],
+        first_page_url: 'http://report.test/api/v1/trade-correction-queue?page=1',
+        from: 1,
+        last_page: 1,
+        last_page_url: 'http://report.test/api/v1/trade-correction-queue?page=1',
+        links: [
+            {
+                url: null,
+                label: '&laquo; Previous',
+                active: false,
+            },
+            {
+                url: 'http://report.test/api/v1/trade-correction-queue?page=1',
+                label: '1',
+                active: true,
+            },
+            {
+                url: null,
+                label: 'Next &raquo;',
+                active: false,
+            },
+        ],
+        next_page_url: null,
+        path: 'http://report.test/api/v1/trade-correction-queue',
+        per_page: 15,
+        prev_page_url: null,
+        to: 2,
+        total: 2,
+    };
+
+    res.status(200);
+    res.json(data);
+});
+
 router.get('/trade-queue-detail', async (req, res) => {
     res.status(200);
     res.json(tradeCorrectionQueueDetail);
