@@ -371,43 +371,39 @@ router.get('/daily-statement', async (req, res) => {
 
 // Trade Correction
 router.get('/trade-correction', async (req, res) => {
-    const per_page = 5;
     const data = {
-        status: 'success',
-        message: 'Successfully',
-        data: {
-            current_page: Number(1),
-            data: tradeCorrection,
-            first_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
-            from: 1,
-            last_page: Number(1),
-            last_page_url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
-            links: [
-                {
-                    url: null,
-                    label: '&laquo; Previous',
-                    active: false,
-                },
-                {
-                    url: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo?page=1',
-                    label: '1',
-                    active: true,
-                },
-                {
-                    url: null,
-                    label: 'Next &raquo;',
-                    active: false,
-                },
-            ],
-            next_page_url: null,
-            path: 'https://afridho-api.vercel.app/api/dummy/severity-alert-ceo',
-            per_page,
-            prev_page_url: null,
-            to: 2,
-            total: Number(2),
-        },
+        current_page: 1,
+        data: tradeCorrection,
+        first_page_url:
+            'https://rpt-rm-dev.surya-am.com/api/v1/revert/trade-correction?start_time=2024-07-25%2009%3A56%3A00&end_time=2024-07-25%2010%3A41%3A53&per_page=1000&is_reload=1&sort=server&sort_type=asc&page=1&servers%5B0%5D=MT4DEV&symbol=XAUUSD.m',
+        from: 1,
+        last_page: 1,
+        last_page_url:
+            'https://rpt-rm-dev.surya-am.com/api/v1/revert/trade-correction?start_time=2024-07-25%2009%3A56%3A00&end_time=2024-07-25%2010%3A41%3A53&per_page=1000&is_reload=1&sort=server&sort_type=asc&page=1&servers%5B0%5D=MT4DEV&symbol=XAUUSD.m',
+        links: [
+            {
+                url: null,
+                label: '&laquo; Previous',
+                active: false,
+            },
+            {
+                url: 'https://rpt-rm-dev.surya-am.com/api/v1/revert/trade-correction?start_time=2024-07-25%2009%3A56%3A00&end_time=2024-07-25%2010%3A41%3A53&per_page=1000&is_reload=1&sort=server&sort_type=asc&page=1&servers%5B0%5D=MT4DEV&symbol=XAUUSD.m',
+                label: '1',
+                active: true,
+            },
+            {
+                url: null,
+                label: 'Next &raquo;',
+                active: false,
+            },
+        ],
+        next_page_url: null,
+        path: 'https://rpt-rm-dev.surya-am.com/api/v1/revert/trade-correction',
+        per_page: 5,
+        prev_page_url: null,
+        to: 1,
+        total: 1,
     };
-
     res.status(200);
     res.json(data);
 });
