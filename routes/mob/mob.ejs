@@ -13,18 +13,18 @@
     <body class="p-2 border-0">
         <div class="container">
             <div class="row g-4">
-                <% data.forEach(function(item, index) { %>
+                <% data?.forEach(function(item, index) { %>
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="card h-100">
                         <h6
-                            class="card-header fw-bold text-truncate <%= item.stock.length == 0 ? 'bg-danger-subtle' : '' %>"
+                            class="card-header fw-bold text-truncate <%= item?.stock?.length == 0 ? 'bg-danger-subtle' : '' %>"
                         >
-                            <%= item.name %>
+                            <%= item?.name %>
                         </h6>
                         <div class="card-body">
                             <div id="carouselAction<%= item.id %>" class="carousel slide" data-touch="true">
                                 <div class="carousel-inner">
-                                    <% item.images.forEach(function(file, i) { %>
+                                    <% item?.images?.forEach(function(file, i) { %>
                                     <div class="carousel-item<%= i === 0 ? ' active' : '' %>">
                                         <% if (i === 0) { %>
                                         <img src="<%= file.url %>" class="img-thumbnail" alt="responsive" />
@@ -58,7 +58,7 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
-                            <% if (item.stock.length > 0) { %>
+                            <% if (item?.stock?.length > 0) { %>
 
                             <table class="table table-striped table-hover mt-2">
                                 <thead>
@@ -68,10 +68,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% item.stock.forEach(function(doc, i) { %>
+                                    <% item?.stock?.forEach(function(doc, i) { %>
                                     <tr>
                                         <th scope="row"><%= doc.size %></th>
-                                        <td><%= doc.stock %></td>
+                                        <td><%= doc?.stock %></td>
                                     </tr>
                                     <% }); %>
                                 </tbody>
@@ -80,11 +80,11 @@
                             <% } %>
                         </div>
 
-                        <% if (item.stock.length > 0) { %>
+                        <% if (item?.stock?.length > 0) { %>
                         <div class="card-footer d-flex justify-content-between align-items-center">
-                            <div><%= item.price %></div>
+                            <div><%= item?.price %></div>
 
-                            <a href="<%= item.productUrl %>" class="btn btn-primary w-50">
+                            <a href="<%= item?.productUrl %>" class="btn btn-primary w-50">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
