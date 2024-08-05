@@ -19,31 +19,33 @@ const mob_logs = database.collection('mob_update_cron_logs');
 router.get('/categories/:id/web', async (req, res) => {
     const id = req.params.id;
     const page = req.query?.page || 1;
-    const limit = 6;
-    const offset = limit * page - limit;
+    const per_page = handlePerPage(req.query?.per_page);
+    const offset = per_page * page - per_page;
     const previous_button = page > 1 || false;
 
     const response = await axios.get(
-        `https://api.plugo.world/v1/shop/66/products?categories=${id}&sort=sold_out,-sort,-id&limit=${limit}&offset=${offset}`
+        `https://api.plugo.world/v1/shop/66/products?categories=${id}&sort=sold_out,-sort,-id&limit=${per_page}&offset=${offset}`
     );
     const allData = response.data.data;
 
     let data = [];
-    if (allData.length > 1) {
+    if (allData.length > 0) {
         data = await Promise.all(
             allData.map(async (item) => {
-                const { stock_data } = await detail_product(item.id);
+                const { stock_data, categories_data } = await detail_product(item.id);
                 const getPrice = item?.productVariations[0]?.price;
                 const idrKurs = parseInt(getPrice);
                 const price = formatToIDR(idrKurs);
                 const name = removeFirstWord(item.name);
                 const productUrl = getProductUrl(item.id, item.name);
                 const stock = stock_data?.filter((item) => {
-                    if (id == 1759) {
+                    if (id == 1759 || categories_data[0]?.id == 1759) {
                         // MARK - show L size when underwear categories
                         return ['M', 'L', 'XL'].includes(item.size);
                     } else {
-                        return !['XL', 'XXL', 'L', 'XL/110', 'L/105'].includes(item.size);
+                        return !['XL', 'XXL', 'XXXL', 'L', 'XL/110', 'L/105', 'LTall', '26', '34', '36'].includes(
+                            item.size
+                        );
                     }
                 });
                 return {
@@ -57,6 +59,7 @@ router.get('/categories/:id/web', async (req, res) => {
         );
     }
     res.status(200);
+    console.log(data);
     res.render(__dirname + '/mob', { data, previous_button });
     res.end();
 });
@@ -139,6 +142,10 @@ router.get('/categories/:id/:menu', async (req, res) => {
     }
 });
 
+function handlePerPage(page = 6) {
+    return page > 12 ? 6 : page;
+}
+
 function getProductUrl(id, name) {
     const nameUrl = name?.toLowerCase().replace(/\s+/g, '-');
     return `${lang.url}/products/${id}/${nameUrl}`;
@@ -173,7 +180,7 @@ async function detail_product(id) {
         const data3 = response1.data.data.vendorCategories;
         const categories_data = data3.filter((item) => item.id !== 1767); //NOTE - filter New Arrivals label
         let combined = [];
-        if (data1.length > 1) {
+        if (data1.length > 0) {
             combined = data1.map((item, index) => ({
                 size: item.details[0].value,
                 stock: data2[index].inventories[0].quantity,

@@ -17,7 +17,7 @@
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="card h-100">
                         <h6
-                            class="card-header fw-bold text-truncate <%= item?.stock?.length == 0 ? 'bg-danger-subtle' : '' %>"
+                            class="card-header fw-bold text-truncate <%= item?.stock?.length > 0 ? '': 'bg-danger-subtle' %>"
                         >
                             <%= item?.name %>
                         </h6>
@@ -39,6 +39,8 @@
                                     </div>
                                     <% }); %>
                                 </div>
+
+                                <% if (item?.images?.length > 1) { %>
                                 <button
                                     class="carousel-control-prev"
                                     type="button"
@@ -57,6 +59,7 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
+                                <% } %>
                             </div>
                             <% if (item?.stock?.length > 0) { %>
 
