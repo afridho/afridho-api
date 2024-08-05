@@ -59,7 +59,6 @@ router.get('/categories/:id/web', async (req, res) => {
         );
     }
     res.status(200);
-    console.log(data);
     res.render(__dirname + '/mob', { data, previous_button });
     res.end();
 });
