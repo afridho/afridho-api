@@ -39,23 +39,17 @@ router.get('/:club_name', async (req, res) => {
     const mongo_data = await mongo_read(club_name);
     if (mongo_data && mongo_data.club_name == club_name) {
         if (data?.match_id != mongo_data.match_id) {
-            if (mongo_data.status === 'sent') {
-                response(res, { code, status: 'no update data.' });
-            } else {
-                const _data = { status: 'sent', match_id: data.match_id };
-                await mongo_update(_data, club_name);
-                const coverImage = await generateImage(data);
-                await send_pushover(data, coverImage);
-                response(res, { code, status: 'Pushover sent.' });
-            }
-        } else {
-            const _data = { status: null };
+            const _data = { match_id: data.match_id };
             await mongo_update(_data, club_name);
+            const coverImage = await generateImage(data);
+            await send_pushover(data, coverImage);
+            response(res, { code, status: 'Pushover sent.' });
+        } else {
             response(res, { code, status: 'no update data.' });
         }
     } else {
         // NOTE: 'New Club in database'
-        const _data = { club_name, status: 'sent', match_id: data.match_id };
+        const _data = { club_name, match_id: data.match_id };
         await mongo_insert(_data);
         res.status(code).json({ code: 200, status: `New Club Added ${club_name}` });
     }
