@@ -31,10 +31,9 @@ const severityRelatedAccount = require('./json/severityRelatedAccount');
 const groupOverview = require('./json/groupOverview');
 const tradeCorrection = require('./json/tradeCorrection');
 const tradeCorrectionQueueDetail = require('./json/tradeCorrectionQueueDetail');
+const tradeCorrectionQueueDetailFull = require('./json/tradeCorrectionQueueDetailFull');
 const severityAlertAccount = require('./json/severityAlertAccount');
 const severityDailyStatement = require('./json/severityDailyStatement');
-
-const stpQueue = require('./json/stpqueueStatus');
 
 require('dotenv').config();
 const MONGODB_USER = process.env.MONGODB_PASS;
@@ -489,6 +488,11 @@ router.get('/trade-correction-queue', async (req, res) => {
 router.get('/trade-queue-detail', async (req, res) => {
     res.status(200);
     res.json(tradeCorrectionQueueDetail);
+});
+
+router.get('/trade-queue-detail-full', async (req, res) => {
+    res.status(200);
+    res.json(tradeCorrectionQueueDetailFull);
 });
 
 module.exports = router;
