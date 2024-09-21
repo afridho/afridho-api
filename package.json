@@ -8,7 +8,9 @@
     },
     "scripts": {
         "start": "node index.js",
-        "lint:fix": "eslint --fix ./**/*.js --ignore-pattern './frontend/*'",
+        "lint": "eslint .",
+        "lint:log": "eslint . --format json --output-file eslint-report.json",
+        "lint:fix": "eslint --fix .",
         "dev:server": "nodemon ./bin/www",
         "dev": "concurrently \"npm run dev:server\" "
     },

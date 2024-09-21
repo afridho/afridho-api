@@ -1,14 +1,14 @@
 const axios = require('axios');
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-require('dotenv').config()
+require('dotenv').config();
 var recursion_now = 0;
-var recursion_limit = 20;// backup RapidAPI-KEY recursion process
+var recursion_limit = 20; // backup RapidAPI-KEY recursion process
 
 router.get('/', async (req, res) => {
     res.render(__dirname + '/input');
-    res.end()
-    })
+    res.end();
+});
 
 router.post('/download', async (req, res) => {
     // const media = [
@@ -18,69 +18,78 @@ router.post('/download', async (req, res) => {
     //         "https://scontent.cdninstagram.com/v/t51.2885-15/308016585_494223315551442_8810189213287579869_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=scontent.cdninstagram.com&_nc_cat=106&_nc_ohc=6JCd8Db7myQAX9RJ0yM&edm=AJBgZrYBAAAA&ccb=7-5&ig_cache_key=MjkzMzI5ODAwODI3NTgzNjE0OA%3D%3D.2-ccb7-5&oh=00_AT9KH70qvGOzKA5PVUVpFG7yMN3rzrzrETSZMKy5bsKTFQ&oe=63345D75&_nc_sid=78c662"
     //       ]
     //     const Type = 'Carousel'
-    const image_from_instagram = await get_instagram_image(req.body.link)
-    try{
-        if(image_from_instagram[0] == 200){
-            if('error' in image_from_instagram[1]){
-                res.status(500)
-                res.render(__dirname + '/input_try_again', {invalid_link : (Object.values(image_from_instagram[1])[0]).replace("reomved", "removed")});
-            } else{
-                const title = image_from_instagram[1]?.title
-                const media = image_from_instagram[1]?.media
-                const Type = image_from_instagram[1]?.Type 
-                
-                if (Type == 'Carousel'){
-                    res.status(200)
-                    res.render(__dirname + '/download_carousel', {media:media, Type:Type, title:title})
-                }else{
-                    const icon = Type == 'Post-Image' ? '📷️' : '📹️'
-                    res.status(200)
-                    res.render(__dirname + '/input_try_again', {valid_link : 'Download success', media : media, icon: icon});
-                    }
-                }
-        }else{
-            res.status(200)
-            res.render(__dirname + '/input_try_again', {invalid_link : image_from_instagram[1]});
-        }}
-        catch{
-            res.status(500)
-            res.render(__dirname + '/input_try_again', {invalid_link : 'Link is removed or private'});
-        }}
-    )
+    const image_from_instagram = await get_instagram_image(req.body.link);
+    try {
+        if (image_from_instagram[0] == 200) {
+            if ('error' in image_from_instagram[1]) {
+                res.status(500);
+                res.render(__dirname + '/input_try_again', {
+                    invalid_link: Object.values(image_from_instagram[1])[0].replace('reomved', 'removed'),
+                });
+            } else {
+                const title = image_from_instagram[1]?.title;
+                const media = image_from_instagram[1]?.media;
+                const Type = image_from_instagram[1]?.Type;
 
-async function get_instagram_image(ig_link){
+                if (Type == 'Carousel') {
+                    res.status(200);
+                    res.render(__dirname + '/download_carousel', { media: media, Type: Type, title: title });
+                } else {
+                    const icon = Type == 'Post-Image' ? '📷️' : '📹️';
+                    res.status(200);
+                    res.render(__dirname + '/input_try_again', {
+                        valid_link: 'Download success',
+                        media: media,
+                        icon: icon,
+                    });
+                }
+            }
+        } else {
+            res.status(200);
+            res.render(__dirname + '/input_try_again', { invalid_link: image_from_instagram[1] });
+        }
+    } catch {
+        res.status(500);
+        res.render(__dirname + '/input_try_again', { invalid_link: 'Link is removed or private' });
+    }
+});
+
+async function get_instagram_image(ig_link) {
     recursion_now++;
     const options = {
-    method: 'GET',
-    url: 'https://instagram-story-downloader-media-downloader.p.rapidapi.com/index',
-    params: {url: ig_link},
-    headers: {
-        'X-RapidAPI-Key' : await RapidAPI_KEY(),
-        'X-RapidAPI-Host': 'instagram-story-downloader-media-downloader.p.rapidapi.com'
-    }
+        method: 'GET',
+        url: 'https://instagram-story-downloader-media-downloader.p.rapidapi.com/index',
+        params: { url: ig_link },
+        headers: {
+            'X-RapidAPI-Key': await RapidAPI_KEY(),
+            'X-RapidAPI-Host': 'instagram-story-downloader-media-downloader.p.rapidapi.com',
+        },
     };
 
-    return await axios.request(options).then(function (response) {
-        return [response.status, response.data]
-    }).catch(async function (error) {
-        if(error.response.status == 429){
-            if(recursion_now <= recursion_limit){   
-            return get_instagram_image(ig_link)
-            }else{
-                return [error.response.status,Object.values(error.response.data)[0]]
+    return await axios
+        .request(options)
+        .then(function (response) {
+            return [response.status, response.data];
+        })
+        .catch(async function (error) {
+            if (error.response.status == 429) {
+                if (recursion_now <= recursion_limit) {
+                    return get_instagram_image(ig_link);
+                } else {
+                    return [error.response.status, Object.values(error.response.data)[0]];
+                }
+            } else {
+                return [error.response.status, Object.values(error.response.data)[0]];
             }
-        }else{
-            return [error.response.status,Object.values(error.response.data)[0]]
-        }
-    });
+        });
 }
 
 async function RapidAPI_KEY() {
-    filtered_env = Object.fromEntries(Object.entries(process.env).filter(([key]) => key.includes('IGDOWNLOADER_KEY')));
+    const filtered_env = Object.fromEntries(
+        Object.entries(process.env).filter(([key]) => key.includes('IGDOWNLOADER_KEY'))
+    );
     var keys = Object.keys(filtered_env);
-    return await filtered_env[keys[ keys.length * Math.random() << 0]];
-};
-
+    return await filtered_env[keys[(keys.length * Math.random()) << 0]];
+}
 
 module.exports = router;
-

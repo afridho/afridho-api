@@ -1,1 +1,4 @@
 **/node_modules/*
+/frontend/sqlite/*
+/routes/dummy/*
+/public/js/*.js
