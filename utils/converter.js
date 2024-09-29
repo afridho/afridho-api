@@ -10,10 +10,12 @@ async function imageUrlToBase64(imageUrl) {
     const base64Image = await axios
         .get(imageUrl, { responseType: 'arraybuffer' })
         .then((response) => Buffer.from(response.data, 'binary').toString('base64'))
-        .catch((error) => {
-            return error;
+        .catch(() => {
+            const emptyImage =
+                'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAQSURBVHjaYvj//z8DQIABAAj8Av7bok0WAAAAAElFTkSuQmCC';
+            return emptyImage;
         });
     return base64Image;
 }
 
-module.exports = [toIdr, imageUrlToBase64];
+module.exports = { toIdr, imageUrlToBase64 };

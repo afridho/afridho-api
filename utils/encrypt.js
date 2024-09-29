@@ -9,4 +9,4 @@ const decrypt = (text) => {
     return bytes.toString(CryptoJS.enc.Utf8);
 };
 
-module.exports = [encrypt, decrypt];
+module.exports = { encrypt, decrypt };

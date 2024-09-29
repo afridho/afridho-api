@@ -18,4 +18,4 @@ async function compressImageBase64(inputBase64, resizePercentage = 60, format = 
         });
 }
 
-module.exports = [compressImageBase64];
+module.exports = { compressImageBase64 };

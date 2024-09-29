@@ -9,6 +9,7 @@ const my_fav_team_cron = require('./routes/football-update/my-fav-team-cron');
 const ig_downloader = require('./routes/ig-downloader/ig-downloader');
 const gratitude_list = require('./routes/gratitude-list/gratitude-list');
 const mob = require('./routes/mob/mob');
+const software_update = require('./routes/software-update');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -51,6 +52,7 @@ app.set('view engine', 'ejs');
 app.use('/api/ig', ig_downloader);
 app.use('/api/gratitude-list', gratitude_list);
 app.use('/api/mob', mob);
+app.use('/api/software-update', software_update);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -3,7 +3,7 @@ const router = express.Router();
 require('dotenv').config();
 const getClientDB = require('../../utils/connectdb');
 const sendPushoverMessage = require('../../utils/pushover');
-const [encrypt, decrypt] = require('../../utils/encrypt');
+const { encrypt, decrypt } = require('../../utils/encrypt');
 const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST;
 const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? ' ' + process.env.GRATITUDE_LIST_NICKNAME : '';
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD;
