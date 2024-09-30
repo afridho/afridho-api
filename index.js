@@ -27,8 +27,14 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.set('trust proxy', true);
 app.get('/', function (req, res) {
-    res.status(200).json({ code: 200, status: `It works.` });
+    const clientIp = req.ip;
+    res.status(200).json({
+        code: 200,
+        status: 'It works.',
+        ip: clientIp,
+    });
 });
 
 // sqlite-viewer
