@@ -5,9 +5,8 @@ const router = express.Router();
 require('dotenv').config();
 const sendPushoverMessage = require('../../utils/pushover');
 const generateImage = require('../football-update/generate-image');
-const getClientDB = require('../../utils/connectdb');
-const database = getClientDB();
-const db = database.collection('football_update_cron');
+const ClientDB = require('../../utils/connectdb');
+const db = new ClientDB('football_update_cron');
 const TOKEN = process.env.PUSHOVER_TOKEN_FOOTBALL_UPDATE;
 
 router.get('/', async (req, res) => {
@@ -16,19 +15,6 @@ router.get('/', async (req, res) => {
     res.end();
 });
 
-async function mongo_read(query_alias) {
-    const alias = { club_name: query_alias };
-    return await db.findOne(alias);
-}
-async function mongo_insert(data) {
-    return await db.insertOne(data);
-}
-async function mongo_update(data, query_alias) {
-    const alias = { club_name: query_alias };
-    const updateDoc = { $set: data };
-    return await db.updateOne(alias, updateDoc, {});
-}
-
 router.get('/:club_name', async (req, res) => {
     const club_name = req.params.club_name;
     const data = await crawl(club_name);
@@ -36,11 +22,11 @@ router.get('/:club_name', async (req, res) => {
 
     if (!data) return res.status(200).json({ code: 200, error: 'Invalid Club Name' });
 
-    const mongo_data = await mongo_read(club_name);
+    const mongo_data = await db.mongo_read({ club_name });
     if (mongo_data && mongo_data.club_name == club_name) {
         if (data?.match_id != mongo_data.match_id) {
             const _data = { match_id: data.match_id };
-            await mongo_update(_data, club_name);
+            await db.mongo_update({ club_name }, _data);
             const coverImage = await generateImage(data);
             await send_pushover(data, coverImage);
             response(res, { code, status: 'Pushover sent.' });
@@ -50,7 +36,7 @@ router.get('/:club_name', async (req, res) => {
     } else {
         // NOTE: 'New Club in database'
         const _data = { club_name, match_id: data.match_id };
-        await mongo_insert(_data);
+        await db.mongo_insert(_data);
         res.status(code).json({ code: 200, status: `New Club Added ${club_name}` });
     }
 });

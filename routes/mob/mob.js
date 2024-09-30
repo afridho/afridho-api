@@ -6,15 +6,14 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 const sendPushoverMessage = require('../../utils/pushover');
-const getClientDB = require('../../utils/connectdb');
 const { capitalizeFirstLetter, transformText, removeFirstWord } = require('../../utils/text');
 const { toIdr, imageUrlToBase64 } = require('../../utils/converter');
 const { compressImageBase64 } = require('../../utils/image');
 const lang = require('./locale.json');
 const MOB_TOKEN = process.env.PUSHOVER_TOKEN_MOB;
-const database = getClientDB();
-const mob = database.collection('mob_update_cron');
-const mob_logs = database.collection('mob_update_cron_logs');
+const ClientDB = require('../../utils/connectdb');
+const mob = new ClientDB('mob_update_cron');
+const mob_logs = new ClientDB('mob_update_cron_logs');
 
 router.get('/categories/:id/web', async (req, res) => {
     const id = req.params.id;
@@ -78,7 +77,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
         result.label = menu;
         result.updated_at = new Date().toISOString();
 
-        const isExist = await mongo_read(mob, menu);
+        const isExist = await mob.mongo_read({ menu });
         const message_new = `${lang.new_category} ${capitalizeFirstLetter(menu)} ✨`;
         const hasNewUpdate = result.id !== isExist?.id;
 
@@ -91,8 +90,8 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     updated_at: isExist?.updated_at,
                 };
                 result.previousId = isExist?.id; // for page checked
-                await mongo_insert(mob_logs, logs_struct);
-                await mongo_update(mob, result, menu);
+                await mob_logs.mongo_insert(logs_struct);
+                await mob.mongo_update({ menu }, result);
                 const { stock_data, categories_data } = await detail_product(result?.id);
                 let str_stock = '';
                 let str_categories = '';
@@ -126,7 +125,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
             }
         } else {
             await sendPushoverMessage({ title: lang.brand, message: message_new, sound }, MOB_TOKEN);
-            await mongo_insert(mob, result);
+            await mob.mongo_insert(result);
         }
         const endTime = Date.now();
         const executionTime = ((endTime - startTime) / 1000).toFixed(1);
@@ -190,20 +189,6 @@ async function detail_product(id) {
     } catch (err) {
         return err;
     }
-}
-
-async function mongo_read(collection, label) {
-    //LINK - label for condition
-    const alias = { label };
-    return await collection.findOne(alias);
-}
-async function mongo_insert(collection, data) {
-    return await collection.insertOne(data);
-}
-async function mongo_update(collection, data, label) {
-    const alias = { label };
-    const updateDoc = { $set: data };
-    return await collection.updateOne(alias, updateDoc, {});
 }
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();
-const getClientDB = require('../../utils/connectdb');
 const sendPushoverMessage = require('../../utils/pushover');
 const { encrypt, decrypt } = require('../../utils/encrypt');
 const TOKEN = process.env.PUSHOVER_TOKEN_GRATITUDE_LIST;
@@ -9,9 +8,8 @@ const GET_NICKNAME = process.env.GRATITUDE_LIST_NICKNAME ? ' ' + process.env.GRA
 const GET_PASSWORD = process.env.GRATITUDE_LIST_PASSWORD;
 const GET_DAY_SENT = process.env.GRATITUDE_LIST_DAY ?? 'Saturday';
 const { format, addHours, getDay } = require('date-fns');
-
-const database = getClientDB();
-const collection = database.collection('gratitude_list');
+const ClientDB = require('../../utils/connectdb');
+const db = new ClientDB('gratitude_list');
 
 // Shortcut Name
 const shortcut_name = 'Gratitude List';
@@ -36,7 +34,7 @@ router.post('/', async (req, res) => {
             const message = encrypt(req.body?.message);
             const location = req.body.location ?? '';
             let _data = { message, location, date };
-            await mongo_insert(_data);
+            await db.mongo_insert(_data);
             res.json({ message, status: 'success' });
             res.status(200);
             res.end();
@@ -46,7 +44,12 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     // send pushover to my device
-    const data = await get_data_one_week();
+    const data = await db.mongo_find({
+        date: {
+            $lt: new Date(),
+            $gte: days_before,
+        },
+    });
     var str = '';
     data.map((val) => {
         str = str.concat(
@@ -109,17 +112,6 @@ async function get_filtered_data_one_week(data) {
     return filteredData?.length;
 }
 
-async function get_data_one_week() {
-    return await collection
-        .find({
-            date: {
-                $lt: new Date(),
-                $gte: days_before,
-            },
-        })
-        .toArray();
-}
-
 function parse_location_message(location) {
     const baseGoogleMapsURL = 'https://www.google.com/maps';
     const encodedLocation = encodeURIComponent(location);
@@ -140,10 +132,6 @@ async function remindMe_message_pushover(total, day) {
     if (total === 0)
         return `<h4>Hei ${GET_NICKNAME}, i want remind you, what has Jesus done for your life till this ${day}? 😉</h4>`;
     return null;
-}
-
-async function mongo_insert(data) {
-    return await collection.insertOne(data);
 }
 
 async function get_week_number() {

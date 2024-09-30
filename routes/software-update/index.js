@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const sendPushoverMessage = require('../../utils/pushover');
-const getClientDB = require('../../utils/connectdb');
-const database = getClientDB();
-const db = database.collection('software_update');
 const axios = require('axios');
 const { imageUrlToBase64 } = require('../../utils/converter');
 const { transformText, capitalizeFirstLetter } = require('../../utils/text');
+const ClientDB = require('../../utils/connectdb');
+const db = new ClientDB('software_update');
 const title = ' Software Update';
 
 // Helper function to send response
@@ -20,11 +19,11 @@ router.get('/', async (req, res) => {
         return sendResponse(res, { message: 'App name is required' });
     }
 
-    const dataExist = await mongo_read(app_name);
+    const dataExist = await db.mongo_read({ app_name });
 
     if (!dataExist) {
         const post_update_date = '2024-01-01'; // default timestamp
-        await mongo_insert({ app_name, post_update_date });
+        await db.mongo_insert({ app_name, post_update_date });
         const appNameNew = capitalizeFirstLetter(app_name);
         const message = {
             title,
@@ -48,7 +47,7 @@ router.get('/', async (req, res) => {
         return sendResponse(res, { message: 'No update available.' });
     }
 
-    await mongo_update(document, app_name);
+    await db.mongo_update({ app_name }, document);
     const imageUrl = document?.post_featuredimage;
     const appNameNew = transformText(document?.post_title, ' Crack', '');
     const url = `https://www.minorpatch.com/${document.post_type}/${document.post_url}.html`;
@@ -64,17 +63,5 @@ router.get('/', async (req, res) => {
     await sendPushoverMessage(message);
     sendResponse(res, message);
 });
-
-async function mongo_read(app_name) {
-    return await db.findOne({ app_name });
-}
-
-async function mongo_insert(data) {
-    return await db.insertOne(data);
-}
-
-async function mongo_update(data, app_name) {
-    return await db.updateOne({ app_name }, { $set: data });
-}
 
 module.exports = router;

@@ -2,17 +2,103 @@ require('dotenv').config();
 const MONGODB_USER = process.env.MONGODB_USER;
 const MONGODB_PASS = process.env.MONGODB_PASS;
 const DB_NAME = process.env.DB_NAME;
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-// Connect to MongoDB
-const getClientDB = () => {
-    const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
-    const client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverApi: ServerApiVersion.v1,
-    });
-    return client.db(DB_NAME);
-};
+/**
+ * Class representing a MongoDB client for a specific collection.
+ */
+class ClientDB {
+    /**
+     * Creates an instance of ClientDB.
+     * @param {string} collectionName - The name of the collection to interact with.
+     */
+    constructor(collectionName) {
+        const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
+        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.collectionName = collectionName;
+        this.collection = null;
+    }
 
-module.exports = getClientDB;
+    /**
+     * Connects to the MongoDB database and initializes the collection.
+     * @returns {Promise<void>}
+     */
+    async connect() {
+        if (!this.collection) {
+            await this.client.connect();
+            const database = this.client.db(DB_NAME); // Ensure you have your database name in your .env file
+            this.collection = database.collection(this.collectionName);
+        }
+    }
+
+    /**
+     * Reads a document from the collection based on the provided query.
+     * @param {Object} query - The query to find the document.
+     * @example
+     * const result = await mongo_read({ label: 'label name' });
+     * @returns {Promise<Object|null>} The found document or null if not found.
+     */
+    async mongo_read(query) {
+        await this.connect(); // Ensure the connection is established
+        return await this.collection.findOne(query);
+    }
+
+    /**
+     * Inserts a new document into the collection.
+     * @param {Object} data - The data to insert.
+     * @example
+     * await mongo_insert({ name: 'New App', version: '1.0.0' });
+     * @returns {Promise<Object>} The result of the insert operation.
+     */
+    async mongo_insert(data) {
+        await this.connect(); // Ensure the connection is established
+        return await this.collection.insertOne(data);
+    }
+
+    /**
+     * Updates a document in the collection based on the provided query.
+     * @param {Object} query - The query to find the document to update.
+     * @param {Object} data - The data to update.
+     * @example
+     * await mongo_update({ label: 'label name' }, { version: '1.0.1' });
+     * @returns {Promise<Object>} The result of the update operation.
+     */
+    async mongo_update(query, data) {
+        await this.connect(); // Ensure the connection is established
+        return await this.collection.updateOne(query, { $set: data });
+    }
+
+    /**
+     * Deletes a document from the collection based on the provided query.
+     * @param {Object} query - The query to find the document to delete.
+     * @example
+     * await mongo_delete({ label: 'label name' });
+     * @returns {Promise<Object>} The result of the delete operation.
+     */
+    async mongo_delete(query) {
+        await this.connect(); // Ensure the connection is established
+        return await this.collection.deleteOne(query);
+    }
+
+    /**
+     * Finds multiple documents in the collection based on the provided query.
+     * @param {Object} query - The query to find the documents.
+     * @example
+     * const results = await mongo_find({ label: 'label name' });
+     * @returns {Promise<Array>} An array of found documents.
+     */
+    async mongo_find(query) {
+        await this.connect(); // Ensure the connection is established
+        return await this.collection.find(query).toArray();
+    }
+
+    /**
+     * Closes the MongoDB connection.
+     * @returns {Promise<void>}
+     */
+    async close() {
+        await this.client.close();
+    }
+}
+
+module.exports = ClientDB;
