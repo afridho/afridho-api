@@ -22,11 +22,11 @@ router.get('/:club_name', async (req, res) => {
 
     if (!data) return res.status(200).json({ code: 200, error: 'Invalid Club Name' });
 
-    const mongo_data = await db.mongo_read({ club_name });
+    const mongo_data = await db.read({ club_name });
     if (mongo_data && mongo_data.club_name == club_name) {
         if (data?.match_id != mongo_data.match_id) {
             const _data = { match_id: data.match_id };
-            await db.mongo_update({ club_name }, _data);
+            await db.update({ club_name }, _data);
             const coverImage = await generateImage(data);
             await send_pushover(data, coverImage);
             response(res, { code, status: 'Pushover sent.' });
@@ -36,7 +36,7 @@ router.get('/:club_name', async (req, res) => {
     } else {
         // NOTE: 'New Club in database'
         const _data = { club_name, match_id: data.match_id };
-        await db.mongo_insert(_data);
+        await db.insert(_data);
         res.status(code).json({ code: 200, status: `New Club Added ${club_name}` });
     }
 });

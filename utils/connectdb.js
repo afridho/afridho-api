@@ -35,10 +35,10 @@ class ClientDB {
      * Reads a document from the collection based on the provided query.
      * @param {Object} query - The query to find the document.
      * @example
-     * const result = await mongo_read({ label: 'label name' });
+     * const result = await read({ label: 'label name' });
      * @returns {Promise<Object|null>} The found document or null if not found.
      */
-    async mongo_read(query) {
+    async read(query) {
         await this.connect(); // Ensure the connection is established
         return await this.collection.findOne(query);
     }
@@ -47,10 +47,10 @@ class ClientDB {
      * Inserts a new document into the collection.
      * @param {Object} data - The data to insert.
      * @example
-     * await mongo_insert({ name: 'New App', version: '1.0.0' });
+     * await insert({ name: 'New App', version: '1.0.0' });
      * @returns {Promise<Object>} The result of the insert operation.
      */
-    async mongo_insert(data) {
+    async insert(data) {
         await this.connect(); // Ensure the connection is established
         return await this.collection.insertOne(data);
     }
@@ -60,10 +60,10 @@ class ClientDB {
      * @param {Object} query - The query to find the document to update.
      * @param {Object} data - The data to update.
      * @example
-     * await mongo_update({ label: 'label name' }, { version: '1.0.1' });
+     * await update({ label: 'label name' }, { version: '1.0.1' });
      * @returns {Promise<Object>} The result of the update operation.
      */
-    async mongo_update(query, data) {
+    async update(query, data) {
         await this.connect(); // Ensure the connection is established
         return await this.collection.updateOne(query, { $set: data });
     }
@@ -72,10 +72,10 @@ class ClientDB {
      * Deletes a document from the collection based on the provided query.
      * @param {Object} query - The query to find the document to delete.
      * @example
-     * await mongo_delete({ label: 'label name' });
+     * await delete({ label: 'label name' });
      * @returns {Promise<Object>} The result of the delete operation.
      */
-    async mongo_delete(query) {
+    async delete(query) {
         await this.connect(); // Ensure the connection is established
         return await this.collection.deleteOne(query);
     }
@@ -84,10 +84,10 @@ class ClientDB {
      * Finds multiple documents in the collection based on the provided query.
      * @param {Object} query - The query to find the documents.
      * @example
-     * const results = await mongo_find({ label: 'label name' });
+     * const results = await find({ label: 'label name' });
      * @returns {Promise<Array>} An array of found documents.
      */
-    async mongo_find(query) {
+    async find(query) {
         await this.connect(); // Ensure the connection is established
         return await this.collection.find(query).toArray();
     }

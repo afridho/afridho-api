@@ -19,11 +19,11 @@ router.get('/', async (req, res) => {
         return sendResponse(res, { message: 'App name is required' });
     }
 
-    const dataExist = await db.mongo_read({ app_name });
+    const dataExist = await db.read({ app_name });
 
     if (!dataExist) {
         const post_update_date = '2024-01-01'; // default timestamp
-        await db.mongo_insert({ app_name, post_update_date });
+        await db.insert({ app_name, post_update_date });
         const appNameNew = capitalizeFirstLetter(app_name);
         const message = {
             title,
@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
         return sendResponse(res, { message: 'No update available.' });
     }
 
-    await db.mongo_update({ app_name }, document);
+    await db.update({ app_name }, document);
     const imageUrl = document?.post_featuredimage;
     const appNameNew = transformText(document?.post_title, ' Crack', '');
     const url = `https://www.minorpatch.com/${document.post_type}/${document.post_url}.html`;

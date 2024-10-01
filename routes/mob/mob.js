@@ -77,7 +77,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
         result.label = label;
         result.updated_at = new Date().toISOString();
 
-        const isExist = await mob.mongo_read({ label });
+        const isExist = await mob.read({ label });
         const message_new = `${lang.new_category} ${capitalizeFirstLetter(label)} ✨`;
         const hasNewUpdate = result.id !== isExist?.id;
 
@@ -90,8 +90,8 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     updated_at: isExist?.updated_at,
                 };
                 result.previousId = isExist?.id; // for page checked
-                await mob_logs.mongo_insert(logs_struct);
-                await mob.mongo_update({ label }, result);
+                await mob_logs.insert(logs_struct);
+                await mob.update({ label }, result);
                 const { stock_data, categories_data } = await detail_product(result?.id);
                 let str_stock = '';
                 let str_categories = '';
@@ -125,7 +125,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
             }
         } else {
             await sendPushoverMessage({ title: lang.brand, message: message_new, sound }, MOB_TOKEN);
-            await mob.mongo_insert(result);
+            await mob.insert(result);
         }
         const endTime = Date.now();
         const executionTime = ((endTime - startTime) / 1000).toFixed(1);

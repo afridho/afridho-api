@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
             const message = encrypt(req.body?.message);
             const location = req.body.location ?? '';
             let _data = { message, location, date };
-            await db.mongo_insert(_data);
+            await db.insert(_data);
             res.json({ message, status: 'success' });
             res.status(200);
             res.end();
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     // send pushover to my device
-    const data = await db.mongo_find({
+    const data = await db.find({
         date: {
             $lt: new Date(),
             $gte: days_before,
