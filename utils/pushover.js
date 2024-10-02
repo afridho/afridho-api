@@ -19,6 +19,7 @@ const isAuthenticated = 'PUSHOVER_TOKEN' in process.env && 'PUSHOVER_KEY' in pro
  * @param {string} [message.sound] - The name of the sound to be played (optional). See the Pushover API for available sounds.
  * @param {string} [message.url] - A URL to be included in the message (optional).
  * @param {string} [message.url_title] - The title of the URL (optional).
+ * @param {string} [message.ttl] - The time to live. The message will gone for estimated time in seconds. Ignoring if priority 2 (optional).
  * @param {string} [token=DEFAULT_TOKEN] - The Pushover application token (optional, defaults to the environment variable).
  * @returns {Promise<Object>} A promise that resolves to an object indicating the result of the operation.
  * @returns {Object} return.value - The response object.
