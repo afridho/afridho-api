@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Trust proxy for client IP detection
+// Trust proxy for real client IP detection
 app.set('trust proxy', true);
 
 // Root endpoint
