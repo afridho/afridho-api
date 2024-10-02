@@ -19,5 +19,6 @@ jobs:
                       "device": "ridhosmac",
                       "url_title": "View deployment",
                       "url": "'"${DEPLOYMENT_URL}"'",
+                      "ttl": "30",
                       "status": "'"${{ github.event.deployment_status.state }}"'"
                   }'
