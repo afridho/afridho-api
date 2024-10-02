@@ -7,8 +7,8 @@ const router = express.Router();
 require('dotenv').config();
 const sendPushoverMessage = require('../../utils/pushover');
 const { capitalizeFirstLetter, transformText, removeFirstWord } = require('../../utils/text');
-const { toIdr, imageUrlToBase64 } = require('../../utils/converter');
-const { compressImageBase64 } = require('../../utils/image');
+const { toIdr } = require('../../utils/converter');
+const { imageUrlToBase64 } = require('../../utils/image');
 const lang = require('./locale.json');
 const MOB_TOKEN = process.env.PUSHOVER_TOKEN_MOB;
 const ClientDB = require('../../utils/connectdb');
@@ -105,8 +105,7 @@ router.get('/categories/:id/:menu', async (req, res) => {
                     price
                 )}</b>${stock_data ? '<br><br>' : ''}${str_stock}`;
 
-                const inputBase64 = await imageUrlToBase64(result?.images[0]?.url);
-                const attachment_base64 = await compressImageBase64(inputBase64, 65); //NOTE - compress images after decode
+                const attachment_base64 = await imageUrlToBase64(result?.images[0]?.url);
                 const url = `${lang.endpoint}/categories/${id}/web`;
                 const url_title = lang.open_browser;
                 const title = `✨ ${removeFirstWord(result?.name)}`;

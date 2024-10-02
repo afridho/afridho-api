@@ -1,6 +1,5 @@
 require('dotenv').config();
-const MONGODB_USER = process.env.MONGODB_USER;
-const MONGODB_PASS = process.env.MONGODB_PASS;
+const DB_URI = process.env.MONGODB_URI;
 const DB_NAME = process.env.DB_NAME;
 const { MongoClient } = require('mongodb');
 
@@ -13,8 +12,7 @@ class ClientDB {
      * @param {string} collectionName - The name of the collection to interact with.
      */
     constructor(collectionName) {
-        const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
-        this.client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         this.collectionName = collectionName;
         this.collection = null;
     }

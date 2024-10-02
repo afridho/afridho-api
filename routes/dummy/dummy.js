@@ -34,11 +34,6 @@ const tradeCorrectionQueueDetail = require('./json/tradeCorrectionQueueDetail');
 const tradeCorrectionQueueDetailFull = require('./json/tradeCorrectionQueueDetailFull');
 const severityAlertAccount = require('./json/severityAlertAccount');
 const severityDailyStatement = require('./json/severityDailyStatement');
-
-require('dotenv').config();
-const MONGODB_USER = process.env.MONGODB_PASS;
-const MONGODB_PASS = process.env.MONGODB_PASS;
-const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
 router.get('/', async (req, res) => {
@@ -158,28 +153,6 @@ router.get('/equity-highest-lowest', async (req, res) => {
 router.get('/v2-menu', async (req, res) => {
     res.status(200);
     res.json(dataMenuV2);
-});
-
-// STP Queue > Status
-router.get('/stp-queue', async (req, res) => {
-    const uri = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@ac-eymobfz-shard-00-00.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-01.dpxrwue.mongodb.net:27017,ac-eymobfz-shard-00-02.dpxrwue.mongodb.net:27017/?ssl=true`;
-    const client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverApi: ServerApiVersion.v1,
-    });
-    const database = client.db('afridho-api-dev');
-    const collection = database.collection('dummy');
-    const response = await collection.find({}).toArray();
-
-    const displayData = {
-        status: 'success',
-        message: 'Successfully',
-        data: response,
-    };
-
-    res.status(200);
-    res.json(displayData);
 });
 
 // Alert Dashboard > Severity Alert
