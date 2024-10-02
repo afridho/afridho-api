@@ -12,7 +12,7 @@ class ClientDB {
      * @param {string} collectionName - The name of the collection to interact with.
      */
     constructor(collectionName) {
-        this.client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+        this.client = new MongoClient(DB_URI);
         this.collectionName = collectionName;
         this.collection = null;
     }
