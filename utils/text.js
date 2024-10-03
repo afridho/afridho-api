@@ -39,4 +39,22 @@ const transformText = (text, condition = '-__-', replace = '-') => text.replace(
  */
 const removeFirstWord = (text) => (text ? text.split(' ').slice(1).join(' ') : 'Invalid!');
 
-module.exports = { capitalizeFirstLetter, transformText, removeFirstWord };
+/**
+ * Extracts a version number from a given text string.
+ *
+ * The version number is expected to be in the format of
+ * major.minor.patch (e.g., 1.0.0) or major.minor.patch.build
+ * (e.g., 1.0.0.1234). The function uses a regular expression
+ * to find the first occurrence of a version number in the text.
+ *
+ * @param {string} text - The input text from which to extract the version number.
+ * @returns {string|null} - Returns the extracted version number as a string if found,
+ *                          or null if no version number is found.
+ */
+const extractVersion = (text) => {
+    const versionRegex = /(\d+\.\d+\.\d+(\.\d+)?)/;
+    const match = text.match(versionRegex);
+    return match ? match[0] : null;
+};
+
+module.exports = { capitalizeFirstLetter, transformText, removeFirstWord, extractVersion };

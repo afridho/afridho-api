@@ -16,6 +16,7 @@ const ig_downloader = require('./routes/ig-downloader/ig-downloader');
 const gratitude_list = require('./routes/gratitude-list/gratitude-list');
 const mob = require('./routes/mob/mob');
 const software_update = require('./routes/software-update');
+const software_dynamiclake = require('./routes/software-update/dynamiclake');
 const test = require('./routes/test');
 
 // Middleware
@@ -57,6 +58,7 @@ app.use('/api/ig', ig_downloader);
 app.use('/api/gratitude-list', gratitude_list);
 app.use('/api/mob', mob);
 app.use('/api/software-update', software_update);
+app.use('/api/software-update/dynamiclake', software_dynamiclake);
 app.use('/api/test', test);
 
 // Set view engine

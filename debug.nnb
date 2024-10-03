@@ -1,9 +1,9 @@
 {
     "cells": [
         {
-            "language": "javascript",
+            "language": "typescript",
             "source": [
-                "const capitalizeFirstLetter = (text) => text.replace(/\\b\\w/g, (match) => match.toUpperCase()).replace(/-/g, ' ');\n\nconst transform = (text) => `${text} ⇒ ${capitalizeFirstLetter(text)}`\n\nconsole.log(transform('new-arrival'));\nconsole.log(transform('good job'));\nconsole.log(transform('best'));"
+                "function extractVersion(text) {\n    // Regular expression to match the version number\n    const versionRegex = /(\\d+\\.\\d+\\.\\d+(\\.\\d+)?)/;\n    const match = text.match(versionRegex);\n    \n    // Return the version number if found, otherwise return null\n    return match ? match[0] : null;\n}\n\n// Test cases\nconst texts = [\n    \"DynamicLake Pro 1.4.5.5 (October 2, 2024)\",\n    \"DynamicLake Pro 1.4.5.3 (September 28, 2024)\",\n    \"DynamicLake Pro 1.4.3 (16, September 2024)\"\n];\n\ntexts.forEach(text => {\n    console.log(`${text} -> ${extractVersion(text)}`);\n});\n"
             ],
             "outputs": [
                 {
@@ -11,47 +11,9 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "new-arrival ⇒ New Arrival",
-                                "good job ⇒ Good Job",
-                                "best ⇒ Best",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "language": "javascript",
-            "source": [
-                "const str = 'accessories-__-socks'\n\nconst transform = (text) => text.replace(\"-__-\", \"-\")\n\nconsole.log(transform(str))"
-            ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "accessories-socks",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "language": "javascript",
-            "source": [
-                "const words = 'Go power ranger';\nconst removeFirstWord = (text) => (text ? text.split(' ').slice(1).join(' ') : 'Invalid!');\n\nconsole.log(removeFirstWord(words))\n"
-            ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "power ranger",
+                                "DynamicLake Pro 1.4.5.5 (October 2, 2024) -> 1.4.5.5",
+                                "DynamicLake Pro 1.4.5.3 (September 28, 2024) -> 1.4.5.3",
+                                "DynamicLake Pro 1.4.3 (16, September 2024) -> 1.4.3",
                                 ""
                             ]
                         }
