@@ -25,9 +25,10 @@ const sendResponse = (res, message) => res.json(message);
 
 router.get('/', async (req, res) => {
     try {
-        const dataExist = (await db.read({ name })) || (await db.insert(dataDefault));
+        const dataExist = await db.read({ name });
 
         if (!dataExist) {
+            await db.insert(dataDefault);
             await sendPushoverMessage({ title, message: `${name} added successfully.` });
             return sendResponse(res, dataDefault);
         }
@@ -37,7 +38,13 @@ router.get('/', async (req, res) => {
             const attachment_base64 = await imageUrlToBase64(dataExist.url_image);
             const message = `${dataExist.name} ${version} has a new update.`;
             await db.update({ name }, { version });
-            await sendPushoverMessage({ title, message, attachment_base64, url, url_title: 'Changelog' });
+            await sendPushoverMessage({
+                title,
+                message,
+                attachment_base64,
+                url: dataExist.url,
+                url_title: 'Changelog',
+            });
             return sendResponse(res, { message });
         }
 
