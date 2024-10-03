@@ -16,7 +16,7 @@ const dataDefault = {
     name,
     type: 'Mac Application',
     version: '1.0',
-    url: 'https://www.dynamiclake.com/',
+    url: 'https://www.dynamiclake.com/changelog',
     url_image: 'https://framerusercontent.com/images/1X8My94OMIQSFOfUXsIOtcaAxIY.png',
     comment: 'Software Update',
 };
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
             const attachment_base64 = await imageUrlToBase64(dataExist.url_image);
             const message = `${dataExist.name} ${version} has a new update.`;
             await db.update({ name }, { version });
-            await sendPushoverMessage({ title, message, attachment_base64 });
+            await sendPushoverMessage({ title, message, attachment_base64, url, url_title: 'Changelog' });
             return sendResponse(res, { message });
         }
 
