@@ -33,17 +33,18 @@ router.get('/', async (req, res) => {
             return sendResponse(res, dataDefault);
         }
 
-        const version = await crawl();
+        const { version, list_update } = await crawl();
         if (version && version !== dataExist.version) {
             const attachment_base64 = await imageUrlToBase64(dataExist.url_image);
-            const message = `${dataExist.name} ${version} has a new update.`;
+            const message = `${dataExist.name} has a new update.\n\n${list_update}`;
             await db.update({ name }, { version });
             await sendPushoverMessage({
                 title,
                 message,
                 attachment_base64,
+                html: 1,
                 url: dataExist.url,
-                url_title: 'Changelog',
+                url_title: 'Full Changelog',
             });
             return sendResponse(res, { message });
         }
@@ -62,10 +63,19 @@ async function crawl() {
         const web_html = res.data;
         const $ = cheerio.load(web_html);
         const appText = $('h3:first').text();
-        const appVersion = extractVersion(appText);
-        return appVersion;
+        const list = $('ul.framer-text:first h3')
+            .map((i, el) => $(el).text())
+            .get();
+
+        let str = '';
+        list.map((val) => {
+            str = str.concat(`- ${val}\n`);
+        });
+        const version = extractVersion(appText) || '';
+        const list_update = `<b>${version}</b>\n${str}`;
+        return { version, list_update };
     } catch (error) {
-        return null;
+        return {};
     }
 }
 
