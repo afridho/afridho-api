@@ -72,7 +72,7 @@ async function crawl() {
             str = str.concat(`- ${val}\n`);
         });
         const version = extractVersion(appText) || '';
-        const list_update = `<b>${version}</b>\n${str}`;
+        const list_update = `<b>${version}</b>\n${str}\- <b><a href=${endpoint} style='text-decoration: none !important'>Read More...</a></b>`;
         return { version, list_update };
     } catch (error) {
         return {};
