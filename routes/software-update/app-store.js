@@ -35,9 +35,8 @@ router.get('/', async (req, res) => {
         const { data: response } = await axios.get(endpoint);
         if (response?.resultCount > 0) {
             const data = response?.results[0];
-            const { trackName, version, artworkUrl512: url_image, releaseNotes, trackViewUrl, sellerUrl } = data;
+            const { trackName, version, artworkUrl512: url_image, releaseNotes, trackViewUrl: url } = data;
             if (version !== dataExist.version) {
-                const url = sellerUrl || trackViewUrl;
                 await db.update({ name }, { version, url_image, url });
                 const attachment_base64 = await imageUrlToBase64(url_image);
                 const message = `${trackName} has a new version.\n\n<b>${version}</b>\n${releaseNotes}`;
