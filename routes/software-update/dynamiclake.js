@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         const { version, list_update } = await crawl();
         if (version && version !== dataExist.version) {
             const attachment_base64 = await imageUrlToBase64(dataExist.url_image);
-            const message = `${dataExist.name} has a new update.\n\n${list_update}`;
+            const message = `${dataExist.name} has a new version.\n\n${list_update}`;
             await db.update({ name }, { version });
             await sendPushoverMessage({
                 title,
