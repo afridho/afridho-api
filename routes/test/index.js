@@ -10,4 +10,13 @@ router.get('/', async (req, res) => {
     sendResponse(res, { message: 'Data added successfully' });
 });
 
+router.post('/', async (req, res) => {
+    const data = req?.body;
+    if (Object.keys(data).length) {
+        await db.insert(data);
+        sendResponse(res, { message: 'Data added successfully' });
+    }
+    sendResponse(res, { message: 'No body inserted' });
+});
+
 module.exports = router;
